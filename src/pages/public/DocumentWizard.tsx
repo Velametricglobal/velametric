@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FileText, Building2, User, ListPlus, Calculator, 
   Settings, Eye, ArrowRight, ArrowLeft, Check, Download,
-  Plus, Trash2, Printer
+  Plus, Trash2, Printer, Lock
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
