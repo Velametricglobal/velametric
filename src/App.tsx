@@ -69,14 +69,55 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Global Safe Error Boundary to prevent constructor injection / malformed SSR crashes
+class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; errorMessage: string }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, errorMessage: '' };
+  }
+
+  static getDerivedStateFromError(error: unknown) {
+    const msg = error instanceof Error ? error.message : 'An unexpected error occurred.';
+    return { hasError: true, errorMessage: msg };
+  }
+
+  componentDidCatch(error: unknown, errorInfo: React.ErrorInfo) {
+    console.error('Unhandled application error caught safely:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-6 text-center">
+          <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 text-red-500 border border-red-500/20">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-2">Something went wrong</h1>
+          <p className="text-zinc-400 max-w-md mb-6 text-sm">The application encountered an unexpected error. Please refresh the page to continue.</p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            className="px-6 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-all"
+          >
+            Return to Home
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <CurrencyProvider>
-          <AudioProvider>
-            <ScrollToTop />
-            <Routes>
+    <SafeErrorBoundary>
+      <BrowserRouter>
+        <AuthProvider>
+          <CurrencyProvider>
+            <AudioProvider>
+              <ScrollToTop />
+              <Routes>
               {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
               <Route path="/" element={<PublicLayout />}>
                 <Route index element={<HomePage />} />
@@ -176,6 +217,7 @@ export const App: React.FC = () => {
         </CurrencyProvider>
       </AuthProvider>
     </BrowserRouter>
+  </SafeErrorBoundary>
   );
 };
 export default App;
