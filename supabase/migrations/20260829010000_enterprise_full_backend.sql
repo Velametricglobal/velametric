@@ -1,5 +1,5 @@
 -- ============================================================================
--- VELAMETRIC GLOBAL ENTERPRISE BACKEND SCHEMA
+-- VELAMETRIC GLOBAL ENTERPRISE BACKEND SCHEMA & PRODUCTION MIGRATION
 -- PostgreSQL 15+ / Supabase Native Auth, RLS, Storage & Triggers
 -- ============================================================================
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS public.site_media_settings (
 
 CREATE TABLE IF NOT EXISTS public.roles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name TEXT UNIQUE NOT NULL,
+    name TEXT UNIQUE NOT NULL, -- super_admin, admin, manager, sales, marketing, finance, crm_staff, content_manager, event_manager, document_manager, user
     description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -151,12 +151,14 @@ BEGIN
         avatar_url = EXCLUDED.avatar_url,
         updated_at = NOW();
 
+    -- Create default user_role record
     INSERT INTO public.user_roles (user_id, company_id, role)
     VALUES (NEW.id, default_comp_id, 'user')
     ON CONFLICT DO NOTHING;
 
+    -- Create initial storage_usage record
     INSERT INTO public.storage_usage (user_id, company_id, storage_used_bytes, storage_limit_bytes)
-    VALUES (NEW.id, default_comp_id, 0, 104857600)
+    VALUES (NEW.id, default_comp_id, 0, 104857600) -- 100MB default free tier
     ON CONFLICT DO NOTHING;
 
     RETURN NEW;
@@ -168,6 +170,7 @@ CREATE TRIGGER on_auth_user_created
 AFTER INSERT ON auth.users
 FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
+-- RBAC & Multi-Tenant Helper Functions
 CREATE OR REPLACE FUNCTION public.get_user_company_id()
 RETURNS UUID AS $$
 BEGIN
@@ -195,7 +198,7 @@ CREATE TABLE IF NOT EXISTS public.storage_usage (
     user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
     company_id UUID REFERENCES public.companies(id) ON DELETE SET NULL,
     storage_used_bytes BIGINT DEFAULT 0,
-    storage_limit_bytes BIGINT DEFAULT 104857600,
+    storage_limit_bytes BIGINT DEFAULT 104857600, -- 100MB Default (5GB for Paid)
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     UNIQUE(user_id, company_id)
 );
@@ -219,8 +222,8 @@ CREATE TABLE IF NOT EXISTS public.leads (
     company_name TEXT,
     source TEXT DEFAULT 'Website',
     service_interest TEXT,
-    status TEXT DEFAULT 'new',
-    priority TEXT DEFAULT 'medium',
+    status TEXT DEFAULT 'new', -- new, contacted, qualified, proposal, negotiation, won, lost, follow_up
+    priority TEXT DEFAULT 'medium', -- low, medium, high, urgent
     notes TEXT,
     estimated_value NUMERIC(14,2) DEFAULT 0.00,
     next_followup_at TIMESTAMPTZ,
@@ -239,11 +242,11 @@ CREATE TABLE IF NOT EXISTS public.lead_followups (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     lead_id UUID REFERENCES public.leads(id) ON DELETE CASCADE NOT NULL,
     user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
-    type TEXT NOT NULL,
+    type TEXT NOT NULL, -- call, whatsapp, email, sms, meeting, manual, automatic
     message TEXT NOT NULL,
     scheduled_at TIMESTAMPTZ NOT NULL,
     completed_at TIMESTAMPTZ,
-    status TEXT DEFAULT 'pending',
+    status TEXT DEFAULT 'pending', -- pending, completed, skipped, cancelled
     notes TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -253,10 +256,10 @@ CREATE TABLE IF NOT EXISTS public.communication_logs (
     company_id UUID REFERENCES public.companies(id) ON DELETE CASCADE,
     lead_id UUID REFERENCES public.leads(id) ON DELETE CASCADE,
     user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
-    channel TEXT NOT NULL,
-    direction TEXT NOT NULL,
+    channel TEXT NOT NULL, -- whatsapp, call, email, sms, internal
+    direction TEXT NOT NULL, -- inbound, outbound
     message TEXT NOT NULL,
-    status TEXT DEFAULT 'sent',
+    status TEXT DEFAULT 'sent', -- pending, sent, delivered, failed
     external_message_id TEXT,
     sent_at TIMESTAMPTZ DEFAULT NOW(),
     created_at TIMESTAMPTZ DEFAULT NOW()
@@ -266,9 +269,9 @@ CREATE TABLE IF NOT EXISTS public.campaigns (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID REFERENCES public.companies(id) ON DELETE CASCADE,
     name TEXT NOT NULL,
-    campaign_type TEXT NOT NULL,
+    campaign_type TEXT NOT NULL, -- whatsapp, email, social, sms, promotion, event
     description TEXT,
-    status TEXT DEFAULT 'draft',
+    status TEXT DEFAULT 'draft', -- draft, scheduled, running, completed, paused
     scheduled_at TIMESTAMPTZ,
     created_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -283,7 +286,7 @@ CREATE TABLE IF NOT EXISTS public.campaign_recipients (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     campaign_id UUID REFERENCES public.campaigns(id) ON DELETE CASCADE NOT NULL,
     lead_id UUID REFERENCES public.leads(id) ON DELETE CASCADE NOT NULL,
-    status TEXT DEFAULT 'pending',
+    status TEXT DEFAULT 'pending', -- pending, sent, delivered, opened, failed
     sent_at TIMESTAMPTZ,
     delivered_at TIMESTAMPTZ,
     opened_at TIMESTAMPTZ,
@@ -299,7 +302,7 @@ CREATE TABLE IF NOT EXISTS public.promotional_media (
     description TEXT,
     file_url TEXT NOT NULL,
     thumbnail_url TEXT,
-    media_type TEXT NOT NULL,
+    media_type TEXT NOT NULL, -- video, image, reel
     created_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -312,7 +315,7 @@ CREATE TABLE IF NOT EXISTS public.lead_imports (
     total_rows INT DEFAULT 0,
     successful_rows INT DEFAULT 0,
     failed_rows INT DEFAULT 0,
-    status TEXT DEFAULT 'completed',
+    status TEXT DEFAULT 'completed', -- processing, completed, failed
     uploaded_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -364,12 +367,12 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 CREATE TABLE IF NOT EXISTS public.service_packages (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     service_id UUID REFERENCES public.services(id) ON DELETE CASCADE NOT NULL,
-    name TEXT NOT NULL,
+    name TEXT NOT NULL, -- Startup, Enterprise, Organization
     slug TEXT NOT NULL,
     description TEXT,
     price NUMERIC(12,2) DEFAULT 0.00,
     currency TEXT DEFAULT 'INR',
-    billing_period TEXT DEFAULT 'one_time',
+    billing_period TEXT DEFAULT 'one_time', -- one_time, monthly, yearly
     features JSONB DEFAULT '[]'::jsonb,
     is_contact_for_quote BOOLEAN DEFAULT FALSE,
     is_active BOOLEAN DEFAULT TRUE,
@@ -416,7 +419,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 CREATE TABLE IF NOT EXISTS public.portfolio_media (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     project_id UUID REFERENCES public.portfolio_projects(id) ON DELETE CASCADE NOT NULL,
-    media_type TEXT NOT NULL,
+    media_type TEXT NOT NULL, -- image, video, document
     file_url TEXT NOT NULL,
     thumbnail_url TEXT,
     title TEXT,
@@ -443,6 +446,7 @@ CREATE TRIGGER set_case_studies_updated_at
 BEFORE UPDATE ON public.case_studies
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+-- Separate Testimonials Table
 CREATE TABLE IF NOT EXISTS public.testimonials (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID REFERENCES public.companies(id) ON DELETE CASCADE,
@@ -487,7 +491,7 @@ CREATE TABLE IF NOT EXISTS public.events (
     background_video_url TEXT,
     ticket_url TEXT,
     registration_url TEXT,
-    status TEXT DEFAULT 'upcoming',
+    status TEXT DEFAULT 'upcoming', -- upcoming, ongoing, completed, cancelled
     is_featured BOOLEAN DEFAULT FALSE,
     is_published BOOLEAN DEFAULT TRUE,
     created_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
@@ -503,7 +507,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 CREATE TABLE IF NOT EXISTS public.event_media (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     event_id UUID REFERENCES public.events(id) ON DELETE CASCADE NOT NULL,
-    media_type TEXT NOT NULL,
+    media_type TEXT NOT NULL, -- image, video, poster, reel
     file_url TEXT NOT NULL,
     thumbnail_url TEXT,
     title TEXT,
@@ -518,7 +522,7 @@ CREATE TABLE IF NOT EXISTS public.event_registrations (
     email TEXT NOT NULL,
     phone TEXT NOT NULL,
     city TEXT,
-    registration_status TEXT DEFAULT 'confirmed',
+    registration_status TEXT DEFAULT 'confirmed', -- confirmed, waitlist, cancelled
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -531,7 +535,7 @@ CREATE TABLE IF NOT EXISTS public.pages (
     company_id UUID REFERENCES public.companies(id) ON DELETE CASCADE,
     title TEXT NOT NULL,
     slug TEXT NOT NULL,
-    page_type TEXT DEFAULT 'standard',
+    page_type TEXT DEFAULT 'standard', -- standard, landing, legal
     content TEXT,
     seo_title TEXT,
     seo_description TEXT,
@@ -549,7 +553,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 CREATE TABLE IF NOT EXISTS public.page_sections (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     page_id UUID REFERENCES public.pages(id) ON DELETE CASCADE NOT NULL,
-    section_type TEXT NOT NULL,
+    section_type TEXT NOT NULL, -- hero, hero_3d, rich_text, video, services, portfolio, case_study, testimonial, contact, enquiry, pricing, events, cta, faq, custom
     title TEXT,
     subtitle TEXT,
     content JSONB DEFAULT '{}'::jsonb,
@@ -564,6 +568,7 @@ CREATE TRIGGER set_page_sections_updated_at
 BEFORE UPDATE ON public.page_sections
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+-- Public Contact / Inquiries Form
 CREATE TABLE IF NOT EXISTS public.inquiries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID REFERENCES public.companies(id) ON DELETE CASCADE,
@@ -574,7 +579,7 @@ CREATE TABLE IF NOT EXISTS public.inquiries (
     service_id UUID REFERENCES public.services(id) ON DELETE SET NULL,
     message TEXT NOT NULL,
     source TEXT DEFAULT 'Contact Page',
-    status TEXT DEFAULT 'new',
+    status TEXT DEFAULT 'new', -- new, contacted, qualified, converted, closed, spam
     assigned_to UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -590,7 +595,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
 CREATE TABLE IF NOT EXISTS public.document_types (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    code TEXT UNIQUE NOT NULL,
+    code TEXT UNIQUE NOT NULL, -- INVOICE, QUOTATION, PO, RECEIPT, ESTIMATE
     name TEXT NOT NULL,
     description TEXT,
     is_active BOOLEAN DEFAULT TRUE,
@@ -641,9 +646,9 @@ CREATE TABLE IF NOT EXISTS public.documents (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID REFERENCES public.companies(id) ON DELETE SET NULL,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
-    document_type TEXT NOT NULL,
+    document_type TEXT NOT NULL, -- invoice, quotation, purchase_order, receipt, estimate
     document_number TEXT NOT NULL,
-    status TEXT DEFAULT 'draft',
+    status TEXT DEFAULT 'draft', -- draft, sent, paid, overdue, cancelled
     client_name TEXT NOT NULL,
     client_email TEXT,
     client_phone TEXT,
@@ -673,6 +678,7 @@ CREATE TRIGGER set_documents_updated_at
 BEFORE UPDATE ON public.documents
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+-- Alias view/table for frontend compatibility
 CREATE TABLE IF NOT EXISTS public.generated_documents (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
@@ -728,8 +734,8 @@ CREATE TABLE IF NOT EXISTS public.subscription_plans (
     description TEXT,
     price NUMERIC(10,2) NOT NULL,
     currency TEXT DEFAULT 'INR',
-    billing_period TEXT DEFAULT 'monthly',
-    storage_days INT DEFAULT 3650,
+    billing_period TEXT DEFAULT 'monthly', -- monthly, yearly
+    storage_days INT DEFAULT 3650, -- 10 years / permanent
     features JSONB DEFAULT '[]'::jsonb,
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMPTZ DEFAULT NOW()
@@ -740,8 +746,8 @@ CREATE TABLE IF NOT EXISTS public.subscriptions (
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
     company_id UUID REFERENCES public.companies(id) ON DELETE SET NULL,
     plan_id UUID REFERENCES public.subscription_plans(id) ON DELETE SET NULL,
-    status TEXT DEFAULT 'active',
-    provider TEXT DEFAULT 'Razorpay',
+    status TEXT DEFAULT 'active', -- trialing, active, past_due, cancelled, expired
+    provider TEXT DEFAULT 'Razorpay', -- Razorpay, Cashfree, Stripe
     provider_subscription_id TEXT,
     current_period_start TIMESTAMPTZ DEFAULT NOW(),
     current_period_end TIMESTAMPTZ,
@@ -757,8 +763,8 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 CREATE TABLE IF NOT EXISTS public.user_subscriptions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE NOT NULL,
-    plan_type TEXT DEFAULT 'FREE',
-    status TEXT DEFAULT 'ACTIVE',
+    plan_type TEXT DEFAULT 'FREE', -- FREE, EXTENDED_STORAGE
+    status TEXT DEFAULT 'ACTIVE', -- ACTIVE, PAST_DUE, CANCELLED, EXPIRED
     price_per_month NUMERIC DEFAULT 0,
     next_billing_date TIMESTAMPTZ,
     payment_provider TEXT,
@@ -776,11 +782,11 @@ CREATE TABLE IF NOT EXISTS public.payments (
     user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
     company_id UUID REFERENCES public.companies(id) ON DELETE SET NULL,
     subscription_id UUID REFERENCES public.subscriptions(id) ON DELETE SET NULL,
-    provider TEXT NOT NULL,
+    provider TEXT NOT NULL, -- Razorpay, Cashfree, Manual
     transaction_id TEXT UNIQUE NOT NULL,
     amount NUMERIC(12,2) NOT NULL,
     currency TEXT DEFAULT 'INR',
-    status TEXT DEFAULT 'paid',
+    status TEXT DEFAULT 'paid', -- pending, paid, failed, refunded
     payment_method TEXT,
     metadata JSONB DEFAULT '{}'::jsonb,
     paid_at TIMESTAMPTZ DEFAULT NOW(),
@@ -795,8 +801,8 @@ CREATE TABLE IF NOT EXISTS public.audit_logs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID REFERENCES public.companies(id) ON DELETE SET NULL,
     user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
-    action TEXT NOT NULL,
-    entity_type TEXT NOT NULL,
+    action TEXT NOT NULL, -- CREATE, UPDATE, DELETE, LOGIN, EXPORT, PUBLISH
+    entity_type TEXT NOT NULL, -- lead, document, payment, company, role
     entity_id UUID,
     old_data JSONB,
     new_data JSONB,
@@ -918,7 +924,7 @@ CREATE POLICY "Public Read Document Types" ON public.document_types FOR SELECT U
 CREATE POLICY "Public Read Document Templates" ON public.document_templates FOR SELECT USING (is_active = TRUE);
 CREATE POLICY "Public Read Subscription Plans" ON public.subscription_plans FOR SELECT USING (is_active = TRUE);
 
--- PUBLIC INSERT POLICIES
+-- PUBLIC INSERT POLICIES (Contact, Leads, Registrations)
 CREATE POLICY "Public Insert Leads" ON public.leads FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public Insert Inquiries" ON public.inquiries FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public Insert Event Registrations" ON public.event_registrations FOR INSERT WITH CHECK (true);
@@ -949,7 +955,7 @@ CREATE POLICY "Users can view own payments" ON public.payments FOR SELECT USING 
 CREATE POLICY "Users can view own storage" ON public.storage_usage FOR SELECT USING (auth.uid() = user_id OR public.has_role('admin'));
 CREATE POLICY "Users can view own notifications" ON public.notifications FOR ALL USING (auth.uid() = user_id);
 
--- ADMIN & STAFF TENANT POLICIES
+-- ADMIN & STAFF TENANT POLICIES (CRM, CMS, Campaigns, Audit)
 CREATE POLICY "Staff Manage Leads" ON public.leads FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Staff Manage Followups" ON public.lead_followups FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Staff Manage Communication" ON public.communication_logs FOR ALL USING (auth.role() = 'authenticated');
@@ -1013,6 +1019,7 @@ INSERT INTO public.document_types (code, name, description) VALUES
 ('ESTIMATE', 'Work Estimate', 'Preliminary work estimate and pricing projection.')
 ON CONFLICT (code) DO NOTHING;
 
+-- Seed Default Company
 INSERT INTO public.companies (name, legal_name, slug, email, phone, website, tagline, description, primary_color, secondary_color, accent_color, font_family)
 VALUES (
     'Velametric Global',
