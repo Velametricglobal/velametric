@@ -10,6 +10,11 @@ export const sanitizeUrl = (url: string | undefined | null, fallback: string = '
   if (!url) return fallback;
   const trimmed = url.trim();
   
+  // Disallow backslash open redirect bypasses (CVE-2026-53669: \\evil.com)
+  if (trimmed.startsWith('\\') || trimmed.includes('\\\\') || trimmed.startsWith('//')) {
+    return fallback;
+  }
+
   // Disallow javascript:, vbscript:, data: protocols
   const lower = trimmed.toLowerCase();
   if (
