@@ -7,7 +7,11 @@ import { BackgroundMusicPlayer } from './BackgroundMusicPlayer';
 import { CurrencySelector } from '../common/CurrencySelector';
 import { Laptop, Phone, Mail, ArrowRight, ChevronDown, Menu, X, User, Video, MessageSquare, Send, Zap } from 'lucide-react';
 
-export const PublicLayout: React.FC = () => {
+interface PublicLayoutProps {
+  children?: React.ReactNode;
+}
+
+export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -132,7 +136,7 @@ export const PublicLayout: React.FC = () => {
 
       {/* Main Page Content */}
       <main className="flex-grow">
-        <Outlet />
+        {children || <Outlet />}
       </main>
 
       {/* STICKY MOBILE ACTION BAR (CALL | WHATSAPP | ENQUIRE) */}

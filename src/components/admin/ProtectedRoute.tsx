@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Shield, Key, Lock, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Shield, Key, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
