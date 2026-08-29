@@ -1,4 +1,4 @@
-name: Build & Deploy to Hostinger
+name: Build & Verify Production Bundle
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
-    name: Build & Verify Production Bundle
+  build-and-verify:
+    name: Build & Test Production Release
     runs-on: ubuntu-latest
 
     steps:
@@ -27,10 +27,10 @@ jobs:
       - name: Build Application (Vite + TypeScript)
         run: npm run build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'placeholder-key' }}
 
-      - name: Verify Production Output
+      - name: Verify Build Artifacts
         run: |
           test -d dist
           test -f dist/index.html
@@ -42,37 +42,3 @@ jobs:
           name: production-dist
           path: dist/
           retention-days: 7
-
-  deploy-to-hostinger:
-    name: Deploy to Hostinger (Optional FTP/SFTP)
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v4
-
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: production-dist
-          path: dist/
-
-      - name: Copy .htaccess to dist for Apache Static Hosting
-        run: |
-          cp .htaccess dist/.htaccess || true
-
-      - name: Deploy via FTP (If secrets configured)
-        if: env.FTP_SERVER != ''
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        env:
-          FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-        with:
-          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ./public_html/
