@@ -40,6 +40,7 @@
     "vite": "^6.1.0"
   },
   "overrides": {
-    "@supabase/auth-js": ">=2.70.0"
+    "@supabase/auth-js": ">=2.70.0",
+    "esbuild": ">=0.25.0"
   }
 }
