@@ -41,6 +41,8 @@
   },
   "overrides": {
     "@supabase/auth-js": ">=2.70.0",
-    "esbuild": ">=0.25.0"
+    "esbuild": ">=0.25.0",
+    "react-router": ">=6.30.0",
+    "react-router-dom": ">=6.30.0"
   }
 }

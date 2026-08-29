@@ -11,7 +11,7 @@ export const sanitizeUrl = (url: string | undefined | null, fallback: string = '
   const trimmed = url.trim();
   
   // Disallow backslash open redirect bypasses (CVE-2026-53669: \\evil.com)
-  if (trimmed.startsWith('\\') || trimmed.includes('\\\\') || trimmed.startsWith('//')) {
+  if (trimmed.startsWith('\\') || trimmed.includes('\\\\') || trimmed.startsWith('//') || trimmed.startsWith('/\\')) {
     return fallback;
   }
 
@@ -24,6 +24,34 @@ export const sanitizeUrl = (url: string | undefined | null, fallback: string = '
   ) {
     return fallback;
   }
+  return trimmed;
+};
+
+/**
+ * Strict internal route sanitizer to eliminate CWE-601 (Open Redirect in client routers).
+ * Ensures paths supplied to navigate() or <Link> are strictly internal safe relative paths.
+ */
+export const sanitizeInternalPath = (path: string | undefined | null, fallback: string = '/'): string => {
+  if (!path || typeof path !== 'string') return fallback;
+  const trimmed = path.trim();
+
+  // Reject external protocols, hostnames, protocol-relative '//', or backslash tricks
+  if (
+    trimmed.startsWith('//') ||
+    trimmed.startsWith('/\\') ||
+    trimmed.startsWith('\\') ||
+    trimmed.includes('://') ||
+    trimmed.toLowerCase().startsWith('javascript:') ||
+    trimmed.toLowerCase().startsWith('data:')
+  ) {
+    return fallback;
+  }
+
+  // Must strictly start with a single '/'
+  if (!trimmed.startsWith('/')) {
+    return `/${trimmed}`;
+  }
+
   return trimmed;
 };
 
