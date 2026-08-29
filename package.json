@@ -3,12 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "vite preview",
+    "start": "node server.js",
+    "serve": "node server.js",
     "preview": "vite preview",
     "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.0",
