@@ -240,6 +240,98 @@ let localProjects: PortfolioProject[] = [
         duration: '1:15'
       }
     ]
+  },
+  // 3. FASHION & MODEL PORTFOLIO PHOTOSHOOT SHOWCASE
+  {
+    id: 'proj-fashion-1',
+    title: 'Botanical Sunflower Couture — Model Portfolio Shoot',
+    slug: 'botanical-sunflower-couture-shoot',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+    production_partner: {
+      name: 'Destiny Productions & Ekraahee Films',
+      instagram_handle: '@destiny_in_productions',
+      instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+      tagline: 'High-Fashion Portfolios, Editorial Modeling & Commercial Cinema',
+      role: 'Creative Direction & Fashion Photography'
+    },
+    description: 'An exclusive outdoor high-fashion model portfolio shoot featuring bespoke handcrafted sunflower floral embroidery on ivory couture with soft natural mountain daylight illumination.',
+    challenge: 'Achieving luminous natural skin tones while balancing high-contrast direct sunlight and highlighting intricate floral embroidery texture on white fabrics.',
+    solution: 'Shot with Sony A7R V paired with 85mm f/1.4 G-Master prime lens utilizing subtle diffused bounce lighting and specialized filmic tone curve color grading.',
+    results: 'Featured in premier Uttarakhand regional fashion lookbooks and generated 98,000+ viral impressions across Instagram fashion community reels.',
+    featured_image: '/images/portfolio/model-portfolio-sunflower-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-sunflower-01.jpg',
+      '/images/portfolio/model-portfolio-sunflower-02.jpg'
+    ],
+    videos: ['https://www.instagram.com/destiny_in_productions/?hl=en'],
+    completion_date: '2026-08-28',
+    testimonial_quote: 'The composition, lighting dynamics, and color grading elevated my modeling portfolio to international agency standards.',
+    testimonial_author: 'Professional Model, Velametric Fashion Network',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Model Portfolio Shoots', 'Outdoor Fashion Photography', 'Bespoke Styling', 'High-End Color Grading'],
+    technologies: ['Sony A7R V', '85mm f/1.4 GM', 'Natural & Diffused Daylight', 'Capture One Pro'],
+    industry: 'Fashion & Model Photography',
+    video_reels: [
+      {
+        id: 'reel-f1',
+        title: 'Botanical Couture Model Reel',
+        video_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        thumbnail_url: '/images/portfolio/model-portfolio-sunflower-01.jpg',
+        partner_name: 'Destiny Productions',
+        instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        views_count: '340K',
+        duration: '0:35'
+      }
+    ]
+  },
+  {
+    id: 'proj-fashion-2',
+    title: 'Urban Noir & Monochrome Fur — Fashion Lookbook Shoot',
+    slug: 'urban-noir-fur-lookbook-shoot',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+    production_partner: {
+      name: 'Ekraahee Films & Dapflix',
+      instagram_handle: '@ekraaheefilms',
+      instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+      tagline: 'Contemporary Street Style & Luxury Brand Lookbooks',
+      role: 'Fashion Photography & Cinematography'
+    },
+    description: 'High-contrast contemporary street style and editorial lookbook shoot pairing plush midnight black fur jackets with structured monochrome houndstooth pattern dresses in dynamic rooftop daylight.',
+    challenge: 'Retaining fine shadow depth in rich faux fur textures without losing the geometric clarity of the houndstooth dress pattern.',
+    solution: 'Employed high dynamic range metering, multi-angle editorial poses, and precision edge-lighting to separate subject silhouettes against natural backgrounds.',
+    results: 'Acclaimed lookbook portfolio release driving a 240% increase in commercial model booking requests.',
+    featured_image: '/images/portfolio/model-portfolio-urban-fur-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-urban-fur-01.jpg',
+      '/images/portfolio/model-portfolio-urban-fur-02.jpg',
+      '/images/portfolio/model-portfolio-editorial-seating-01.jpg'
+    ],
+    videos: ['https://www.instagram.com/ekraaheefilms/?hl=en#'],
+    completion_date: '2026-08-29',
+    testimonial_quote: 'The team captured the bold contrast of the noir fur jacket and houndstooth silhouette with breathtaking editorial sophistication.',
+    testimonial_author: 'Fashion Stylist & Creative Director',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Fashion Editorial Shoots', 'Commercial Brand Lookbooks', 'Cinematic Retouching', 'Outdoor Fashion Direction'],
+    technologies: ['Sony A7R V', '50mm f/1.2 GM', 'High Dynamic Range Lighting', 'DaVinci Resolve Color'],
+    industry: 'Fashion & Model Photography',
+    video_reels: [
+      {
+        id: 'reel-f2',
+        title: 'Urban Noir Fashion Lookbook Reel',
+        video_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+        thumbnail_url: '/images/portfolio/model-portfolio-urban-fur-01.jpg',
+        partner_name: 'Ekraahee Films',
+        instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+        views_count: '480K',
+        duration: '0:45'
+      }
+    ]
   }
 ];
 
