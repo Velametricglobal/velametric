@@ -458,13 +458,40 @@ let localCaseStudies: CaseStudy[] = [
   }
 ];
 
+const STORAGE_KEY_PROJECTS = 'velametric_portfolio_projects_v2';
+const STORAGE_KEY_STUDIES = 'velametric_case_studies_v2';
+
+function loadProjectsFromStorage(): PortfolioProject[] {
+  if (typeof window === 'undefined') return [...localProjects];
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY_PROJECTS);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {
+    console.error('Error loading projects from storage:', e);
+  }
+  return [...localProjects];
+}
+
+function saveProjectsToStorage(projects: PortfolioProject[]) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(STORAGE_KEY_PROJECTS, JSON.stringify(projects));
+  } catch (e) {
+    console.error('Error saving projects to storage:', e);
+  }
+}
+
 export const portfolioService = {
   async getProjects(): Promise<PortfolioProject[]> {
-    return [...localProjects];
+    return loadProjectsFromStorage();
   },
 
   async getProjectBySlug(slug: string): Promise<PortfolioProject | null> {
-    const p = localProjects.find(item => item.slug === slug);
+    const projects = loadProjectsFromStorage();
+    const p = projects.find(item => item.slug === slug);
     return p ? JSON.parse(JSON.stringify(p)) : null;
   },
 
@@ -478,11 +505,13 @@ export const portfolioService = {
   },
 
   async saveProject(project: Partial<PortfolioProject>): Promise<PortfolioProject> {
+    const projects = loadProjectsFromStorage();
     if (project.id) {
-      const idx = localProjects.findIndex(p => p.id === project.id);
+      const idx = projects.findIndex(p => p.id === project.id);
       if (idx !== -1) {
-        localProjects[idx] = { ...localProjects[idx], ...project } as PortfolioProject;
-        return JSON.parse(JSON.stringify(localProjects[idx]));
+        projects[idx] = { ...projects[idx], ...project } as PortfolioProject;
+        saveProjectsToStorage(projects);
+        return JSON.parse(JSON.stringify(projects[idx]));
       }
     }
     const newProj: PortfolioProject = {
@@ -495,7 +524,7 @@ export const portfolioService = {
       challenge: project.challenge || '',
       solution: project.solution || '',
       results: project.results || '',
-      featured_image: project.featured_image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+      featured_image: project.featured_image || '/images/photoshoot/_dsc9548.jpg',
       gallery: project.gallery || [],
       videos: project.videos || [],
       completion_date: project.completion_date || new Date().toISOString().split('T')[0],
@@ -503,8 +532,98 @@ export const portfolioService = {
       status: project.status || 'PUBLISHED',
       ...project
     };
-    localProjects.push(newProj);
+    projects.push(newProj);
+    saveProjectsToStorage(projects);
     return JSON.parse(JSON.stringify(newProj));
+  },
+
+  async deleteProject(id: string): Promise<boolean> {
+    let projects = loadProjectsFromStorage();
+    const initialLen = projects.length;
+    projects = projects.filter(p => p.id !== id);
+    saveProjectsToStorage(projects);
+    return projects.length < initialLen;
+  },
+
+  async deletePhoto(projectId: string, photoUrl: string): Promise<PortfolioProject | null> {
+    const projects = loadProjectsFromStorage();
+    const idx = projects.findIndex(p => p.id === projectId);
+    if (idx === -1) return null;
+
+    const proj = projects[idx];
+    const currentGallery = proj.gallery || [];
+    const updatedGallery = currentGallery.filter(url => url !== photoUrl);
+    proj.gallery = updatedGallery;
+
+    // If the deleted photo was also the featured_image (display profile photo), replace it with the next photo or placeholder
+    if (proj.featured_image === photoUrl) {
+      proj.featured_image = updatedGallery.length > 0 ? updatedGallery[0] : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80';
+    }
+
+    projects[idx] = proj;
+    saveProjectsToStorage(projects);
+    return JSON.parse(JSON.stringify(proj));
+  },
+
+  async setFeaturedImage(projectId: string, photoUrl: string): Promise<PortfolioProject | null> {
+    const projects = loadProjectsFromStorage();
+    const idx = projects.findIndex(p => p.id === projectId);
+    if (idx === -1) return null;
+
+    const proj = projects[idx];
+    proj.featured_image = photoUrl;
+
+    // Ensure it's in the gallery if not already present
+    if (!proj.gallery) proj.gallery = [];
+    if (!proj.gallery.includes(photoUrl)) {
+      proj.gallery.unshift(photoUrl);
+    }
+
+    projects[idx] = proj;
+    saveProjectsToStorage(projects);
+    return JSON.parse(JSON.stringify(proj));
+  },
+
+  async deleteFeaturedImage(projectId: string): Promise<PortfolioProject | null> {
+    const projects = loadProjectsFromStorage();
+    const idx = projects.findIndex(p => p.id === projectId);
+    if (idx === -1) return null;
+
+    const proj = projects[idx];
+    const oldFeatured = proj.featured_image;
+    const gallery = (proj.gallery || []).filter(url => url !== oldFeatured);
+    proj.gallery = gallery;
+    proj.featured_image = gallery.length > 0 ? gallery[0] : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80';
+
+    projects[idx] = proj;
+    saveProjectsToStorage(projects);
+    return JSON.parse(JSON.stringify(proj));
+  },
+
+  async addPhotoToGallery(projectId: string, photoUrl: string): Promise<PortfolioProject | null> {
+    const projects = loadProjectsFromStorage();
+    const idx = projects.findIndex(p => p.id === projectId);
+    if (idx === -1) return null;
+
+    const proj = projects[idx];
+    if (!proj.gallery) proj.gallery = [];
+    if (!proj.gallery.includes(photoUrl)) {
+      proj.gallery.push(photoUrl);
+    }
+    if (!proj.featured_image || proj.featured_image.includes('unsplash.com/photo-1551288049')) {
+      proj.featured_image = photoUrl;
+    }
+
+    projects[idx] = proj;
+    saveProjectsToStorage(projects);
+    return JSON.parse(JSON.stringify(proj));
+  },
+
+  async resetProjectsToDefault(): Promise<PortfolioProject[]> {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEY_PROJECTS);
+    }
+    return [...localProjects];
   },
 
   async saveCaseStudy(cs: Partial<CaseStudy>): Promise<CaseStudy> {

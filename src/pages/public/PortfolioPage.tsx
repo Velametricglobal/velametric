@@ -87,47 +87,51 @@ export const PortfolioPage: React.FC = () => {
       </div>
 
       {/* 3. WORK SHOWCASE GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 [perspective:1400px]">
         {filteredProjects.map((proj) => (
           <div
             key={proj.id}
-            className="bg-white dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 rounded-3xl overflow-hidden group hover:border-amber-400/60 dark:hover:border-zinc-600 transition-all flex flex-col justify-between shadow-xl hover:shadow-2xl backdrop-blur"
+            className="group relative bg-white/95 dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-xl backdrop-blur-xl transform-gpu transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-x-[3deg] hover:rotate-y-[-1.5deg] hover:shadow-[0_25px_60px_-12px_rgba(245,158,11,0.28),0_18px_36px_-12px_rgba(0,0,0,0.6)] hover:border-amber-400/80 dark:hover:border-amber-500/60"
+            style={{ transformStyle: 'preserve-3d' }}
           >
+            {/* 3D Holographic Glare Sheen Overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-amber-500/0 via-amber-400/10 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl z-20" />
+
             <div>
-              {/* Media Thumbnail Container */}
-              <div className="h-64 sm:h-72 relative overflow-hidden bg-slate-100 dark:bg-zinc-950">
+              {/* Media Thumbnail Container with 3D Depth */}
+              <div className="h-64 sm:h-72 relative overflow-hidden bg-slate-100 dark:bg-zinc-950 rounded-t-3xl">
                 <img
                   src={proj.featured_image}
                   alt={proj.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                 
-                {/* Client Tag */}
-                <span className="absolute top-4 left-4 text-[10px] font-extrabold px-3 py-1 bg-black/80 text-white rounded-full border border-white/20 backdrop-blur">
+                {/* Floating 3D Client Tag */}
+                <span className="absolute top-4 left-4 text-[10px] font-extrabold px-3 py-1 bg-black/85 text-white rounded-full border border-white/20 backdrop-blur-md shadow-lg transform group-hover:translate-z-10 group-hover:scale-105 transition-all">
                   {proj.client}
                 </span>
 
-                {/* Type Badge */}
+                {/* Floating 3D Type Badge */}
                 {proj.project_type === 'photoshoot' ? (
-                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-black rounded-full font-mono flex items-center gap-1 shadow-lg">
-                    <Camera className="w-3 h-3" /> PHOTOSHOOT
+                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-black rounded-full font-mono flex items-center gap-1 shadow-xl border border-amber-300/40 transform group-hover:scale-105 transition-all">
+                    <Camera className="w-3.5 h-3.5" /> PHOTOSHOOT
                   </span>
                 ) : proj.project_type === 'video_production' ? (
-                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-purple-500 text-white rounded-full font-mono flex items-center gap-1 shadow-lg">
-                    <Video className="w-3 h-3" /> VIDEO REELS
+                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-mono flex items-center gap-1 shadow-xl border border-purple-400/30 transform group-hover:scale-105 transition-all">
+                    <Video className="w-3.5 h-3.5" /> VIDEO REELS
                   </span>
                 ) : (
-                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-emerald-500 text-black rounded-full font-mono shadow-lg">
+                  <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-400 text-black rounded-full font-mono shadow-xl border border-emerald-300/30 transform group-hover:scale-105 transition-all">
                     LIVE HOSTED ↗
                   </span>
                 )}
 
-                {/* Photoshoot Quick View Overlay Button */}
+                {/* Photoshoot Quick View 3D Overlay Button */}
                 {proj.project_type === 'photoshoot' && proj.gallery && proj.gallery.length > 0 && (
                   <button
                     onClick={() => setActivePhotoModal({ images: proj.gallery || [], index: 0, title: proj.title || 'Photoshoot' })}
-                    className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/70 hover:bg-amber-400 text-white hover:text-black border border-white/20 text-[10px] font-extrabold uppercase tracking-wider backdrop-blur flex items-center gap-1.5 transition-all shadow-lg"
+                    className="absolute bottom-4 right-4 px-3.5 py-1.5 rounded-full bg-black/75 hover:bg-amber-400 text-white hover:text-black border border-white/25 text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 transition-all shadow-xl hover:scale-105 active:scale-95"
                   >
                     <Eye className="w-3.5 h-3.5" /> View Gallery ({proj.gallery.length})
                   </button>
@@ -140,9 +144,9 @@ export const PortfolioPage: React.FC = () => {
                       href={proj.instagram_url || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-2xl"
+                      className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white hover:scale-115 hover:bg-amber-500 hover:text-black transition-all shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                     >
-                      <Play className="w-6 h-6 fill-white ml-1" />
+                      <Play className="w-6 h-6 fill-current ml-1" />
                     </a>
                   </div>
                 )}
@@ -164,22 +168,22 @@ export const PortfolioPage: React.FC = () => {
                   {proj.description}
                 </p>
 
-                {/* Photoshoot Gallery Mini Strip */}
+                {/* Photoshoot Gallery 3D Pop-Out Thumbnail Strip */}
                 {proj.project_type === 'photoshoot' && proj.gallery && proj.gallery.length > 0 && (
                   <div className="pt-2">
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-2 flex items-center gap-1 font-mono">
                       <Images className="w-3 h-3 text-amber-500" /> Shoot Lookbook ({proj.gallery.length} High-Res Frames)
                     </div>
-                    <div className="grid grid-cols-4 gap-1.5">
+                    <div className="grid grid-cols-4 gap-2">
                       {proj.gallery.slice(0, 4).map((imgUrl, i) => (
                         <div
                           key={i}
                           onClick={() => setActivePhotoModal({ images: proj.gallery || [], index: i, title: proj.title || 'Photoshoot' })}
-                          className="h-14 rounded-xl overflow-hidden cursor-pointer border border-slate-200 dark:border-zinc-800 hover:border-amber-400 transition-all relative group/thumb"
+                          className="h-14 rounded-xl overflow-hidden cursor-pointer border border-slate-200 dark:border-zinc-800 hover:border-amber-400 hover:ring-2 hover:ring-amber-400/50 hover:shadow-lg hover:-translate-y-1 transition-all relative group/thumb"
                         >
-                          <img src={imgUrl} alt={`Frame ${i + 1}`} className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform" />
+                          <img src={imgUrl} alt={`Frame ${i + 1}`} className="w-full h-full object-cover group-hover/thumb:scale-115 transition-transform duration-300" />
                           {i === 3 && proj.gallery && proj.gallery.length > 4 && (
-                            <div className="absolute inset-0 bg-black/60 text-white text-[10px] font-bold flex items-center justify-center font-mono">
+                            <div className="absolute inset-0 bg-black/65 text-white text-[10px] font-extrabold flex items-center justify-center font-mono">
                               +{proj.gallery.length - 4}
                             </div>
                           )}
@@ -200,7 +204,7 @@ export const PortfolioPage: React.FC = () => {
                         <div
                           key={reel.id}
                           onClick={() => setActiveReelModal(reel)}
-                          className="p-2 rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 cursor-pointer flex items-center gap-2 group/reel"
+                          className="p-2 rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 cursor-pointer flex items-center gap-2 group/reel hover:-translate-y-0.5 hover:shadow-md transition-all"
                         >
                           <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 relative bg-zinc-900">
                             <img src={reel.thumbnail_url} alt={reel.title} className="w-full h-full object-cover" />
@@ -220,12 +224,12 @@ export const PortfolioPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Card Footer Actions */}
-            <div className="p-6 pt-0 space-y-3">
+            {/* Card Footer Actions with 3D Button Depth */}
+            <div className="p-6 pt-0 space-y-3 z-10">
               {proj.project_type === 'photoshoot' ? (
                 <button
                   onClick={() => setActivePhotoModal({ images: proj.gallery || [proj.featured_image || ''], index: 0, title: proj.title || 'Photoshoot' })}
-                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black font-extrabold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition-all shadow-lg"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black font-extrabold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition-all shadow-[0_8px_20px_-4px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_28px_-4px_rgba(245,158,11,0.5)] hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Eye className="w-4 h-4" /> Open High-Res Lookbook ({proj.gallery?.length || 1} Photos)
                 </button>
@@ -234,7 +238,7 @@ export const PortfolioPage: React.FC = () => {
                   href={proj.instagram_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-xl"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-95 transition-all shadow-xl hover:-translate-y-0.5"
                 >
                   <Instagram className="w-4 h-4" /> Watch Reels on Instagram ↗
                 </a>
@@ -243,7 +247,7 @@ export const PortfolioPage: React.FC = () => {
                   href={proj.live_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-slate-950 dark:bg-white text-white dark:text-black font-extrabold text-xs uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-xl"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-slate-950 dark:bg-white text-white dark:text-black font-extrabold text-xs uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-xl hover:-translate-y-0.5"
                 >
                   <Globe className="w-4 h-4 text-emerald-500" /> Visit Live Site <ExternalLink className="w-3.5 h-3.5" />
                 </a>
