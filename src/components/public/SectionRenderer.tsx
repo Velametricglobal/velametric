@@ -456,12 +456,32 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
       {
         url: '/images/portfolio/model-portfolio-sunflower-01.jpg',
         title: 'Sunflower Couture Profile',
-        tag: 'Botanical Embroidery'
+        tag: 'Botanical Couture'
       },
       {
         url: '/images/portfolio/model-portfolio-urban-fur-01.jpg',
         title: 'Urban Fur & Houndstooth',
         tag: 'Contemporary Editorial'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
+        title: 'Playful Studio Portrait',
+        tag: 'High-Key Studio'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
+        title: 'Golden Sequin Opulence',
+        tag: 'Evening Glamour'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-beige-couture-kneeling-01.jpg',
+        title: 'Earth Tone Ribbed Couture',
+        tag: 'Drapery & Form'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-black-crop-standing-01.jpg',
+        title: 'Windblown Athletic Silhouette',
+        tag: 'Street Glamour'
       },
       {
         url: '/images/portfolio/model-portfolio-urban-fur-02.jpg',
@@ -472,6 +492,11 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         url: '/images/portfolio/model-portfolio-sunflower-02.jpg',
         title: 'Daylight Floral Couture',
         tag: 'Outdoor Fashion'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-black-crop-seated-01.jpg',
+        title: 'Minimalist Stool Editorial',
+        tag: 'Studio Test Series'
       },
       {
         url: '/images/portfolio/model-portfolio-editorial-seating-01.jpg',
@@ -503,8 +528,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             </SmartLink>
           </div>
 
-          {/* 5-Photo Editorial Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          {/* 10-Photo Editorial Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {shootPhotos.map((photo, idx) => (
               <div
                 key={idx}

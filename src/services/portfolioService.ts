@@ -332,6 +332,97 @@ let localProjects: PortfolioProject[] = [
         duration: '0:45'
       }
     ]
+  },
+  {
+    id: 'proj-fashion-3',
+    title: 'Studio Minimalist Noir & Street Glam — Model Test Series',
+    slug: 'studio-minimalist-noir-model-lookbook',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+    production_partner: {
+      name: 'Destiny Productions & Dapflix',
+      instagram_handle: '@destiny_in_productions',
+      instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+      tagline: 'Contemporary Commercial Modeling & High-Key Studio Shoots',
+      role: 'Creative Direction & Fashion Photography'
+    },
+    description: 'Sleek studio model portfolio test series pairing athletic cropped silhouettes with playful editorial poses, wind machine dynamics, and clean high-key studio backdrop lighting.',
+    challenge: 'Balancing crisp hair motion and dynamic expression capture while maintaining clean shadow gradients on neutral seamless studio cycloramas.',
+    solution: 'Multi-point Profoto strobe configuration with large Octabox key light and high-speed sync capturing spontaneous motion with pin-sharp clarity.',
+    results: 'Model talent shortlisted for national athletic apparel and beauty commercial campaigns.',
+    featured_image: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
+      '/images/portfolio/model-portfolio-black-crop-standing-01.jpg',
+      '/images/portfolio/model-portfolio-black-crop-seated-01.jpg'
+    ],
+    videos: ['https://www.instagram.com/destiny_in_productions/?hl=en'],
+    completion_date: '2026-08-30',
+    testimonial_quote: 'The studio lighting and artistic direction brought out a versatile range of editorial expressions effortlessly.',
+    testimonial_author: 'Commercial Casting Director, Fashion Network',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Studio Model Portfolios', 'Lookbook Production', 'High-Key Lighting', 'Fashion Retouching'],
+    technologies: ['Sony A7R V', 'Profoto D2 Strobes', 'Octabox 5ft', 'Capture One Pro'],
+    industry: 'Fashion & Model Photography',
+    video_reels: [
+      {
+        id: 'reel-f3',
+        title: 'Minimalist Noir Studio BTS Reel',
+        video_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        thumbnail_url: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
+        partner_name: 'Destiny Productions',
+        instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        views_count: '290K',
+        duration: '0:28'
+      }
+    ]
+  },
+  {
+    id: 'proj-fashion-4',
+    title: 'Golden Opulence & Earth Tone Drapery — High-Fashion Series',
+    slug: 'golden-opulence-earth-tone-editorial',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+    production_partner: {
+      name: 'Ekraahee Films & Velametric Studio',
+      instagram_handle: '@ekraaheefilms',
+      instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+      tagline: 'Haute Couture Editorial, Glamour & Texture Storytelling',
+      role: 'Fashion Photography & Color Grading'
+    },
+    description: 'Luxe evening cocktail dress with gold sequined embroidery and minimalist earth-tone ribbed couture capturing warm ambient studio contours and sculptural posing.',
+    challenge: 'Highlighting reflective gold metallic sequin sparkle without blowing out soft skin tones and fabric weave textures.',
+    solution: 'Cross-polarized lighting setup with warm parabolic bounce reflectors for smooth skin tonal rolloff and controlled specular highlights on metallic sequins.',
+    results: 'Featured across luxury boutique lookbooks and generated 115,000+ engagements on Instagram fashion reels.',
+    featured_image: '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
+      '/images/portfolio/model-portfolio-beige-couture-kneeling-01.jpg'
+    ],
+    videos: ['https://www.instagram.com/ekraaheefilms/?hl=en#'],
+    completion_date: '2026-08-30',
+    testimonial_quote: 'The balance between reflective gold sequin glitter and warm earthy tones was executed with pure luxury perfection.',
+    testimonial_author: 'Couture Fashion Designer',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Evening Glamour Shoots', 'Textured Drapery Photography', 'Commercial Lookbooks', 'Color Grading'],
+    technologies: ['Sony A7R V', '85mm f/1.4 GM', 'Cross-Polarized Lighting', 'DaVinci Resolve Color'],
+    industry: 'Fashion & Model Photography',
+    video_reels: [
+      {
+        id: 'reel-f4',
+        title: 'Golden Glamour Editorial Reel',
+        video_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+        thumbnail_url: '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
+        partner_name: 'Ekraahee Films',
+        instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
+        views_count: '510K',
+        duration: '0:42'
+      }
+    ]
   }
 ];
 
