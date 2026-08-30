@@ -155,45 +155,45 @@ export const HomepageBuilder: React.FC = () => {
   };
 
   return (
-    <div className="-m-4 sm:-m-6 h-[calc(100vh-4rem)] flex flex-col bg-zinc-950 text-zinc-100 overflow-hidden font-sans">
+    <div className="-m-4 sm:-m-6 h-[calc(100vh-4rem)] flex flex-col bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 overflow-hidden font-sans">
       {/* Top Action Header Bar */}
-      <div className="min-h-14 bg-zinc-900 border-b border-zinc-800 px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+      <div className="min-h-14 bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0 shadow-sm">
         <div className="flex items-center gap-2 sm:gap-4">
-          <span className="text-xs font-bold text-white flex items-center gap-1.5 sm:gap-2 font-display uppercase tracking-wider">
-            <Layout className="w-4 h-4 text-amber-400" />
+          <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5 sm:gap-2 font-display uppercase tracking-wider">
+            <Layout className="w-4 h-4 text-amber-500 dark:text-amber-400" />
             <span className="hidden sm:inline">Homepage Video & Section Manager</span>
             <span className="sm:hidden">Page Builder</span>
           </span>
           {saveStatus && (
-            <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono truncate max-w-[150px] sm:max-w-none">
+            <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 font-mono truncate max-w-[150px] sm:max-w-none">
               {saveStatus}
             </span>
           )}
         </div>
 
         {/* 4 Device Viewport Switcher */}
-        <div className="hidden md:flex items-center gap-1 bg-zinc-950 p-1 rounded-xl border border-zinc-800">
+        <div className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-zinc-950 p-1 rounded-xl border border-slate-200 dark:border-zinc-800">
           <button
             onClick={() => setViewport('desktop')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'desktop' ? 'bg-white text-black' : 'text-zinc-400 hover:text-white'}`}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'desktop' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
           >
             <Monitor className="w-3.5 h-3.5" /> 1440px
           </button>
           <button
             onClick={() => setViewport('laptop')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'laptop' ? 'bg-white text-black' : 'text-zinc-400 hover:text-white'}`}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'laptop' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
           >
             <Laptop className="w-3.5 h-3.5" /> 1280px
           </button>
           <button
             onClick={() => setViewport('tablet')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'tablet' ? 'bg-white text-black' : 'text-zinc-400 hover:text-white'}`}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'tablet' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
           >
             <Tablet className="w-3.5 h-3.5" /> 768px
           </button>
           <button
             onClick={() => setViewport('mobile')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'mobile' ? 'bg-white text-black' : 'text-zinc-400 hover:text-white'}`}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 ${viewport === 'mobile' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
           >
             <Smartphone className="w-3.5 h-3.5" /> 390px
           </button>
@@ -203,19 +203,19 @@ export const HomepageBuilder: React.FC = () => {
         <div className="flex items-center gap-1.5 sm:gap-3">
           <button
             onClick={handleOpenVersions}
-            className="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center gap-1"
+            className="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-300 flex items-center gap-1 border border-slate-200 dark:border-transparent"
           >
             <RotateCcw className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Versions</span>
           </button>
           <button
             onClick={handleSaveDraft}
-            className="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold bg-zinc-800 hover:bg-zinc-700 text-white flex items-center gap-1"
+            className="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-900 dark:text-white flex items-center gap-1 border border-slate-200 dark:border-transparent"
           >
             <Save className="w-3.5 h-3.5" /> Save<span className="hidden sm:inline"> Draft</span>
           </button>
           <button
             onClick={handlePublish}
-            className="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold bg-white hover:bg-zinc-200 text-black flex items-center gap-1 shadow-xl"
+            className="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black flex items-center gap-1 shadow-md"
           >
             <Globe className="w-3.5 h-3.5" /> Publish
           </button>
@@ -223,11 +223,11 @@ export const HomepageBuilder: React.FC = () => {
       </div>
 
       {/* Mobile / Tablet Tab Switcher (< lg screens) */}
-      <div className="lg:hidden bg-zinc-900 border-b border-zinc-800 p-1.5 flex items-center justify-around text-xs font-bold shrink-0">
+      <div className="lg:hidden bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 p-1.5 flex items-center justify-around text-xs font-bold shrink-0">
         <button
           onClick={() => setMobileTab('sections')}
           className={`flex items-center gap-1.5 py-1.5 px-3 rounded-xl transition-all ${
-            mobileTab === 'sections' ? 'bg-amber-400 text-black font-extrabold shadow-md' : 'text-zinc-400 hover:text-white'
+            mobileTab === 'sections' ? 'bg-amber-500 text-black font-extrabold shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'
           }`}
         >
           <Layout className="w-3.5 h-3.5" /> Sections ({sections.length})
@@ -235,7 +235,7 @@ export const HomepageBuilder: React.FC = () => {
         <button
           onClick={() => setMobileTab('preview')}
           className={`flex items-center gap-1.5 py-1.5 px-3 rounded-xl transition-all ${
-            mobileTab === 'preview' ? 'bg-amber-400 text-black font-extrabold shadow-md' : 'text-zinc-400 hover:text-white'
+            mobileTab === 'preview' ? 'bg-amber-500 text-black font-extrabold shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'
           }`}
         >
           <Eye className="w-3.5 h-3.5" /> Live Preview
@@ -243,7 +243,7 @@ export const HomepageBuilder: React.FC = () => {
         <button
           onClick={() => setMobileTab('inspector')}
           className={`flex items-center gap-1.5 py-1.5 px-3 rounded-xl transition-all ${
-            mobileTab === 'inspector' ? 'bg-amber-400 text-black font-extrabold shadow-md' : 'text-zinc-400 hover:text-white'
+            mobileTab === 'inspector' ? 'bg-amber-500 text-black font-extrabold shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'
           }`}
         >
           <Settings className="w-3.5 h-3.5" /> Inspector
@@ -254,9 +254,9 @@ export const HomepageBuilder: React.FC = () => {
       <div className="flex-1 flex min-h-0">
         
         {/* LEFT PANEL: Section Reordering & Palette */}
-        <div className={`${mobileTab === 'sections' ? 'flex' : 'hidden'} lg:flex w-full lg:w-80 bg-zinc-900/95 border-r border-zinc-800 flex-col shrink-0 overflow-y-auto custom-scrollbar`}>
-          <div className="p-4 border-b border-zinc-800 space-y-2">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Add Custom Section</h3>
+        <div className={`${mobileTab === 'sections' ? 'flex' : 'hidden'} lg:flex w-full lg:w-80 bg-white dark:bg-zinc-900/95 border-r border-slate-200 dark:border-zinc-800 flex-col shrink-0 overflow-y-auto custom-scrollbar`}>
+          <div className="p-4 border-b border-slate-200 dark:border-zinc-800 space-y-2">
+            <h3 className="text-xs font-bold text-slate-700 dark:text-zinc-400 uppercase tracking-wider">Add Custom Section</h3>
             <div className="grid grid-cols-2 gap-2">
               {[
                 { type: 'hero_3d', label: 'Event Video Hero' },
@@ -274,9 +274,9 @@ export const HomepageBuilder: React.FC = () => {
                     handleAddSection(item.type as SectionType);
                     setMobileTab('inspector');
                   }}
-                  className="p-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-[11px] font-semibold text-zinc-300 hover:text-white flex items-center justify-center gap-1.5 transition-colors touch-target"
+                  className="p-2 rounded-xl bg-slate-50 dark:bg-zinc-950 hover:bg-slate-100 dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-800 text-[11px] font-semibold text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white flex items-center justify-center gap-1.5 transition-colors touch-target shadow-sm"
                 >
-                  <Plus className="w-3 h-3 text-amber-400" /> {item.label}
+                  <Plus className="w-3 h-3 text-amber-500 dark:text-amber-400" /> {item.label}
                 </button>
               ))}
             </div>
@@ -284,7 +284,7 @@ export const HomepageBuilder: React.FC = () => {
 
           {/* Section Tree List */}
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Homepage Sections ({sections.length})</h3>
+            <h3 className="text-xs font-bold text-slate-600 dark:text-zinc-400 uppercase tracking-wider mb-3">Homepage Sections ({sections.length})</h3>
             {sections.map((sec, idx) => (
               <div
                 key={sec.id}
@@ -292,52 +292,52 @@ export const HomepageBuilder: React.FC = () => {
                   setSelectedSecId(sec.id);
                   if (window.innerWidth < 1024) setMobileTab('inspector');
                 }}
-                className={`p-3 rounded-2xl border transition-all cursor-pointer ${
+                className={`p-3 rounded-2xl border transition-all cursor-pointer shadow-sm ${
                   selectedSecId === sec.id
-                    ? 'bg-zinc-800 border-white text-white shadow-xl'
-                    : 'bg-zinc-950/60 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                    ? 'bg-slate-100 dark:bg-zinc-800 border-slate-900 dark:border-white text-slate-950 dark:text-white ring-1 ring-slate-900 dark:ring-white shadow-md'
+                    : 'bg-white dark:bg-zinc-950/60 border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-zinc-700'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold truncate max-w-[170px] font-display">{sec.name}</span>
+                  <span className="text-xs font-bold truncate max-w-[170px] font-display text-slate-900 dark:text-white">{sec.name}</span>
                   <div className="flex items-center gap-1">
                     <button
                       onClick={(e) => { e.stopPropagation(); handleMoveSection(idx, 'up'); }}
-                      className="p-1 text-zinc-400 hover:text-white touch-target"
+                      className="p-1 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white touch-target"
                       title="Move Up"
                     >
                       <ArrowUp className="w-3 h-3" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); handleMoveSection(idx, 'down'); }}
-                      className="p-1 text-zinc-400 hover:text-white touch-target"
+                      className="p-1 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white touch-target"
                       title="Move Down"
                     >
                       <ArrowDown className="w-3 h-3" />
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-[10px] text-zinc-500">
-                  <span className="uppercase font-bold text-amber-400 font-mono">{sec.section_type}</span>
+                <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-zinc-500">
+                  <span className="uppercase font-bold text-amber-600 dark:text-amber-400 font-mono">{sec.section_type}</span>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => { e.stopPropagation(); handleToggleVisibility(sec.id); }}
                       title="Toggle Visibility"
-                      className="p-1 text-zinc-400 hover:text-white"
+                      className="p-1 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white"
                     >
-                      {sec.is_enabled ? <Eye className="w-3.5 h-3.5 text-emerald-400" /> : <EyeOff className="w-3.5 h-3.5 text-rose-400" />}
+                      {sec.is_enabled ? <Eye className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <EyeOff className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" />}
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); handleDuplicateSection(sec); }}
                       title="Duplicate Section"
-                      className="p-1 text-zinc-400 hover:text-white"
+                      className="p-1 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white"
                     >
                       <Copy className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); handleDeleteSection(sec.id); }}
                       title="Delete Section"
-                      className="p-1 text-rose-400 hover:text-rose-300"
+                      className="p-1 text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -349,9 +349,9 @@ export const HomepageBuilder: React.FC = () => {
         </div>
 
         {/* CENTER PANEL: Live Interactive Workspace */}
-        <div className={`${mobileTab === 'preview' ? 'flex' : 'hidden'} lg:flex flex-1 bg-zinc-950 overflow-y-auto p-2 sm:p-6 justify-center custom-scrollbar`}>
+        <div className={`${mobileTab === 'preview' ? 'flex' : 'hidden'} lg:flex flex-1 bg-slate-100 dark:bg-zinc-950 overflow-y-auto p-2 sm:p-6 justify-center custom-scrollbar`}>
           <div
-            className={`transition-all duration-300 bg-zinc-950 border border-zinc-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-x-hidden ${getViewportWidth()}`}
+            className={`transition-all duration-300 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-x-hidden ${getViewportWidth()}`}
           >
             {sections.filter(s => s.is_enabled).map((sec) => (
               <div
@@ -376,30 +376,30 @@ export const HomepageBuilder: React.FC = () => {
         </div>
 
         {/* RIGHT PANEL: Property Inspector */}
-        <div className={`${mobileTab === 'inspector' ? 'flex' : 'hidden'} lg:flex w-full lg:w-80 bg-zinc-900/95 border-l border-zinc-800 flex-col shrink-0 overflow-y-auto custom-scrollbar`}>
-          <div className="p-4 border-b border-zinc-800 space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider font-display">
+        <div className={`${mobileTab === 'inspector' ? 'flex' : 'hidden'} lg:flex w-full lg:w-80 bg-white dark:bg-zinc-900/95 border-l border-slate-200 dark:border-zinc-800 flex-col shrink-0 overflow-y-auto custom-scrollbar`}>
+          <div className="p-4 border-b border-slate-200 dark:border-zinc-800 space-y-2">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-display">
               Section Inspector
             </h3>
-            <p className="text-[11px] text-zinc-400">Configure content & media parameters</p>
+            <p className="text-[11px] text-slate-500 dark:text-zinc-400">Configure content & media parameters</p>
             
             {/* Inspector Tabs */}
-            <div className="flex gap-1 mt-3 p-1 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex gap-1 mt-3 p-1 rounded-xl bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800">
               <button
                 onClick={() => setInspectorTab('content')}
-                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'content' ? 'bg-white text-black' : 'text-zinc-400'}`}
+                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'content' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
               >
                 Content
               </button>
               <button
                 onClick={() => setInspectorTab('video')}
-                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'video' ? 'bg-white text-black' : 'text-zinc-400'}`}
+                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'video' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
               >
                 Video / Media
               </button>
               <button
                 onClick={() => setInspectorTab('style')}
-                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'style' ? 'bg-white text-black' : 'text-zinc-400'}`}
+                className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-colors ${inspectorTab === 'style' ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white'}`}
               >
                 Style
               </button>
@@ -411,7 +411,7 @@ export const HomepageBuilder: React.FC = () => {
               {inspectorTab === 'content' && (
                 <>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-300 mb-1">Section Identifier</label>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 mb-1">Section Identifier</label>
                     <input
                       type="text"
                       value={selectedSection.name}
@@ -419,25 +419,25 @@ export const HomepageBuilder: React.FC = () => {
                         const val = e.target.value;
                         setSections(sections.map(s => s.id === selectedSecId ? { ...s, name: val } : s));
                       }}
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white"
+                      className="w-full bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white"
                     />
                   </div>
 
                   {selectedSection.content.heading !== undefined && (
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-300 mb-1">Main Heading</label>
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 mb-1">Main Heading</label>
                       <textarea
                         rows={2}
                         value={selectedSection.content.heading || ''}
                         onChange={(e) => handleUpdateContentProperty('heading', e.target.value)}
-                        className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white"
+                        className="w-full bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white"
                       />
                     </div>
                   )}
 
                   {selectedSection.content.subheading !== undefined && (
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-300 mb-1">Subtitle / Description</label>
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 mb-1">Subtitle / Description</label>
                       <textarea
                         rows={3}
                         value={selectedSection.content.subheading || ''}
