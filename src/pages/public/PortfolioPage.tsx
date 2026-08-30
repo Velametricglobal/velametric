@@ -26,8 +26,17 @@ export const PortfolioPage: React.FC = () => {
       
       {/* 1. EDITORIAL HEADER BANNER */}
       <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-amber-500/10 dark:bg-zinc-900 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-zinc-800 backdrop-blur">
-          <Sparkles className="w-3.5 h-3.5" /> Velametric Global Showcase
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-amber-500/10 dark:bg-zinc-900 text-amber-600 dark:text-amber-400 border border-amber-500/20 dark:border-zinc-800 backdrop-blur">
+            <Sparkles className="w-3.5 h-3.5" /> Velametric Global Showcase
+          </div>
+
+          <Link
+            to="/admin/portfolio"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-slate-900 dark:bg-white hover:bg-amber-500 text-white dark:text-black dark:hover:bg-amber-400 transition-all shadow-sm"
+          >
+            <Images className="w-3.5 h-3.5 text-amber-400 dark:text-black" /> Manage Photos & Profile ⚙️
+          </Link>
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-slate-900 dark:text-white uppercase tracking-tight font-display">

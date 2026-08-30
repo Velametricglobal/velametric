@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { PortfolioProject, CaseStudy } from '../../types/database.types';
 import { portfolioService } from '../../services/portfolioService';
 import {
@@ -16,19 +16,119 @@ import {
   CheckCircle2,
   AlertCircle,
   X,
-  Layers,
-  Wrench,
+  Upload,
+  Link as LinkIcon,
+  FolderOpen,
   Search,
-  Filter
+  Check,
+  Image as ImageIcon
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const LOCAL_PHOTOSHOOT_LIBRARY = [
+  { path: '/images/photoshoot/_dsc9548.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9547.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9546.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9545.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9544.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9543.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9542.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9541.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9540.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9539.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9538.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9537.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9536.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9535.jpg', category: 'Haute Couture' },
+  { path: '/images/photoshoot/_dsc9531.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9530.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9529.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9528.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9549.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9550.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9551.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9552.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9553.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9554.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9555.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9556.jpg', category: 'Heritage Bridal' },
+  { path: '/images/photoshoot/_dsc9557.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9558.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9559.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9560.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9561.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9562.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9563.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9564.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9565.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9566.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9567.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9568.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/_dsc9569.jpg', category: 'Fine-Art Jewellery' },
+  { path: '/images/photoshoot/bp_photo_1.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_2.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_3.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_4.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_5.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_6.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_7.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_8.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_9.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_10.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_11.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_12.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/bp_photo_13.jpg', category: 'Beauty & Glamour' },
+  { path: '/images/photoshoot/6c1a4689.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4690.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4691.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4692.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4705.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4708.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4709.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4711.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4712.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4715.jpg', category: 'Gold Sequin Studio' },
+  { path: '/images/photoshoot/6c1a4723.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4724.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4725.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4726.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4727.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4729.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4730.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/6c1a4742.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4756.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4757.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4762.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4776.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4777.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4780.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4781.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4782.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4785.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4792.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4796.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4797.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4798.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4803.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4804.jpg', category: 'Pop Editorial' },
+  { path: '/images/photoshoot/img_4808.jpg', category: 'Pop Editorial' },
+];
 
 export const PortfolioCMS: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [activeFilter, setActiveFilter] = useState<'ALL' | 'photoshoot' | 'web_app' | 'video_production'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
+  
+  // Add Photo State
+  const [addMethod, setAddMethod] = useState<'upload' | 'url' | 'library'>('upload');
   const [newPhotoUrl, setNewPhotoUrl] = useState('');
+  const [setAsCoverImmediately, setSetAsCoverImmediately] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+  const [libraryFilter, setLibraryFilter] = useState('ALL');
+  const [librarySearch, setLibrarySearch] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [confirmDeleteProject, setConfirmDeleteProject] = useState<PortfolioProject | null>(null);
 
@@ -50,11 +150,11 @@ export const PortfolioCMS: React.FC = () => {
     loadProjects();
   }, []);
 
-  // Action: Delete or remove single photo
+  // Action: Delete single photo
   const handleDeletePhoto = async (projectId: string, photoUrl: string) => {
     const updated = await portfolioService.deletePhoto(projectId, photoUrl);
     if (updated) {
-      showToast('Photo successfully removed from lookbook!');
+      showToast('Photo removed from project lookbook!');
       loadProjects();
     }
   };
@@ -63,7 +163,7 @@ export const PortfolioCMS: React.FC = () => {
   const handleSetFeaturedImage = async (projectId: string, photoUrl: string) => {
     const updated = await portfolioService.setFeaturedImage(projectId, photoUrl);
     if (updated) {
-      showToast('Display profile photo updated successfully! ⭐');
+      showToast('Display profile photo updated! ⭐');
       loadProjects();
     }
   };
@@ -72,20 +172,67 @@ export const PortfolioCMS: React.FC = () => {
   const handleDeleteFeaturedImage = async (projectId: string) => {
     const updated = await portfolioService.deleteFeaturedImage(projectId);
     if (updated) {
-      showToast('Display profile photo removed & replaced with next frame!');
+      showToast('Display profile photo removed & updated!');
       loadProjects();
     }
   };
 
-  // Action: Add new photo
-  const handleAddPhoto = async (projectId: string) => {
+  // Action: Add photo via URL
+  const handleAddPhotoViaUrl = async (projectId: string) => {
     if (!newPhotoUrl.trim()) return;
-    const updated = await portfolioService.addPhotoToGallery(projectId, newPhotoUrl.trim());
-    if (updated) {
-      setNewPhotoUrl('');
-      showToast('New photo added to lookbook!');
-      loadProjects();
+    const url = newPhotoUrl.trim();
+    await portfolioService.addPhotoToGallery(projectId, url);
+    if (setAsCoverImmediately) {
+      await portfolioService.setFeaturedImage(projectId, url);
     }
+    setNewPhotoUrl('');
+    showToast('Photo frame added to lookbook! ✨');
+    loadProjects();
+  };
+
+  // Action: Handle File Upload (from Device/Computer)
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const loadedDataUrls: string[] = [];
+    let processed = 0;
+
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          loadedDataUrls.push(event.target.result as string);
+        }
+        processed++;
+        if (processed === files.length) {
+          setUploadedFiles(prev => [...prev, ...loadedDataUrls]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Action: Commit Uploaded Files
+  const handleSaveUploadedPhotos = async (projectId: string) => {
+    if (uploadedFiles.length === 0) return;
+    await portfolioService.addMultiplePhotosToGallery(projectId, uploadedFiles);
+    if (setAsCoverImmediately && uploadedFiles.length > 0) {
+      await portfolioService.setFeaturedImage(projectId, uploadedFiles[0]);
+    }
+    setUploadedFiles([]);
+    showToast(`Successfully added ${uploadedFiles.length} photo(s) to project!`);
+    loadProjects();
+  };
+
+  // Action: Add from Library
+  const handleAddFromLibrary = async (projectId: string, photoPath: string) => {
+    await portfolioService.addPhotoToGallery(projectId, photoPath);
+    if (setAsCoverImmediately) {
+      await portfolioService.setFeaturedImage(projectId, photoPath);
+    }
+    showToast('Photo added from photoshoot bank!');
+    loadProjects();
   };
 
   // Action: Delete entire project
@@ -132,17 +279,17 @@ export const PortfolioCMS: React.FC = () => {
         </div>
       )}
 
-      {/* Top Banner & Stats */}
+      {/* Top Banner & Controls */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-3xl shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold uppercase mb-2">
-            <Sparkles className="w-3.5 h-3.5" /> 3D Portfolio & Media Management CMS
+            <Sparkles className="w-3.5 h-3.5" /> 3D Portfolio & Photo CMS
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-display">
-            Showcase Projects & Profile Photos
+            Manage Photos & Profile Covers
           </h1>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-            Control display profile photos, delete unwanted frames, organize high-fashion photoshoot galleries, and update live project links.
+            Add high-res photoshoot photos from your computer, choose from the photoshoot library, delete unwanted frames, and customize display profile covers.
           </p>
         </div>
 
@@ -259,7 +406,7 @@ export const PortfolioCMS: React.FC = () => {
                 )}
 
                 {/* Active Display Profile Photo Indicator */}
-                <span className="absolute bottom-3 left-3 text-[10px] font-bold px-2.5 py-1 bg-amber-500/90 text-black rounded-lg backdrop-blur font-mono flex items-center gap-1 shadow-md">
+                <span className="absolute bottom-3 left-3 text-[10px] font-bold px-2.5 py-1 bg-amber-500 text-black rounded-lg backdrop-blur font-mono flex items-center gap-1 shadow-md">
                   <Star className="w-3 h-3 fill-black" /> Display Profile Photo
                 </span>
 
@@ -312,10 +459,10 @@ export const PortfolioCMS: React.FC = () => {
         ))}
       </div>
 
-      {/* Media & Profile Photo Manager Modal */}
+      {/* Comprehensive Media & Profile Photo Manager Modal with Full Add Photo Options */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fadeIn">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-5xl max-h-[92vh] overflow-y-auto p-5 sm:p-8 space-y-6 shadow-2xl">
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
               <div>
@@ -326,7 +473,7 @@ export const PortfolioCMS: React.FC = () => {
                   {selectedProject.title}
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  Set any photo as the main display cover, delete unwanted frames, or add new lookbook images.
+                  Add new photos from computer/URL/library, delete unwanted photos, and set the primary profile cover.
                 </p>
               </div>
               <button
@@ -368,12 +515,250 @@ export const PortfolioCMS: React.FC = () => {
               </button>
             </div>
 
-            {/* Gallery Frames Grid */}
+            {/* ⭐ SECTION: ADD PHOTOS TO PROJECT & LOOKBOOK ⭐ */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 space-y-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white font-display flex items-center gap-2">
+                    <Plus className="w-4 h-4 text-amber-500" />
+                    Add Photos to Project & Lookbook
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Choose your preferred method to add photos: upload files from your computer, paste an image link, or select from the photoshoot image library.
+                  </p>
+                </div>
+
+                {/* Cover Option Toggle */}
+                <label className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <input
+                    type="checkbox"
+                    checked={setAsCoverImmediately}
+                    onChange={(e) => setSetAsCoverImmediately(e.target.checked)}
+                    className="rounded text-amber-500 focus:ring-amber-400 accent-amber-500"
+                  />
+                  <span>Make Display Profile Cover</span>
+                </label>
+              </div>
+
+              {/* Add Photo Tabs */}
+              <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-3">
+                <button
+                  onClick={() => setAddMethod('upload')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    addMethod === 'upload'
+                      ? 'bg-amber-500 text-black shadow-md'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <Upload className="w-3.5 h-3.5" /> Upload from Computer
+                </button>
+                <button
+                  onClick={() => setAddMethod('url')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    addMethod === 'url'
+                      ? 'bg-amber-500 text-black shadow-md'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <LinkIcon className="w-3.5 h-3.5" /> Paste URL / Path
+                </button>
+                <button
+                  onClick={() => setAddMethod('library')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    addMethod === 'library'
+                      ? 'bg-amber-500 text-black shadow-md'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <FolderOpen className="w-3.5 h-3.5" /> Photoshoot Library ({LOCAL_PHOTOSHOOT_LIBRARY.length})
+                </button>
+              </div>
+
+              {/* METHOD 1: UPLOAD FROM DEVICE */}
+              {addMethod === 'upload' && (
+                <div className="space-y-4">
+                  <div
+                    onClick={() => fileInputRef.current?.click()}
+                    className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-400 rounded-2xl p-6 sm:p-8 text-center cursor-pointer bg-white/70 dark:bg-slate-900/70 transition-all group"
+                  >
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={handleFileSelect}
+                      className="hidden"
+                    />
+                    <div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <Upload className="w-6 h-6" />
+                    </div>
+                    <div className="text-xs font-bold text-slate-900 dark:text-white">
+                      Click to Browse Images or Drag & Drop Photos Here
+                    </div>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                      Supports JPG, PNG, WEBP high-resolution photoshoot frames. Multi-file upload supported.
+                    </p>
+                  </div>
+
+                  {/* Uploaded Previews */}
+                  {uploadedFiles.length > 0 && (
+                    <div className="space-y-3 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-slate-900 dark:text-white">
+                          Selected Photos to Add ({uploadedFiles.length})
+                        </span>
+                        <button
+                          onClick={() => setUploadedFiles([])}
+                          className="text-[11px] font-bold text-rose-500 hover:underline"
+                        >
+                          Clear All
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        {uploadedFiles.map((previewUrl, i) => (
+                          <div key={i} className="relative h-20 rounded-xl overflow-hidden border border-amber-400/60 bg-black">
+                            <img src={previewUrl} alt={`Upload ${i + 1}`} className="w-full h-full object-cover" />
+                            <button
+                              onClick={() => setUploadedFiles(prev => prev.filter((_, idx) => idx !== i))}
+                              className="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px]"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => handleSaveUploadedPhotos(selectedProject.id)}
+                        className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all"
+                      >
+                        <Plus className="w-4 h-4" /> Save & Add {uploadedFiles.length} Photo(s) to Lookbook
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* METHOD 2: PASTE URL / PATH */}
+              {addMethod === 'url' && (
+                <div className="space-y-3">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="text"
+                      placeholder="Paste image URL (https://...) or local path (e.g. /images/photoshoot/bp_photo_1.jpg)..."
+                      value={newPhotoUrl}
+                      onChange={(e) => setNewPhotoUrl(e.target.value)}
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    />
+                    <button
+                      onClick={() => handleAddPhotoViaUrl(selectedProject.id)}
+                      disabled={!newPhotoUrl.trim()}
+                      className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md shrink-0"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Add Frame
+                    </button>
+                  </div>
+
+                  {newPhotoUrl.trim() && (
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden bg-black shrink-0 border border-amber-400">
+                        <img src={newPhotoUrl.trim()} alt="Preview" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="text-xs text-slate-600 dark:text-slate-400 truncate">
+                        <span className="font-bold text-slate-900 dark:text-white">Live Preview:</span> {newPhotoUrl}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* METHOD 3: PICK FROM PHOTOSHOOT LIBRARY */}
+              {addMethod === 'library' && (
+                <div className="space-y-3">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                      {['ALL', 'Haute Couture', 'Heritage Bridal', 'Fine-Art Jewellery', 'Beauty & Glamour', 'Gold Sequin Studio', 'Pop Editorial'].map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => setLibraryFilter(cat)}
+                          className={`px-3 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap transition-all ${
+                            libraryFilter === cat
+                              ? 'bg-amber-500 text-black'
+                              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100'
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+
+                    <input
+                      type="text"
+                      placeholder="Search photo file..."
+                      value={librarySearch}
+                      onChange={(e) => setLibrarySearch(e.target.value)}
+                      className="w-full sm:w-44 px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-900 dark:text-white"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-60 overflow-y-auto p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+                    {LOCAL_PHOTOSHOOT_LIBRARY
+                      .filter(item => libraryFilter === 'ALL' || item.category === libraryFilter)
+                      .filter(item => !librarySearch.trim() || item.path.toLowerCase().includes(librarySearch.toLowerCase()))
+                      .map((item, idx) => {
+                        const isAlreadyInGallery = selectedProject.gallery?.includes(item.path);
+                        const isCover = selectedProject.featured_image === item.path;
+
+                        return (
+                          <div
+                            key={idx}
+                            className={`relative h-28 rounded-xl overflow-hidden border-2 group/bank transition-all ${
+                              isCover
+                                ? 'border-amber-400 shadow-md ring-2 ring-amber-400'
+                                : isAlreadyInGallery
+                                ? 'border-emerald-500 opacity-70'
+                                : 'border-slate-200 dark:border-slate-800 hover:border-amber-400'
+                            }`}
+                          >
+                            <img src={item.path} alt={item.category} className="w-full h-full object-cover" />
+                            
+                            <div className="absolute top-1 left-1">
+                              {isCover ? (
+                                <span className="px-1.5 py-0.5 rounded bg-amber-500 text-black text-[8px] font-bold font-mono">
+                                  COVER
+                                </span>
+                              ) : isAlreadyInGallery ? (
+                                <span className="px-1.5 py-0.5 rounded bg-emerald-500 text-black text-[8px] font-bold font-mono flex items-center gap-0.5">
+                                  <Check className="w-2.5 h-2.5" /> ADDED
+                                </span>
+                              ) : null}
+                            </div>
+
+                            {!isAlreadyInGallery && (
+                              <div className="absolute inset-0 bg-black/65 opacity-0 group-hover/bank:opacity-100 transition-opacity flex flex-col items-center justify-center p-1 gap-1">
+                                <button
+                                  onClick={() => handleAddFromLibrary(selectedProject.id, item.path)}
+                                  className="w-full py-1 rounded bg-amber-500 hover:bg-amber-400 text-black text-[9px] font-extrabold uppercase tracking-wider flex items-center justify-center gap-1 shadow"
+                                >
+                                  <Plus className="w-2.5 h-2.5" /> Add
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Current Gallery Frames Grid with Individual Delete and Make Cover */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white font-display flex items-center gap-2">
                   <Images className="w-4 h-4 text-amber-500" />
-                  Lookbook Gallery Frames ({selectedProject.gallery?.length || 0} Photos)
+                  Current Lookbook Gallery ({selectedProject.gallery?.length || 0} Photos)
                 </h3>
                 <span className="text-[11px] text-slate-500 dark:text-slate-400">
                   Click ⭐ to set as cover, 🗑️ to delete
@@ -429,29 +814,6 @@ export const PortfolioCMS: React.FC = () => {
                     </div>
                   );
                 })}
-              </div>
-            </div>
-
-            {/* Add New Photo Input */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono flex items-center gap-1.5">
-                <Plus className="w-4 h-4 text-amber-500" /> Add New Photo to this Project
-              </h4>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Paste local path (e.g. /images/photoshoot/my_photo.jpg) or image URL..."
-                  value={newPhotoUrl}
-                  onChange={(e) => setNewPhotoUrl(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
-                />
-                <button
-                  onClick={() => handleAddPhoto(selectedProject.id)}
-                  disabled={!newPhotoUrl.trim()}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md shrink-0"
-                >
-                  <Plus className="w-3.5 h-3.5" /> Add Frame
-                </button>
               </div>
             </div>
 

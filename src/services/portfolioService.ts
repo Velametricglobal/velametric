@@ -601,17 +601,27 @@ export const portfolioService = {
   },
 
   async addPhotoToGallery(projectId: string, photoUrl: string): Promise<PortfolioProject | null> {
+    return this.addMultiplePhotosToGallery(projectId, [photoUrl]);
+  },
+
+  async addMultiplePhotosToGallery(projectId: string, photoUrls: string[]): Promise<PortfolioProject | null> {
     const projects = loadProjectsFromStorage();
     const idx = projects.findIndex(p => p.id === projectId);
     if (idx === -1) return null;
 
     const proj = projects[idx];
     if (!proj.gallery) proj.gallery = [];
-    if (!proj.gallery.includes(photoUrl)) {
-      proj.gallery.push(photoUrl);
-    }
+    
+    photoUrls.forEach(url => {
+      if (url && url.trim() && !proj.gallery?.includes(url.trim())) {
+        proj.gallery?.push(url.trim());
+      }
+    });
+
     if (!proj.featured_image || proj.featured_image.includes('unsplash.com/photo-1551288049')) {
-      proj.featured_image = photoUrl;
+      if (proj.gallery.length > 0) {
+        proj.featured_image = proj.gallery[0];
+      }
     }
 
     projects[idx] = proj;
