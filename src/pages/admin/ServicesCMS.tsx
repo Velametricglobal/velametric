@@ -116,26 +116,26 @@ export const ServicesCMS: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* CMS Header & Tabs */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
         <div>
-          <div className="flex items-center gap-2 text-amber-400 font-mono text-[11px] uppercase tracking-wider font-bold">
+          <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-mono text-[11px] uppercase tracking-wider font-bold">
             <Layers className="w-3.5 h-3.5" /> OUR PRODUCTS & SERVICES — PACKAGE MANAGEMENT
           </div>
-          <h2 className="text-xl font-bold text-white mt-1 font-display">Products, Services & Package CMS</h2>
-          <p className="text-slate-400 text-xs mt-1">Manage Startup, Enterprise, and Organization pricing, inclusions, exclusions, and GST display.</p>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-1 font-display">Products, Services & Package CMS</h2>
+          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">Manage Startup, Enterprise, and Organization pricing, inclusions, exclusions, and GST display.</p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <div className="flex bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
             <button
               onClick={() => setActiveTab('SERVICES')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'SERVICES' ? 'bg-amber-400 text-black' : 'text-slate-400 hover:text-white'}`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'SERVICES' ? 'bg-amber-500 text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Services ({services.length})
             </button>
             <button
               onClick={() => setActiveTab('AUDIT')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${activeTab === 'AUDIT' ? 'bg-amber-400 text-black' : 'text-slate-400 hover:text-white'}`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${activeTab === 'AUDIT' ? 'bg-amber-500 text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
             >
               <History className="w-3.5 h-3.5" /> Price Audit History
             </button>
@@ -144,7 +144,7 @@ export const ServicesCMS: React.FC = () => {
           {activeTab === 'SERVICES' && (
             <button
               onClick={handleAddNewService}
-              className="px-4 py-2 rounded-xl bg-white text-black font-extrabold text-xs flex items-center gap-1.5 hover:bg-slate-200 transition-all shadow-lg"
+              className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-black font-extrabold text-xs flex items-center gap-1.5 transition-all shadow-md"
             >
               <Plus className="w-4 h-4" /> Add Service
             </button>
@@ -156,23 +156,23 @@ export const ServicesCMS: React.FC = () => {
         /* Services & Packages Cards Grid */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((srv) => (
-            <div key={srv.id} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col justify-between hover:border-slate-700 transition-all">
+            <div key={srv.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 transition-all shadow-sm">
               <div>
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 font-mono">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 font-mono">
                     {srv.category_name || 'Service'}
                   </span>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setEditingService(JSON.parse(JSON.stringify(srv)))}
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-amber-400 hover:text-black text-slate-300 transition-all"
+                      className="p-1.5 rounded-lg bg-slate-100 hover:bg-amber-400 hover:text-black text-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-amber-400 dark:hover:text-black transition-all"
                       title="Edit Service & Packages"
                     >
                       <Edit3 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteService(srv.id)}
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-500 hover:text-white text-rose-400 transition-all"
+                      className="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-500 hover:text-white text-rose-500 dark:bg-slate-800 dark:text-rose-400 dark:hover:bg-rose-500 dark:hover:text-white transition-all"
                       title="Delete Service"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -180,18 +180,18 @@ export const ServicesCMS: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mt-3 font-display">{srv.name}</h3>
-                <p className="text-xs text-slate-400 line-clamp-2 mt-1 leading-relaxed">{srv.short_description}</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-3 font-display">{srv.name}</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">{srv.short_description}</p>
 
                 {/* Package Tiers Summary Badges */}
                 {srv.packages && (
-                  <div className="mt-4 pt-3 border-t border-slate-800/80 space-y-2">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase font-mono">Active Packages:</div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2">
+                    <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase font-mono">Active Packages:</div>
                     <div className="space-y-1.5">
                       {srv.packages.map((pkg) => (
-                        <div key={pkg.id} className="flex justify-between items-center text-xs bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-                          <span className="text-slate-300 font-semibold">{pkg.name} ({pkg.tier})</span>
-                          <span className="font-bold text-amber-400 font-mono">
+                        <div key={pkg.id} className="flex justify-between items-center text-xs bg-slate-50 dark:bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                          <span className="text-slate-700 dark:text-slate-300 font-semibold">{pkg.name} ({pkg.tier})</span>
+                          <span className="font-bold text-amber-600 dark:text-amber-400 font-mono">
                             {pkg.price_display_type === 'CUSTOM_QUOTE' ? 'Custom Quote' : formatAmount(pkg.price)}
                           </span>
                         </div>
@@ -201,9 +201,9 @@ export const ServicesCMS: React.FC = () => {
                 )}
               </div>
 
-              <div className="text-[11px] text-slate-400 border-t border-slate-800 pt-3 flex justify-between items-center font-mono">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-between items-center font-mono">
                 <span>Slug: /{srv.slug}</span>
-                <span className="text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                <span className="text-emerald-700 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                   {srv.status}
                 </span>
               </div>
@@ -212,13 +212,13 @@ export const ServicesCMS: React.FC = () => {
         </div>
       ) : (
         /* Price Audit History Logs */
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <h3 className="text-lg font-bold text-white font-display">Price & Package Modification Audit Log</h3>
-          <p className="text-xs text-slate-400">Chronological history of price changes, package tier updates, and pricing modifications.</p>
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">Price & Package Modification Audit Log</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Chronological history of price changes, package tier updates, and pricing modifications.</p>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase font-mono border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="p-3">Timestamp</th>
                   <th className="p-3">Service Name</th>
@@ -228,15 +228,15 @@ export const ServicesCMS: React.FC = () => {
                   <th className="p-3">Changed By</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                 {auditLogs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-800/40 font-mono">
-                    <td className="p-3 text-slate-400">{new Date(log.timestamp).toLocaleString()}</td>
-                    <td className="p-3 font-bold text-white">{log.service_name}</td>
-                    <td className="p-3 text-amber-400">{log.package_name}</td>
-                    <td className="p-3 text-rose-400 line-through">{log.old_price_display}</td>
-                    <td className="p-3 text-emerald-400 font-bold">{log.new_price_display}</td>
-                    <td className="p-3 text-slate-300">{log.changed_by}</td>
+                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 font-mono">
+                    <td className="p-3 text-slate-500 dark:text-slate-400">{new Date(log.timestamp).toLocaleString()}</td>
+                    <td className="p-3 font-bold text-slate-900 dark:text-white">{log.service_name}</td>
+                    <td className="p-3 text-amber-600 dark:text-amber-400">{log.package_name}</td>
+                    <td className="p-3 text-rose-600 dark:text-rose-400 line-through">{log.old_price_display}</td>
+                    <td className="p-3 text-emerald-600 dark:text-emerald-400 font-bold">{log.new_price_display}</td>
+                    <td className="p-3 text-slate-700 dark:text-slate-300">{log.changed_by}</td>
                   </tr>
                 ))}
               </tbody>
@@ -248,13 +248,13 @@ export const ServicesCMS: React.FC = () => {
       {/* Edit Service & Package Tier Modal */}
       {editingService && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-          <div className="w-full max-w-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+          <div className="w-full max-w-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-3xl space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
               <div>
-                <span className="text-[10px] font-bold text-amber-400 uppercase font-mono">SERVICE & PACKAGE BUILDER</span>
-                <h3 className="text-xl font-bold text-white font-display">Edit Service & Package Tiers</h3>
+                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase font-mono">SERVICE & PACKAGE BUILDER</span>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">Edit Service & Package Tiers</h3>
               </div>
-              <button onClick={() => setEditingService(null)} className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+              <button onClick={() => setEditingService(null)} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -263,58 +263,58 @@ export const ServicesCMS: React.FC = () => {
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-300 mb-1">Service Title *</label>
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Service Title *</label>
                   <input
                     type="text"
                     value={editingService.name || ''}
                     onChange={(e) => setEditingService({ ...editingService, name: e.target.value, slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-') })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:border-amber-400 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-300 mb-1">Category Name</label>
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Category Name</label>
                   <input
                     type="text"
                     value={editingService.category_name || ''}
                     onChange={(e) => setEditingService({ ...editingService, category_name: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:border-amber-400 focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:border-amber-400 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Short Description</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Short Description</label>
                 <textarea
                   rows={2}
                   value={editingService.short_description || ''}
                   onChange={(e) => setEditingService({ ...editingService, short_description: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:border-amber-400 focus:outline-none resize-none"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-amber-400 focus:outline-none resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Important Service Disclaimer</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Important Service Disclaimer</label>
                 <input
                   type="text"
                   placeholder="e.g. Financial services are subject to eligibility and lender policies."
                   value={editingService.disclaimer || ''}
                   onChange={(e) => setEditingService({ ...editingService, disclaimer: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:border-amber-400 focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-amber-400 focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Package Tiers Manager Tabs */}
             {editingService.packages && editingService.packages.length > 0 && (
-              <div className="space-y-4 pt-4 border-t border-slate-800">
+              <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <div className="flex items-center justify-between">
-                  <div className="text-xs font-bold text-amber-400 uppercase font-mono">Package Tiers Editor:</div>
-                  <div className="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+                  <div className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase font-mono">Package Tiers Editor:</div>
+                  <div className="flex bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
                     {editingService.packages.map((pkg, idx) => (
                       <button
                         key={pkg.id}
                         onClick={() => setActivePkgTab(idx)}
-                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePkgTab === idx ? 'bg-amber-400 text-black' : 'text-slate-400 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${activePkgTab === idx ? 'bg-amber-500 text-black shadow-sm' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
                       >
                         {pkg.tier} ({pkg.name})
                       </button>
@@ -324,10 +324,10 @@ export const ServicesCMS: React.FC = () => {
 
                 {/* Active Package Editor Form */}
                 {editingService.packages[activePkgTab] && (
-                  <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 text-xs">
+                  <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-slate-400 mb-1 font-semibold">Package Name</label>
+                        <label className="block text-slate-600 dark:text-slate-400 mb-1 font-semibold">Package Name</label>
                         <input
                           type="text"
                           value={editingService.packages[activePkgTab].name}
@@ -336,12 +336,12 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].name = e.target.value;
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-semibold">Package Price (₹ INR)</label>
+                        <label className="block text-slate-600 dark:text-slate-400 mb-1 font-semibold">Package Price (₹ INR)</label>
                         <input
                           type="number"
                           value={editingService.packages[activePkgTab].price}
@@ -350,12 +350,12 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].price = parseFloat(e.target.value) || 0;
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white font-mono font-bold"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono font-bold"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-semibold">Price Display Model</label>
+                        <label className="block text-slate-600 dark:text-slate-400 mb-1 font-semibold">Price Display Model</label>
                         <select
                           value={editingService.packages[activePkgTab].price_display_type}
                           onChange={(e) => {
@@ -363,7 +363,7 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].price_display_type = e.target.value as PriceDisplayType;
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white font-mono"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono"
                         >
                           <option value="STARTING_FROM">Starting From</option>
                           <option value="FIXED">Fixed Price</option>
@@ -377,7 +377,7 @@ export const ServicesCMS: React.FC = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-slate-400 mb-1 font-semibold">Target Audience Subtitle</label>
+                        <label className="block text-slate-600 dark:text-slate-400 mb-1 font-semibold">Target Audience Subtitle</label>
                         <input
                           type="text"
                           value={editingService.packages[activePkgTab].target_audience}
@@ -386,12 +386,12 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].target_audience = e.target.value;
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-semibold">Badge Highlight (Optional)</label>
+                        <label className="block text-slate-600 dark:text-slate-400 mb-1 font-semibold">Badge Highlight (Optional)</label>
                         <input
                           type="text"
                           placeholder="e.g. Most Popular, Best Value"
@@ -401,7 +401,7 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].badge = e.target.value;
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white"
                         />
                       </div>
                     </div>
@@ -409,7 +409,7 @@ export const ServicesCMS: React.FC = () => {
                     {/* Inclusions & Exclusions Textareas */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-emerald-400 mb-1 font-semibold">Inclusions (One per line)</label>
+                        <label className="block text-emerald-600 dark:text-emerald-400 mb-1 font-semibold">Inclusions (One per line)</label>
                         <textarea
                           rows={4}
                           value={editingService.packages[activePkgTab].inclusions.join('\n')}
@@ -418,12 +418,12 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].inclusions = e.target.value.split('\n').filter(Boolean);
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white font-mono text-[11px] leading-relaxed resize-none"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono text-[11px] leading-relaxed resize-none"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-rose-400 mb-1 font-semibold">Exclusions (One per line)</label>
+                        <label className="block text-rose-600 dark:text-rose-400 mb-1 font-semibold">Exclusions (One per line)</label>
                         <textarea
                           rows={4}
                           value={editingService.packages[activePkgTab].exclusions.join('\n')}
@@ -432,7 +432,7 @@ export const ServicesCMS: React.FC = () => {
                             pkgs[activePkgTab].exclusions = e.target.value.split('\n').filter(Boolean);
                             setEditingService({ ...editingService, packages: pkgs });
                           }}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-white font-mono text-[11px] leading-relaxed resize-none"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono text-[11px] leading-relaxed resize-none"
                         />
                       </div>
                     </div>
@@ -441,16 +441,16 @@ export const ServicesCMS: React.FC = () => {
               </div>
             )}
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
               <button
                 onClick={() => setEditingService(null)}
-                className="px-5 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 transition-all"
+                className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveService}
-                className="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs flex items-center gap-2 transition-all shadow-xl"
+                className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs flex items-center gap-2 transition-all shadow-md"
               >
                 <Save className="w-4 h-4" /> Save Service & Publish Pricing
               </button>

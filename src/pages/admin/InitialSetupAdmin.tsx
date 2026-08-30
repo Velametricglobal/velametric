@@ -45,18 +45,18 @@ export const InitialSetupAdmin: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 text-xs text-slate-200">
+    <div className="space-y-8 text-xs text-slate-700 dark:text-slate-200">
       
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/10 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30 font-mono">
             <Key className="w-3.5 h-3.5" /> Initial Deployment Credentials Panel
           </div>
-          <h1 className="text-2xl font-extrabold text-white mt-2 font-display uppercase">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-2 font-display uppercase">
             Initial Setup Accounts & Credentials Sheet
           </h1>
-          <p className="text-slate-400 text-xs mt-1">
+          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
             Generated unique initial account credentials. Every initial login forces an immediate password change (`must_change_password = true`).
           </p>
         </div>
@@ -64,14 +64,14 @@ export const InitialSetupAdmin: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowPasswords(!showPasswords)}
-            className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs inline-flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs inline-flex items-center gap-2 transition-all"
           >
             {showPasswords ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             {showPasswords ? 'Hide Passwords' : 'Reveal Temporary Passwords'}
           </button>
           <button
             onClick={handleDownloadSheet}
-            className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs inline-flex items-center gap-2 shadow-lg"
+            className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs inline-flex items-center gap-2 shadow-md transition-all"
           >
             <Download className="w-4 h-4" /> Download Setup Sheet
           </button>
@@ -79,11 +79,11 @@ export const InitialSetupAdmin: React.FC = () => {
       </div>
 
       {/* SECURITY NOTICE ALERT */}
-      <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl space-y-1 text-amber-300">
+      <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl space-y-1 text-amber-800 dark:text-amber-300">
         <div className="font-bold flex items-center gap-2">
           <AlertTriangle className="w-4 h-4" /> ONE-TIME INITIAL CREDENTIALS SHEET
         </div>
-        <p className="text-[11px] text-amber-200/80 leading-relaxed">
+        <p className="text-[11px] text-amber-700/80 dark:text-amber-200/80 leading-relaxed">
           These initial credentials are generated for the initial deployment setup. Once an initial user logs in for the first time, they will be prompted to set a permanent password.
         </p>
       </div>
@@ -91,21 +91,21 @@ export const InitialSetupAdmin: React.FC = () => {
       {/* CREDENTIALS CARDS GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {INITIAL_SETUP_ACCOUNTS.map((acc, idx) => (
-          <div key={acc.user_code} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-4 shadow-xl flex flex-col justify-between">
+          <div key={acc.user_code} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
             <div className="space-y-3">
-              <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                <span className="font-extrabold text-white text-sm font-display">{acc.role_title}</span>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2">
+                <span className="font-extrabold text-slate-900 dark:text-white text-sm font-display">{acc.role_title}</span>
+                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30">
                   {acc.user_code}
                 </span>
               </div>
 
               <div className="space-y-1.5 font-mono text-xs">
-                <div><span className="text-slate-400">Email:</span> <span className="text-slate-200">{acc.email}</span></div>
-                <div><span className="text-slate-400">Department:</span> <span className="text-slate-300">{acc.department}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Email:</span> <span className="text-slate-800 dark:text-slate-200 font-semibold">{acc.email}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Department:</span> <span className="text-slate-700 dark:text-slate-300">{acc.department}</span></div>
                 <div>
-                  <span className="text-slate-400">Temp Password:</span>{' '}
-                  <span className="text-amber-400 font-bold">
+                  <span className="text-slate-500 dark:text-slate-400">Temp Password:</span>{' '}
+                  <span className="text-amber-600 dark:text-amber-400 font-bold">
                     {showPasswords ? acc.temp_password : '••••••••••••'}
                   </span>
                 </div>
@@ -113,23 +113,23 @@ export const InitialSetupAdmin: React.FC = () => {
             </div>
 
             {rotatedUser === acc.user_code ? (
-              <div className="p-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl text-[11px] font-bold text-center">
+              <div className="p-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 rounded-xl text-[11px] font-bold text-center">
                 ✓ Credentials Rotated & Password Reset Dispatched!
               </div>
             ) : (
-              <div className="pt-3 border-t border-slate-800 flex justify-between items-center gap-2">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center gap-2">
                 <button
                   onClick={() => handleCopyCredentials(acc, idx)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 text-[11px] font-bold inline-flex items-center gap-1.5 flex-1 justify-center"
+                  className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 text-[11px] font-bold inline-flex items-center gap-1.5 flex-1 justify-center transition-all"
                 >
-                  {copiedIndex === idx ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedIndex === idx ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   {copiedIndex === idx ? 'Copied!' : 'Copy Credentials'}
                 </button>
 
                 <button
                   onClick={() => handleRotateCredentials(acc.user_code)}
                   title="Rotate Credentials & Revoke Sessions"
-                  className="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[11px] font-bold inline-flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-500/20 dark:border-rose-500/30 text-[11px] font-bold inline-flex items-center gap-1 transition-all"
                 >
                   <RefreshCw className="w-3.5 h-3.5" /> Rotate
                 </button>

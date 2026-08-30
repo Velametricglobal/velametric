@@ -80,36 +80,36 @@ export const ReelMarketingAdmin: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 text-xs text-slate-200">
+    <div className="space-y-8 text-xs text-slate-800 dark:text-slate-200">
       
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/10 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30 font-mono">
             <Megaphone className="w-3.5 h-3.5" /> WhatsApp & Video Reel Marketing Engine
           </div>
-          <h1 className="text-2xl font-extrabold text-white mt-2 font-display uppercase">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-2 font-display uppercase">
             Promotional Reel Campaigns & Library
           </h1>
-          <p className="text-slate-400 text-xs mt-1">
+          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
             Upload promotional reels, segment targeted CRM audiences, execute bulk WhatsApp campaigns, and track ROI attribution.
           </p>
         </div>
 
         {/* TAB SELECTOR */}
-        <div className="flex flex-wrap gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+        <div className="flex flex-wrap gap-2 bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
           <button
             onClick={() => setActiveTab('CAMPAIGNS')}
             className={`px-4 py-2 rounded-lg font-bold transition-all ${
-              activeTab === 'CAMPAIGNS' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-400 hover:text-white'
+              activeTab === 'CAMPAIGNS' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
             }`}
           >
-            Campaign Performance ({campaigns.length})
+            Campaigns ({campaigns.length})
           </button>
           <button
             onClick={() => setActiveTab('REEL_LIBRARY')}
             className={`px-4 py-2 rounded-lg font-bold transition-all ${
-              activeTab === 'REEL_LIBRARY' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-400 hover:text-white'
+              activeTab === 'REEL_LIBRARY' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
             }`}
           >
             Reel Library ({reels.length})
@@ -117,57 +117,57 @@ export const ReelMarketingAdmin: React.FC = () => {
           <button
             onClick={() => setActiveTab('CREATE_CAMPAIGN')}
             className={`px-4 py-2 rounded-lg font-bold transition-all ${
-              activeTab === 'CREATE_CAMPAIGN' ? 'bg-amber-500 text-black shadow-md' : 'text-slate-400 hover:text-white'
+              activeTab === 'CREATE_CAMPAIGN' ? 'bg-amber-500 text-black shadow-md' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
             }`}
           >
-            + Create New Campaign
+            + Create Campaign
           </button>
         </div>
       </div>
 
       {/* METRIC OVERVIEW CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
-            Total Campaign Reach <Users className="w-4 h-4 text-brand-400" />
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">
+            Total Campaign Reach <Users className="w-4 h-4 text-brand-600 dark:text-brand-400" />
           </div>
-          <div className="text-3xl font-extrabold text-white font-display">478</div>
-          <div className="text-[11px] text-emerald-400 font-medium">Recipients Contacted</div>
+          <div className="text-3xl font-extrabold text-slate-900 dark:text-white font-display">478</div>
+          <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Recipients Contacted</div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
-            Average Read Rate <Eye className="w-4 h-4 text-emerald-400" />
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">
+            Average Read Rate <Eye className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-3xl font-extrabold text-emerald-400 font-display">84.0%</div>
-          <div className="text-[11px] text-slate-400 font-medium">WhatsApp Engagement</div>
+          <div className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-display">84.0%</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">WhatsApp Engagement</div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
-            Leads Generated <Sparkles className="w-4 h-4 text-amber-400" />
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">
+            Leads Generated <Sparkles className="w-4 h-4 text-amber-500 dark:text-amber-400" />
           </div>
-          <div className="text-3xl font-extrabold text-amber-400 font-display">30</div>
-          <div className="text-[11px] text-amber-300 font-medium">Inbound Inquiries</div>
+          <div className="text-3xl font-extrabold text-amber-600 dark:text-amber-400 font-display">30</div>
+          <div className="text-[11px] text-amber-600 dark:text-amber-300 font-medium">Inbound Inquiries</div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
-            Attributed Revenue <DollarSign className="w-4 h-4 text-rose-400" />
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">
+            Attributed Revenue <DollarSign className="w-4 h-4 text-rose-600 dark:text-rose-400" />
           </div>
-          <div className="text-3xl font-extrabold text-white font-display">₹7,70,000</div>
-          <div className="text-[11px] text-slate-400 font-medium">Direct Marketing ROI</div>
+          <div className="text-3xl font-extrabold text-slate-900 dark:text-white font-display">₹7,70,000</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Direct Marketing ROI</div>
         </div>
       </div>
 
       {/* TAB 1: CAMPAIGNS LIST & ANALYTICS */}
       {activeTab === 'CAMPAIGNS' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-sm">
           <div className="flex justify-between items-center">
-            <h2 className="text-base font-bold text-white font-display">Active & Completed Reel Campaigns</h2>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white font-display">Active & Completed Reel Campaigns</h2>
             <button
               onClick={() => setActiveTab('CREATE_CAMPAIGN')}
-              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs inline-flex items-center gap-2"
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs inline-flex items-center gap-2 shadow-sm"
             >
               <Plus className="w-4 h-4" /> Create Reel Campaign
             </button>
@@ -175,44 +175,44 @@ export const ReelMarketingAdmin: React.FC = () => {
 
           <div className="space-y-4">
             {campaigns.map(camp => (
-              <div key={camp.id} className="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-4">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
+              <div key={camp.id} className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
                   <div>
-                    <span className="text-[10px] font-extrabold font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase">
+                    <span className="text-[10px] font-extrabold font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/30 uppercase">
                       ● {camp.status}
                     </span>
-                    <h3 className="text-base font-extrabold text-white font-display mt-1">{camp.name}</h3>
-                    <p className="text-slate-400 text-[11px] font-mono">Audience: {camp.target_audience} • Channel: {camp.channel}</p>
+                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white font-display mt-1">{camp.name}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] font-mono">Audience: {camp.target_audience} • Channel: {camp.channel}</p>
                   </div>
-                  <div className="text-right text-[11px] text-slate-400">
+                  <div className="text-right text-[11px] text-slate-500 dark:text-slate-400">
                     <div>Launched: {new Date(camp.created_at).toLocaleDateString()}</div>
-                    <div className="text-slate-300 font-bold">Created by: {camp.created_by}</div>
+                    <div className="text-slate-700 dark:text-slate-300 font-bold">Created by: {camp.created_by}</div>
                   </div>
                 </div>
 
                 {camp.reel_title && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 font-bold text-xs">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 text-amber-700 dark:text-amber-400 border border-slate-200 dark:border-slate-800 font-bold text-xs">
                     🎬 Attached Reel: {camp.reel_title}
                   </div>
                 )}
 
                 {/* CAMPAIGN METRICS GRID */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-mono font-bold">Recipients / Sent</div>
-                    <div className="text-base font-bold text-white font-display">{camp.recipients_count} / {camp.sent_count}</div>
+                  <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-mono font-bold">Recipients / Sent</div>
+                    <div className="text-base font-bold text-slate-900 dark:text-white font-display">{camp.recipients_count} / {camp.sent_count}</div>
                   </div>
-                  <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-mono font-bold">Delivered / Read</div>
-                    <div className="text-base font-bold text-emerald-400 font-display">{camp.delivered_count} / {camp.read_count}</div>
+                  <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-mono font-bold">Delivered / Read</div>
+                    <div className="text-base font-bold text-emerald-600 dark:text-emerald-400 font-display">{camp.delivered_count} / {camp.read_count}</div>
                   </div>
-                  <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-mono font-bold">Inbound Replies</div>
-                    <div className="text-base font-bold text-amber-400 font-display">{camp.replies_count}</div>
+                  <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-mono font-bold">Inbound Replies</div>
+                    <div className="text-base font-bold text-amber-600 dark:text-amber-400 font-display">{camp.replies_count}</div>
                   </div>
-                  <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 text-[10px] uppercase font-mono font-bold">Attributed Revenue</div>
-                    <div className="text-base font-bold text-white font-display">₹{camp.revenue_attributed.toLocaleString()}</div>
+                  <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-mono font-bold">Attributed Revenue</div>
+                    <div className="text-base font-bold text-slate-900 dark:text-white font-display">₹{camp.revenue_attributed.toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -223,15 +223,15 @@ export const ReelMarketingAdmin: React.FC = () => {
 
       {/* TAB 2: REEL LIBRARY */}
       {activeTab === 'REEL_LIBRARY' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-sm">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-base font-bold text-white font-display">CRM Promotional Reel Asset Library</h2>
-              <p className="text-slate-400 text-xs">Upload, manage, and organize 9:16 vertical video reels for marketing campaigns.</p>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white font-display">CRM Promotional Reel Asset Library</h2>
+              <p className="text-slate-500 dark:text-slate-400 text-xs">Upload, manage, and organize 9:16 vertical video reels for marketing campaigns.</p>
             </div>
             <button
               onClick={() => setShowUploadModal(true)}
-              className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold inline-flex items-center gap-2"
+              className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold inline-flex items-center gap-2 shadow-sm"
             >
               <Plus className="w-4 h-4" /> Bulk Upload Reels
             </button>
@@ -239,7 +239,7 @@ export const ReelMarketingAdmin: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {reels.map(reel => (
-              <div key={reel.id} className="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden space-y-3 p-4 flex flex-col justify-between">
+              <div key={reel.id} className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden space-y-3 p-4 flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="h-56 rounded-xl overflow-hidden relative bg-black group cursor-pointer" onClick={() => setPreviewReel(reel)}>
                     <img src={reel.thumbnail_url} alt={reel.title} className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" />
@@ -254,27 +254,27 @@ export const ReelMarketingAdmin: React.FC = () => {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-extrabold text-white font-display">{reel.title}</h3>
-                    <p className="text-slate-400 text-[11px] mt-1 leading-relaxed">{reel.description}</p>
+                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white font-display">{reel.title}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-1 leading-relaxed">{reel.description}</p>
                   </div>
 
                   <div className="flex flex-wrap gap-1">
                     {reel.tags.map((t, idx) => (
-                      <span key={idx} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">
+                      <span key={idx} className="text-[10px] font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800">
                         #{t}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px]">
-                  <span className="text-slate-400 font-mono">Used in {reel.campaign_count} campaigns</span>
+                <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-[11px]">
+                  <span className="text-slate-500 dark:text-slate-400 font-mono">Used in {reel.campaign_count} campaigns</span>
                   <button
                     onClick={() => {
                       setSelectedReelId(reel.id);
                       setActiveTab('CREATE_CAMPAIGN');
                     }}
-                    className="text-amber-400 font-bold hover:underline"
+                    className="text-amber-600 dark:text-amber-400 font-bold hover:underline"
                   >
                     Use in Campaign →
                   </button>
@@ -287,30 +287,30 @@ export const ReelMarketingAdmin: React.FC = () => {
 
       {/* TAB 3: CREATE NEW CAMPAIGN BUILDER */}
       {activeTab === 'CREATE_CAMPAIGN' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 max-w-3xl mx-auto">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 max-w-3xl mx-auto shadow-sm">
           <div className="space-y-1">
-            <h2 className="text-lg font-extrabold text-white font-display">Create Promotional Reel Campaign</h2>
-            <p className="text-slate-400 text-xs">Segment your CRM audience, select a promotional reel, and craft a personalized message.</p>
+            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white font-display">Create Promotional Reel Campaign</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-xs">Segment your CRM audience, select a promotional reel, and craft a personalized message.</p>
           </div>
 
           <div className="space-y-5">
             <div>
-              <label className="block text-slate-300 font-bold mb-1">Campaign Name</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Campaign Name</label>
               <input
                 type="text"
                 placeholder="e.g. September Digital Marketing Reel Launch"
                 value={campaignName}
                 onChange={(e) => setCampaignName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               />
             </div>
 
             <div>
-              <label className="block text-slate-300 font-bold mb-1">Target CRM Audience Segment</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Target CRM Audience Segment</label>
               <select
                 value={targetAudience}
                 onChange={(e) => setTargetAudience(e.target.value as any)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               >
                 <option value="QUALIFIED_LEADS">Qualified Leads (247 Recipients)</option>
                 <option value="ALL">All Contact Database (478 Recipients)</option>
@@ -321,11 +321,11 @@ export const ReelMarketingAdmin: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-slate-300 font-bold mb-1">Select Promotional Reel</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Select Promotional Reel</label>
               <select
                 value={selectedReelId}
                 onChange={(e) => setSelectedReelId(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               >
                 {reels.map(r => (
                   <option key={r.id} value={r.id}>{r.title} ({r.category} • {r.duration_seconds}s)</option>
@@ -334,28 +334,28 @@ export const ReelMarketingAdmin: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-slate-300 font-bold mb-1">Campaign Message Content</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Campaign Message Content</label>
               <textarea
                 rows={5}
                 value={campaignMessage}
                 onChange={(e) => setCampaignMessage(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white focus:outline-none focus:border-amber-400 font-mono leading-relaxed"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-mono leading-relaxed"
               />
-              <span className="text-[10px] text-slate-400 mt-1 block">Variables supported: {'{{first_name}}, {{service_name}}, {{event_name}}, {{cta_link}}'}</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 block">Variables supported: {'{{first_name}}, {{service_name}}, {{event_name}}, {{cta_link}}'}</span>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex justify-end gap-3">
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setActiveTab('CAMPAIGNS')}
-                className="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold"
+                className="px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={() => setShowConfirmModal(true)}
-                className="px-7 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold uppercase tracking-wider shadow-xl"
+                className="px-7 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold uppercase tracking-wider shadow-md"
               >
                 Review Campaign & Launch →
               </button>
@@ -367,38 +367,38 @@ export const ReelMarketingAdmin: React.FC = () => {
       {/* MANDATORY CAMPAIGN CONFIRMATION MODAL */}
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-2xl text-left">
-            <div className="border-b border-slate-800 pb-3">
-              <span className="text-[10px] font-extrabold font-mono uppercase px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+          <div className="w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-2xl text-left">
+            <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+              <span className="text-[10px] font-extrabold font-mono uppercase px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-800 dark:bg-amber-500/20 dark:text-amber-400 border border-amber-500/20 dark:border-amber-500/30">
                 Mandatory Campaign Review
               </span>
-              <h3 className="text-lg font-black text-white font-display mt-2">Confirm Campaign Launch</h3>
+              <h3 className="text-lg font-black text-slate-900 dark:text-white font-display mt-2">Confirm Campaign Launch</h3>
             </div>
 
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 text-xs font-mono">
-              <div><span className="text-slate-400">Campaign Name:</span> <span className="text-white font-bold">{campaignName || 'Promotional Reel Launch'}</span></div>
-              <div><span className="text-slate-400">Channel:</span> <span className="text-emerald-400 font-bold">WhatsApp Business API</span></div>
-              <div><span className="text-slate-400">Target Segment:</span> <span className="text-amber-400 font-bold">{targetAudience}</span></div>
-              <div><span className="text-slate-400">Estimated Recipients:</span> <span className="text-white font-bold">247 Contacts</span></div>
-              <div><span className="text-slate-400">Excluded (Opted-Out):</span> <span className="text-rose-400 font-bold">16 Contacts</span></div>
+            <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs font-mono">
+              <div><span className="text-slate-500 dark:text-slate-400">Campaign Name:</span> <span className="text-slate-900 dark:text-white font-bold">{campaignName || 'Promotional Reel Launch'}</span></div>
+              <div><span className="text-slate-500 dark:text-slate-400">Channel:</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">WhatsApp Business API</span></div>
+              <div><span className="text-slate-500 dark:text-slate-400">Target Segment:</span> <span className="text-amber-600 dark:text-amber-400 font-bold">{targetAudience}</span></div>
+              <div><span className="text-slate-500 dark:text-slate-400">Estimated Recipients:</span> <span className="text-slate-900 dark:text-white font-bold">247 Contacts</span></div>
+              <div><span className="text-slate-500 dark:text-slate-400">Excluded (Opted-Out):</span> <span className="text-rose-600 dark:text-rose-400 font-bold">16 Contacts</span></div>
             </div>
 
-            <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[11px] text-emerald-300 font-semibold flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 shrink-0 text-emerald-400" />
+            <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[11px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
               Marketing Opt-In Rules Enforced. Opted-out contacts will be automatically skipped.
             </div>
 
             <div className="flex justify-end gap-3 pt-2">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-5 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold"
+                className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
               >
                 Go Back
               </button>
               <button
                 onClick={handleLaunchCampaign}
                 disabled={isLaunching}
-                className="px-7 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider"
+                className="px-7 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider shadow-md"
               >
                 {isLaunching ? 'Dispatching Campaign...' : 'Confirm & Launch Campaign 🚀'}
               </button>
@@ -410,27 +410,27 @@ export const ReelMarketingAdmin: React.FC = () => {
       {/* UPLOAD REEL MODAL */}
       {showUploadModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <form onSubmit={handleCreateReel} className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white font-display">Bulk Upload Promotional Reel</h3>
+          <form onSubmit={handleCreateReel} className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white font-display">Bulk Upload Promotional Reel</h3>
             
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Reel Title *</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Reel Title *</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. Uttarakhand Fashion Summit Highlights"
                 value={newReelTitle}
                 onChange={(e) => setNewReelTitle(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
               />
             </div>
 
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Category</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Category</label>
               <select
                 value={newReelCategory}
                 onChange={(e) => setNewReelCategory(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white"
               >
                 <option value="Marketing">Marketing</option>
                 <option value="Website">Website Development</option>
@@ -444,13 +444,13 @@ export const ReelMarketingAdmin: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowUploadModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold"
+                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-brand-600 text-white font-bold"
+                className="px-5 py-2 rounded-xl bg-brand-600 text-white font-bold shadow-sm"
               >
                 Upload Reel
               </button>
@@ -462,13 +462,13 @@ export const ReelMarketingAdmin: React.FC = () => {
       {/* REEL VIDEO PLAYER PREVIEW MODAL */}
       {previewReel && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-3xl p-4 space-y-4 text-center">
+          <div className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-4 space-y-4 text-center shadow-2xl">
             <div className="flex justify-between items-center">
-              <h3 className="text-sm font-bold text-white truncate max-w-[200px]">{previewReel.title}</h3>
-              <button onClick={() => setPreviewReel(null)} className="text-slate-400 hover:text-white font-bold">✕</button>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[200px]">{previewReel.title}</h3>
+              <button onClick={() => setPreviewReel(null)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white font-bold">✕</button>
             </div>
 
-            <div className="aspect-[9/16] w-full rounded-2xl overflow-hidden bg-black border border-slate-800">
+            <div className="aspect-[9/16] w-full rounded-2xl overflow-hidden bg-black border border-slate-200 dark:border-slate-800">
               <video
                 src={previewReel.video_url}
                 controls

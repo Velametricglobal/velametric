@@ -173,18 +173,26 @@ export const App: React.FC = () => {
                   <Route path="security" element={<SecurityAuditAdmin />} />
                   <Route path="setup" element={<InitialSetupAdmin />} />
                   <Route path="homepage-builder" element={<HomepageBuilder />} />
+                  <Route path="pages" element={<HomepageBuilder />} />
                   <Route path="leads" element={<LeadsCRM />} />
+                  <Route path="clients" element={<LeadsCRM />} />
                   <Route path="pipeline" element={<PipelineKanban />} />
                   <Route path="follow-ups" element={<FollowUps />} />
                   <Route path="communication" element={<CommunicationCenterAdmin />} />
+                  <Route path="notifications" element={<CommunicationCenterAdmin />} />
                   <Route path="marketing/reels" element={<ReelMarketingAdmin />} />
+                  <Route path="campaigns" element={<ReelMarketingAdmin />} />
                   <Route path="services" element={<ServicesCMS />} />
                   <Route path="testimonials" element={<TestimonialsCMS />} />
                   <Route path="portfolio" element={<PortfolioCMS />} />
                   <Route path="case-studies" element={<CaseStudiesCMS />} />
                   <Route path="proposals" element={<ProposalsInvoices />} />
                   <Route path="invoices" element={<ProposalsInvoices />} />
+                  <Route path="payments" element={<ProposalsInvoices />} />
                   <Route path="media" element={<MediaLibrary />} />
+                  <Route path="blog" element={<MediaLibrary />} />
+                  <Route path="team" element={<RolesPermissionsAdmin />} />
+                  <Route path="analytics" element={<Dashboard />} />
                   <Route path="settings" element={<SiteSettingsAdmin />} />
                   <Route path="navigation" element={<NavigationAdmin />} />
                   <Route path="events" element={<EventsAdmin />} />

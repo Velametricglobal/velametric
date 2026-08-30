@@ -37,25 +37,25 @@ export const DepartmentsAdmin: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 text-xs text-slate-200">
+    <div className="space-y-8 text-xs text-slate-700 dark:text-slate-200">
       
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-amber-500/10 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30 font-mono">
             <Building2 className="w-3.5 h-3.5" /> Organizational Structure
           </div>
-          <h1 className="text-2xl font-extrabold text-white mt-2 font-display uppercase">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-2 font-display uppercase">
             Department Management
           </h1>
-          <p className="text-slate-400 text-xs mt-1">
+          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
             Create departments, assign division managers, and organize team members.
           </p>
         </div>
 
         <button
           onClick={() => setShowAddModal(true)}
-          className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs inline-flex items-center gap-2 shadow-lg"
+          className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs inline-flex items-center gap-2 shadow-md transition-all"
         >
           <Plus className="w-4 h-4" /> Create Department
         </button>
@@ -64,26 +64,26 @@ export const DepartmentsAdmin: React.FC = () => {
       {/* DEPARTMENTS GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {departments.map((dept) => (
-          <div key={dept.id} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 shadow-xl flex flex-col justify-between">
+          <div key={dept.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <div className="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-300 border border-brand-500/30 flex items-center justify-center font-bold">
-                  <Building2 className="w-5 h-5 text-brand-400" />
+                <div className="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-600 dark:bg-brand-500/20 dark:text-brand-300 border border-brand-500/20 dark:border-brand-500/30 flex items-center justify-center font-bold">
+                  <Building2 className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                 </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-950 text-slate-300 border border-slate-800">
+                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
                   {dept.members_count} Members
                 </span>
               </div>
 
               <div>
-                <h3 className="text-base font-extrabold text-white font-display">{dept.name}</h3>
-                <p className="text-slate-400 text-xs mt-1 leading-relaxed">{dept.description}</p>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white font-display">{dept.name}</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 leading-relaxed">{dept.description}</p>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex justify-between items-center text-[11px]">
-              <span className="text-slate-400 font-mono">Manager:</span>
-              <span className="text-amber-400 font-bold">{dept.manager_name}</span>
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px]">
+              <span className="text-slate-500 dark:text-slate-400 font-mono">Manager:</span>
+              <span className="text-amber-600 dark:text-amber-400 font-bold">{dept.manager_name}</span>
             </div>
           </div>
         ))}
@@ -92,40 +92,40 @@ export const DepartmentsAdmin: React.FC = () => {
       {/* ADD DEPARTMENT MODAL */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <form onSubmit={handleCreateDept} className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white font-display">Create New Department</h3>
+          <form onSubmit={handleCreateDept} className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white font-display">Create New Department</h3>
             
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Department Name *</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Department Name *</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. Media & Video Production"
                 value={deptName}
                 onChange={(e) => setDeptName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               />
             </div>
 
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Department Description</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Department Description</label>
               <textarea
                 rows={3}
                 placeholder="Describe division functions..."
                 value={deptDesc}
                 onChange={(e) => setDeptDesc(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               />
             </div>
 
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Assigned Department Manager</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Assigned Department Manager</label>
               <input
                 type="text"
                 placeholder="e.g. Meera Rawat"
                 value={managerName}
                 onChange={(e) => setManagerName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-400"
               />
             </div>
 
@@ -133,13 +133,13 @@ export const DepartmentsAdmin: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowAddModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold"
+                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold"
+                className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold shadow-sm transition-all"
               >
                 Save Department
               </button>
@@ -147,7 +147,6 @@ export const DepartmentsAdmin: React.FC = () => {
           </form>
         </div>
       )}
-
     </div>
   );
 };

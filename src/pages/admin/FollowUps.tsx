@@ -21,33 +21,33 @@ export const FollowUps: React.FC = () => {
       {/* CRM UNIFIED SUB-NAVIGATION HEADER */}
       <CRMNavigationHeader />
 
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-        <h2 className="text-xl font-bold text-white">Automated Follow-up Sequences</h2>
-        <p className="text-slate-400 text-xs mt-1">Review scheduled sales outreach tasks, calls, and email follow-ups.</p>
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white font-display">Automated Follow-up Sequences</h2>
+        <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">Review scheduled sales outreach tasks, calls, and email follow-ups.</p>
       </div>
 
       <div className="space-y-4">
         {tasks.map((task) => {
           const isDone = task.status === 'COMPLETED';
           return (
-            <div key={task.id} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+            <div key={task.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-sm">
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => handleToggle(task.id)}
                   className={`w-6 h-6 rounded-lg border flex items-center justify-center transition-colors ${
-                    isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-700 text-transparent hover:border-brand-500'
+                    isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-700 text-transparent hover:border-brand-500'
                   }`}
                 >
                   ✓
                 </button>
                 <div>
-                  <h4 className={`text-sm font-bold ${isDone ? 'line-through text-slate-500' : 'text-white'}`}>
+                  <h4 className={`text-sm font-bold ${isDone ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-900 dark:text-white'}`}>
                     {task.title}
                   </h4>
-                  <div className="text-xs text-slate-400">Lead: {task.lead_name} • Assigned: {task.assigned_to}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">Lead: {task.lead_name} • Assigned: {task.assigned_to}</div>
                 </div>
               </div>
-              <div className="text-xs font-semibold text-rose-400">
+              <div className="text-xs font-semibold text-rose-600 dark:text-rose-400">
                 Due: {new Date(task.due_date).toLocaleDateString()}
               </div>
             </div>
