@@ -183,13 +183,22 @@ html.light .bg-slate-800\/60 {
 html.light .bg-zinc-800\/50,
 html.light .bg-slate-800\/50,
 html.light .bg-slate-800\/40,
-html.light .bg-zinc-800\/40 {
-  background-color: #f8fafc !important;
+html.light .bg-zinc-800\/40,
+html.light .bg-slate-950\/60 {
+  background-color: #f1f5f9 !important;
 }
 
 html.light .bg-zinc-700,
 html.light .bg-slate-700 {
   background-color: #e2e8f0 !important;
+}
+
+/* Clear dark gradients on light surfaces */
+html.light .bg-gradient-to-b:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light [class*="from-zinc-"]:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light [class*="via-zinc-"]:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light [class*="to-zinc-"]:not(.hero-cinematic-section *):not(section.bg-black *) {
+  background-image: none !important;
 }
 
 /* 2. Global Borders & Dividers */
@@ -211,12 +220,12 @@ html.light .border-slate-900 {
 }
 
 /* 3. Typography & Headings */
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6 {
+html.light h1:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light h2:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light h3:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light h4:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light h5:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light h6:not(.hero-cinematic-section *):not(section.bg-black *) {
   color: #0f172a;
 }
 
@@ -231,13 +240,13 @@ html.light .text-slate-200 {
   color: #1e293b !important;
 }
 
-html.light .text-zinc-300,
-html.light .text-slate-300 {
+html.light .text-zinc-300:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .text-slate-300:not(.hero-cinematic-section *):not(section.bg-black *) {
   color: #334155 !important;
 }
 
-html.light .text-zinc-400,
-html.light .text-slate-400,
+html.light .text-zinc-400:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .text-slate-400:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .text-muted {
   color: #64748b !important;
 }
@@ -247,32 +256,42 @@ html.light .text-slate-500 {
   color: #64748b !important;
 }
 
+/* Brand & Amber Accents on light surfaces */
+html.light .text-brand-400:not(.hero-cinematic-section *):not(section.bg-black *) {
+  color: #4f46e5 !important; /* Rich Indigo */
+}
+
+html.light .text-amber-400:not(.hero-cinematic-section *):not(section.bg-black *):not(button *):not(a *) {
+  color: #d97706 !important; /* Rich warm amber */
+}
+
 /* Subtle background number watermarks in light mode */
-html.light .text-zinc-800 {
+html.light .text-zinc-800,
+html.light .text-slate-200 {
   color: #e2e8f0 !important;
 }
 
 /* Heading / Title text-white color conversion on light surfaces */
-html.light div:not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400) > .text-white,
-html.light section:not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-black *) {
+html.light div:not(.hero-cinematic-section *):not(section.bg-black *):not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400) > .text-white,
+html.light section:not(.hero-cinematic-section):not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-black *):not(.hero-cinematic-section *) {
   color: #0f172a !important;
 }
 
 /* 4. Action Buttons & Interactive Controls */
 
 /* Primary buttons that were white on dark background now become bold dark slate on light background */
-html.light a.bg-white.text-black,
-html.light button.bg-white.text-black,
-html.light a.bg-white.text-zinc-950,
-html.light button.bg-white.text-zinc-950 {
+html.light a.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light button.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light a.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light button.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *) {
   background-color: #0f172a !important;
   color: #ffffff !important;
 }
 
-html.light a.bg-white.text-black:hover,
-html.light button.bg-white.text-black:hover,
-html.light a.bg-white.text-zinc-950:hover,
-html.light button.bg-white.text-zinc-950:hover {
+html.light a.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *):hover,
+html.light button.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *):hover,
+html.light a.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *):hover,
+html.light button.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *):hover {
   background-color: #1e293b !important;
   color: #ffffff !important;
 }
@@ -313,24 +332,37 @@ html.light .bg-blue-600 * {
 
 /* Amber buttons preserve black text */
 html.light .bg-amber-400,
+html.light .bg-amber-500,
 html.light .bg-amber-300,
 html.light button.bg-amber-400,
-html.light a.bg-amber-400 {
+html.light button.bg-amber-500,
+html.light a.bg-amber-400,
+html.light a.bg-amber-500 {
   color: #000000 !important;
 }
 
 html.light .bg-amber-400 *,
+html.light .bg-amber-500 *,
 html.light button.bg-amber-400 *,
-html.light a.bg-amber-400 * {
+html.light button.bg-amber-500 *,
+html.light a.bg-amber-400 *,
+html.light a.bg-amber-500 * {
   color: #000000 !important;
 }
 
 /* 5. Full-Screen Cinematic Video Hero Section (Always Dark & High Contrast) */
+html.light .hero-cinematic-section,
+html.light .hero-cinematic-section *,
 html.light section.bg-black,
 html.light section.bg-black * {
   color: inherit;
 }
 
+html.light .hero-cinematic-section h1,
+html.light .hero-cinematic-section h2,
+html.light .hero-cinematic-section h3,
+html.light .hero-cinematic-section .hero-title,
+html.light .hero-cinematic-section .text-white,
 html.light section.bg-black h1,
 html.light section.bg-black h2,
 html.light section.bg-black h3,
@@ -338,31 +370,46 @@ html.light section.bg-black .text-white {
   color: #ffffff !important;
 }
 
+html.light .hero-cinematic-section .hero-subheading,
+html.light .hero-cinematic-section .text-zinc-200,
+html.light .hero-cinematic-section .text-zinc-300,
+html.light section.bg-black .text-zinc-200,
 html.light section.bg-black .text-zinc-300 {
-  color: #d4d4d8 !important;
+  color: #e4e4e7 !important;
 }
 
+html.light .hero-cinematic-section .text-zinc-400,
 html.light section.bg-black .text-zinc-400 {
   color: #a1a1aa !important;
 }
 
-html.light section.bg-black a.bg-white.text-black,
-html.light section.bg-black button.bg-white.text-black {
+html.light .hero-cinematic-section a.bg-white,
+html.light .hero-cinematic-section button.bg-white,
+html.light section.bg-black a.bg-white,
+html.light section.bg-black button.bg-white {
   background-color: #ffffff !important;
   color: #000000 !important;
 }
 
-html.light section.bg-black a.bg-white.text-black:hover,
-html.light section.bg-black button.bg-white.text-black:hover {
+html.light .hero-cinematic-section a.bg-white:hover,
+html.light .hero-cinematic-section button.bg-white:hover,
+html.light section.bg-black a.bg-white:hover,
+html.light section.bg-black button.bg-white:hover {
   background-color: #e4e4e7 !important;
   color: #000000 !important;
 }
 
+html.light .hero-cinematic-section a.bg-zinc-900\/90,
+html.light .hero-cinematic-section a.bg-zinc-900\/80,
+html.light .hero-cinematic-section button.bg-zinc-900\/90,
+html.light .hero-cinematic-section button.bg-zinc-900\/80,
+html.light section.bg-black a.bg-zinc-900\/90,
 html.light section.bg-black a.bg-zinc-900\/80,
+html.light section.bg-black button.bg-zinc-900\/90,
 html.light section.bg-black button.bg-zinc-900\/80 {
-  background-color: rgba(24, 24, 27, 0.8) !important;
+  background-color: rgba(24, 24, 27, 0.9) !important;
   color: #ffffff !important;
-  border-color: rgba(63, 63, 70, 1) !important;
+  border-color: rgba(63, 63, 70, 0.8) !important;
 }
 
 /* 6. Form Controls, Textareas & Dropdowns */

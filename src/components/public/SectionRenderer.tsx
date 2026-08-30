@@ -109,7 +109,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
     const youtubeEmbed = getYouTubeEmbedUrl(content.youtube_url || '');
 
     return (
-      <section className="relative w-full min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-black text-white px-6 sm:px-12 lg:px-24 py-16">
+      <section className="hero-cinematic-section relative w-full min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-black text-white px-6 sm:px-12 lg:px-24 py-16">
         {/* VIDEO BACKGROUND LAYER */}
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
           {videoSource === 'youtube' && youtubeEmbed ? (
@@ -137,20 +137,20 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             />
           )}
           {/* Dark Cinematic Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-zinc-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/50" />
         </div>
 
         {/* HERO CONTENT OVERLAY */}
         <div className="relative z-10 max-w-[1280px] mx-auto text-center space-y-6 sm:space-y-8 w-full">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-white/10 backdrop-blur-md text-amber-400 border border-white/20">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-white/10 backdrop-blur-md text-amber-300 border border-white/20 shadow-lg">
             <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> Velametric Global Business & Media Engine
           </div>
 
-          <h1 className="text-3xl sm:text-6xl lg:text-8xl font-black tracking-tight text-white font-display uppercase leading-tight sm:leading-[1.02] max-w-5xl mx-auto break-words">
+          <h1 className="hero-title text-3xl sm:text-6xl lg:text-8xl font-black tracking-tight text-white font-display uppercase leading-tight sm:leading-[1.02] max-w-5xl mx-auto break-words drop-shadow-md">
             {content.heading || 'We Create. We Market. We Grow.'}
           </h1>
 
-          <p className="text-xs sm:text-xl lg:text-2xl text-zinc-300 max-w-3xl mx-auto font-normal leading-relaxed px-2">
+          <p className="hero-subheading text-xs sm:text-xl lg:text-2xl text-zinc-200 max-w-3xl mx-auto font-normal leading-relaxed px-2 drop-shadow">
             {content.subheading || 'From digital experiences and marketing to media, video, finance and unforgettable events — we turn ideas into measurable impact.'}
           </p>
 
@@ -165,7 +165,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             <SmartLink
               to={content.secondaryCtaUrl || '/portfolio'}
               openInNewTab={content.secondaryCtaOpenNewTab}
-              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 backdrop-blur transition-all text-center"
+              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 backdrop-blur transition-all text-center"
             >
               {content.secondaryCtaText || 'Explore Our Work'}
             </SmartLink>
@@ -173,7 +173,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <SmartLink
                 to={content.eventCtaUrl || '/event-registration'}
                 openInNewTab={content.eventCtaOpenNewTab}
-                className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-amber-400 bg-amber-500/20 border border-amber-500/40 backdrop-blur hover:bg-amber-500/30 transition-all text-center"
+                className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-amber-300 bg-amber-500/20 border border-amber-500/40 backdrop-blur hover:bg-amber-500/30 transition-all text-center"
               >
                 {content.eventCtaText}
               </SmartLink>
@@ -182,7 +182,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         </div>
 
         {/* SCROLL INDICATOR */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-zinc-400 uppercase">
+        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-zinc-300 uppercase">
           <span>{content.scrollIndicatorText || 'SCROLL TO EXPLORE'}</span>
           <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-bounce text-amber-400" />
         </div>
@@ -196,22 +196,22 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
       <section className="py-16 sm:py-24 bg-zinc-950 border-b border-zinc-800/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 block">
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-500 dark:text-amber-400 block">
               Who We Are
             </span>
-            <h2 className="text-2xl sm:text-5xl font-black text-white font-display uppercase tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-5xl font-black text-slate-900 dark:text-white font-display uppercase tracking-tight leading-tight">
               {content.heading || 'We Build Brands That Move Forward.'}
             </h2>
-            <p className="text-zinc-300 text-xs sm:text-lg leading-relaxed">
+            <p className="text-slate-600 dark:text-zinc-300 text-xs sm:text-lg leading-relaxed">
               {content.subheading || 'Velametric Global brings together Technology, Marketing, Creative Design, Media, Video Production, Financial Consultancy, and Mega Event Management under one seamless agency ecosystem.'}
             </p>
 
             {content.stats && content.stats.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 pt-2 sm:pt-4 border-t border-zinc-800">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 pt-2 sm:pt-4 border-t border-slate-200 dark:border-zinc-800">
                 {content.stats.map((st: any, idx: number) => (
-                  <div key={idx} className="bg-zinc-900 border border-zinc-800 p-3 sm:p-4 rounded-2xl">
-                    <div className="text-xl sm:text-2xl font-black text-amber-400 font-display">{st.value}</div>
-                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-400 mt-1 uppercase tracking-wider">{st.label}</div>
+                  <div key={idx} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-3 sm:p-4 rounded-2xl shadow-sm">
+                    <div className="text-xl sm:text-2xl font-black text-amber-500 dark:text-amber-400 font-display">{st.value}</div>
+                    <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 dark:text-zinc-400 mt-1 uppercase tracking-wider">{st.label}</div>
                   </div>
                 ))}
               </div>
@@ -221,7 +221,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <SmartLink
                 to={content.primaryCtaUrl || '/about'}
                 openInNewTab={content.primaryCtaOpenNewTab}
-                className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-xs font-extrabold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all shadow-xl"
+                className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-xs font-extrabold uppercase tracking-wider text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 transition-all shadow-xl"
               >
                 {content.primaryCtaText || 'Know More About Us'} <ArrowRight className="w-4 h-4" />
               </SmartLink>
@@ -229,7 +229,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl relative">
+            <div className="rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 shadow-2xl relative">
               <img
                 src={content.image_url || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80'}
                 alt="About Visual"
@@ -266,13 +266,13 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10 space-y-12 sm:space-y-16">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-amber-400 font-mono bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-flex items-center gap-1.5 shadow-lg shadow-amber-500/5">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-amber-500 dark:text-amber-400 font-mono bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-flex items-center gap-1.5 shadow-lg shadow-amber-500/5">
               <Sparkles className="w-3.5 h-3.5" /> Capabilities & Offerings
             </span>
-            <h2 className="text-3xl sm:text-6xl font-black text-white font-display uppercase tracking-tight">
+            <h2 className="text-3xl sm:text-6xl font-black text-slate-900 dark:text-white font-display uppercase tracking-tight">
               {content.heading || 'What We Do'}
             </h2>
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               {content.subheading || 'End-to-end solutions for brands, businesses and organizations ready to grow.'}
             </p>
           </div>
@@ -285,25 +285,25 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               return (
                 <div
                   key={idx}
-                  className="group relative bg-gradient-to-b from-zinc-900/90 via-zinc-900/60 to-zinc-950/90 border border-zinc-800/80 hover:border-amber-500/40 p-6 sm:p-8 rounded-3xl space-y-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_35px_rgba(245,158,11,0.12)] flex flex-col justify-between backdrop-blur-xl"
+                  className="group relative bg-white dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800/80 hover:border-amber-500/50 p-6 sm:p-8 rounded-3xl space-y-6 transition-all duration-300 hover:-translate-y-2 shadow-lg dark:shadow-none hover:shadow-2xl dark:hover:shadow-[0_0_35px_rgba(245,158,11,0.12)] flex flex-col justify-between backdrop-blur-xl"
                 >
                   <div className="space-y-4">
                     {/* Top Row: Icon Container + Stylized Number */}
                     <div className="flex items-center justify-between">
-                      <div className="w-13 h-13 p-3 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-500/5 border border-amber-500/30 text-amber-400 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300">
+                      <div className="w-13 h-13 p-3 rounded-2xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 text-amber-500 dark:text-amber-400 flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300">
                         <IconComp className="w-6 h-6" />
                       </div>
-                      <span className="text-4xl sm:text-5xl font-black font-display text-zinc-800 group-hover:text-amber-400/40 transition-colors select-none font-mono">
+                      <span className="text-4xl sm:text-5xl font-black font-display text-slate-200 dark:text-zinc-800 group-hover:text-amber-500/40 transition-colors select-none font-mono">
                         {cat.num}
                       </span>
                     </div>
 
                     {/* Card Title & Description */}
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white font-display group-hover:text-amber-400 transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-display group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
                         {cat.name}
                       </h3>
-                      <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2">
+                      <p className="text-slate-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2">
                         {cat.desc}
                       </p>
                     </div>
@@ -313,7 +313,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
                       {cat.items?.map((item: string, i: number) => (
                         <span
                           key={i}
-                          className="text-[11px] font-semibold px-3 py-1 rounded-xl bg-zinc-950/90 text-zinc-300 border border-zinc-800/90 group-hover:border-zinc-700 group-hover:text-white group-hover:bg-zinc-900 transition-all font-mono shadow-sm"
+                          className="text-[11px] font-semibold px-3 py-1 rounded-xl bg-slate-100 dark:bg-zinc-950/90 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800/90 group-hover:border-slate-300 dark:group-hover:border-zinc-700 group-hover:text-slate-900 dark:group-hover:text-white group-hover:bg-slate-200 dark:group-hover:bg-zinc-900 transition-all font-mono shadow-sm"
                         >
                           {item}
                         </span>
@@ -322,11 +322,11 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
                   </div>
 
                   {/* Card Action Link */}
-                  <div className="pt-4 border-t border-zinc-800/80">
+                  <div className="pt-4 border-t border-slate-200 dark:border-zinc-800/80">
                     <SmartLink
                       to={content.primaryCtaUrl || '/services'}
                       openInNewTab={content.primaryCtaOpenNewTab}
-                      className="inline-flex items-center gap-2 text-xs font-extrabold text-zinc-300 group-hover:text-amber-400 transition-colors font-mono tracking-wider"
+                      className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-800 dark:text-zinc-300 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors font-mono tracking-wider"
                     >
                       <span>Explore Capabilities</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />

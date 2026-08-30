@@ -131,8 +131,8 @@ export const ServiceDetailPage: React.FC = () => {
                   key={pkg.id}
                   className={`rounded-3xl p-8 flex flex-col justify-between relative transition-all duration-300 ${
                     isEnterprise
-                      ? 'bg-gradient-to-b from-amber-500/10 via-zinc-900 to-zinc-950 border-2 border-amber-500/50 shadow-2xl scale-105 z-10'
-                      : 'bg-zinc-900/80 border border-zinc-800'
+                      ? 'bg-amber-50/50 dark:bg-gradient-to-b dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-950 border-2 border-amber-500 shadow-2xl scale-105 z-10'
+                      : 'bg-white dark:bg-zinc-900/80 border border-slate-200 dark:border-zinc-800 shadow-lg dark:shadow-none'
                   }`}
                 >
                   {pkg.badge && (
@@ -143,25 +143,25 @@ export const ServiceDetailPage: React.FC = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 font-mono">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-500 font-mono">
                         {pkg.tier}
                       </span>
-                      <h3 className="text-2xl font-bold text-white font-display">{pkg.name}</h3>
-                      <p className="text-xs text-amber-400 font-semibold mt-1">{pkg.target_audience}</p>
+                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white font-display">{pkg.name}</h3>
+                      <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold mt-1">{pkg.target_audience}</p>
                     </div>
 
-                    <div className="py-4 border-y border-zinc-800">
+                    <div className="py-4 border-y border-slate-200 dark:border-zinc-800">
                       {isOrg ? (
                         <div>
-                          <div className="text-3xl font-black text-white font-display">Contact Us</div>
-                          <div className="text-xs text-emerald-400 font-semibold font-mono mt-1">Request a Custom Quotation</div>
+                          <div className="text-3xl font-black text-slate-900 dark:text-white font-display">Contact Us</div>
+                          <div className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold font-mono mt-1">Request a Custom Quotation</div>
                         </div>
                       ) : (
                         <div>
-                          <div className="text-4xl font-black text-white font-display">
+                          <div className="text-4xl font-black text-slate-900 dark:text-white font-display">
                             {formatAmount(pkg.price)}
                           </div>
-                          <div className="text-xs text-zinc-400 font-mono mt-1">
+                          <div className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-1">
                             {pkg.price_display_type === 'PER_MONTH' && 'Starting at / Month'}
                             {pkg.price_display_type === 'PER_PROJECT' && 'Starting at / Project'}
                             {pkg.price_display_type === 'PER_CASE' && 'Starting at / Case'}
@@ -174,11 +174,11 @@ export const ServiceDetailPage: React.FC = () => {
 
                     {/* What's Included */}
                     <div>
-                      <div className="text-xs font-bold text-white uppercase tracking-wider mb-3 font-mono">What's Included:</div>
+                      <div className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3 font-mono">What's Included:</div>
                       <ul className="space-y-2.5">
                         {pkg.inclusions.map((inc, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300">
-                            <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-zinc-300">
+                            <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                             <span>{inc}</span>
                           </li>
                         ))}
@@ -187,11 +187,11 @@ export const ServiceDetailPage: React.FC = () => {
 
                     {/* What's Excluded */}
                     {pkg.exclusions && pkg.exclusions.length > 0 && (
-                      <div className="pt-4 border-t border-zinc-800">
-                        <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2 font-mono">What's Excluded:</div>
+                      <div className="pt-4 border-t border-slate-200 dark:border-zinc-800">
+                        <div className="text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2 font-mono">What's Excluded:</div>
                         <ul className="space-y-1.5">
                           {pkg.exclusions.map((exc, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-xs text-zinc-400 italic">
+                            <li key={idx} className="flex items-start gap-2 text-xs text-slate-500 dark:text-zinc-400 italic">
                               <X className="w-3.5 h-3.5 text-rose-500/80 shrink-0 mt-0.5" />
                               <span>{exc}</span>
                             </li>
@@ -201,15 +201,15 @@ export const ServiceDetailPage: React.FC = () => {
                     )}
                   </div>
 
-                  <div className="pt-8 mt-8 border-t border-zinc-800">
+                  <div className="pt-8 mt-8 border-t border-slate-200 dark:border-zinc-800">
                     <button
                       onClick={() => setActiveEnquiryPkg(pkg)}
                       className={`w-full py-3.5 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all shadow-xl ${
                         isEnterprise
-                          ? 'bg-amber-400 hover:bg-amber-300 text-black'
+                          ? 'bg-amber-500 hover:bg-amber-400 text-black'
                           : isOrg
-                          ? 'bg-emerald-500 hover:bg-emerald-400 text-black'
-                          : 'bg-white hover:bg-zinc-200 text-black'
+                          ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                          : 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black'
                       }`}
                     >
                       {pkg.cta_text || (isOrg ? 'Request a Quotation' : 'Get Started')} <ArrowRight className="w-4 h-4" />
