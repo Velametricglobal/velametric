@@ -454,6 +454,21 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
   if (section.section_type === 'fashion_gallery' || section.id.includes('fashion') || section.id.includes('model-shoot')) {
     const shootPhotos = [
       {
+        url: '/images/portfolio/model-portfolio-fairylights-warmglow-01.jpg',
+        title: 'Twilight Fairy Lights Mood',
+        tag: 'Cinematic Mood'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-pastel-windblown-01.jpg',
+        title: 'Ethereal Pastel Resortwear',
+        tag: 'Summer Editorial'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-earth-curly-portrait-01.jpg',
+        title: 'Earth Tone Curly Beauty',
+        tag: 'Editorial Portrait'
+      },
+      {
         url: '/images/portfolio/model-portfolio-polka-lollipop-smile-01.jpg',
         title: 'Retro Polka Dot Pop Look',
         tag: 'Youth Commercial'
@@ -484,24 +499,9 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         tag: 'Pop Culture Lookbook'
       },
       {
-        url: '/images/portfolio/model-portfolio-polka-headphones-lying-01.jpg',
-        title: 'Studio Headphone Lifestyle',
-        tag: 'Music & Audio Commercial'
-      },
-      {
         url: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
         title: 'Playful Studio Portrait',
         tag: 'High-Key Studio'
-      },
-      {
-        url: '/images/portfolio/model-portfolio-urban-fur-02.jpg',
-        title: 'Noir Hooded Silhouette',
-        tag: 'Portrait Lighting'
-      },
-      {
-        url: '/images/portfolio/model-portfolio-black-crop-windblown-02.jpg',
-        title: 'Windblown Athletic Silhouette',
-        tag: 'Street Glamour'
       }
     ];
 

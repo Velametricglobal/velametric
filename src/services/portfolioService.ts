@@ -401,7 +401,8 @@ let localProjects: PortfolioProject[] = [
     featured_image: '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
     gallery: [
       '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
-      '/images/portfolio/model-portfolio-beige-couture-kneeling-01.jpg'
+      '/images/portfolio/model-portfolio-beige-couture-kneeling-01.jpg',
+      '/images/portfolio/model-portfolio-earth-curly-portrait-01.jpg'
     ],
     videos: ['https://www.instagram.com/ekraaheefilms/?hl=en#'],
     completion_date: '2026-08-30',
@@ -469,6 +470,52 @@ let localProjects: PortfolioProject[] = [
         instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
         views_count: '420K',
         duration: '0:30'
+      }
+    ]
+  },
+  {
+    id: 'proj-fashion-6',
+    title: 'Ethereal Pastel & Twilight Fairy Lights — Mood Editorial Series',
+    slug: 'ethereal-pastel-twilight-fairy-lights',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+    production_partner: {
+      name: 'Ekraahee Films & Destiny Productions',
+      instagram_handle: '@destiny_in_productions',
+      instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+      tagline: 'Atmospheric Creative Lighting, Resortwear & Mood Portfolios',
+      role: 'Creative Direction & Cinematography'
+    },
+    description: 'Dreamy cinematic summer resortwear lookbook paired with warm bokeh twilight fairy light mood portraiture, emphasizing soft pastel translucency and atmospheric warm amber tones.',
+    challenge: 'Achieving soft delicate skin rendering under ambient fairy light filament illumination while preserving natural highlights in sheer pastel fabrics.',
+    solution: 'Shot wide open at f/1.4 with specialized diffusion filters and tungsten warm ambient fill creating an intimate, magical luminescence.',
+    results: 'Editorial spread featured in leading seasonal fashion lookbooks and driving 280,000+ views on Instagram creative reels.',
+    featured_image: '/images/portfolio/model-portfolio-pastel-windblown-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-pastel-windblown-01.jpg',
+      '/images/portfolio/model-portfolio-pastel-shoulder-01.jpg',
+      '/images/portfolio/model-portfolio-fairylights-warmglow-01.jpg'
+    ],
+    videos: ['https://www.instagram.com/destiny_in_productions/?hl=en'],
+    completion_date: '2026-08-30',
+    testimonial_quote: 'The warm glow and ethereal pastels gave the collection a timeless romantic mood that resonated deeply with our audience.',
+    testimonial_author: 'Creative Director, Resort Fashion House',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Mood & Creative Portraits', 'Resortwear Lookbooks', 'Atmospheric Lighting', 'Fine Art Retouching'],
+    technologies: ['Sony A7R V', '50mm f/1.2 GM', 'Tungsten Fairy Lights', 'Black Pro-Mist 1/4'],
+    industry: 'Fashion & Creative Photography',
+    video_reels: [
+      {
+        id: 'reel-f6',
+        title: 'Twilight Fairy Lights Mood Reel',
+        video_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        thumbnail_url: '/images/portfolio/model-portfolio-fairylights-warmglow-01.jpg',
+        partner_name: 'Destiny Productions',
+        instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        views_count: '370K',
+        duration: '0:35'
       }
     ]
   }
