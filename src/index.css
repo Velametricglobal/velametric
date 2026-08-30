@@ -7,7 +7,7 @@
     color-scheme: dark;
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
   
   html.light {
@@ -21,7 +21,7 @@
     overflow-x: hidden;
     color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   html.light body {
@@ -135,27 +135,32 @@
 }
 
 /* ==========================================================================
-   GLOBAL LIGHT THEME OVERRIDES — WHOLE WEBSITE & CRM
+   GLOBAL LIGHT THEME SYSTEM — ACCESSIBILITY & HIGH CONTRAST (WHOLE WEBSITE & CRM)
    ========================================================================== */
+
+/* 1. Canvas & Surface Backgrounds */
 html.light .bg-zinc-950,
 html.light .bg-obsidian-950,
-html.light .bg-slate-950 {
+html.light .bg-slate-950,
+html.light .bg-background {
   background-color: #f8fafc !important;
 }
 
 html.light .bg-zinc-900,
 html.light .bg-slate-900,
-html.light .bg-obsidian-900 {
+html.light .bg-obsidian-900,
+html.light .bg-surface,
+html.light .bg-secondary {
   background-color: #ffffff !important;
 }
 
-html.light .bg-zinc-900\/90,
-html.light .bg-zinc-900\/95,
 html.light .bg-zinc-900\/98,
+html.light .bg-zinc-900\/95,
+html.light .bg-zinc-900\/90,
 html.light .bg-zinc-950\/95,
 html.light .bg-zinc-950\/90,
-html.light .bg-slate-900\/90,
 html.light .bg-slate-900\/95,
+html.light .bg-slate-900\/90,
 html.light .bg-slate-950\/80 {
   background-color: rgba(255, 255, 255, 0.96) !important;
 }
@@ -164,20 +169,21 @@ html.light .bg-zinc-900\/80,
 html.light .bg-zinc-900\/70,
 html.light .bg-zinc-900\/60,
 html.light .bg-slate-900\/80 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.92) !important;
 }
 
 html.light .bg-zinc-800,
 html.light .bg-slate-800,
 html.light .bg-zinc-800\/80,
-html.light .bg-slate-800\/60,
-html.light .bg-slate-800\/80 {
+html.light .bg-slate-800\/80,
+html.light .bg-slate-800\/60 {
   background-color: #f1f5f9 !important;
 }
 
 html.light .bg-zinc-800\/50,
 html.light .bg-slate-800\/50,
-html.light .bg-slate-800\/40 {
+html.light .bg-slate-800\/40,
+html.light .bg-zinc-800\/40 {
   background-color: #f8fafc !important;
 }
 
@@ -186,39 +192,37 @@ html.light .bg-slate-700 {
   background-color: #e2e8f0 !important;
 }
 
-/* Light mode text colors */
-html.light .text-white {
-  color: #0f172a !important;
+/* 2. Global Borders & Dividers */
+html.light .border-zinc-800,
+html.light .border-slate-800,
+html.light .border-zinc-800\/80,
+html.light .border-zinc-800\/60,
+html.light .border-zinc-800\/40,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/40 {
+  border-color: #e2e8f0 !important;
 }
 
-/* Maintain high contrast white text on solid background action buttons & tags */
-html.light .bg-brand-600 .text-white,
-html.light .bg-brand-700 .text-white,
-html.light .bg-indigo-600 .text-white,
-html.light .bg-purple-600 .text-white,
-html.light .bg-pink-600 .text-white,
-html.light .bg-rose-500 .text-white,
-html.light .bg-rose-600 .text-white,
-html.light .bg-emerald-600 .text-white,
-html.light .bg-blue-600 .text-white,
-html.light .bg-black .text-white,
-html.light .bg-primary .text-white,
-html.light button.bg-brand-600,
-html.light button.bg-indigo-600,
-html.light button.bg-purple-600,
-html.light button.bg-emerald-600,
-html.light button.bg-rose-600,
-html.light a.bg-brand-600,
-html.light a.bg-indigo-600,
-html.light a.bg-purple-600,
-html.light a.bg-emerald-600,
-html.light a.bg-gradient-to-r,
-html.light button.bg-gradient-to-r {
-  color: #ffffff !important;
+html.light .border-zinc-700,
+html.light .border-slate-700,
+html.light .border-zinc-900,
+html.light .border-slate-900 {
+  border-color: #cbd5e1 !important;
+}
+
+/* 3. Typography & Headings */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0f172a;
 }
 
 html.light .text-zinc-100,
-html.light .text-slate-100 {
+html.light .text-slate-100,
+html.light .text-text {
   color: #0f172a !important;
 }
 
@@ -233,7 +237,8 @@ html.light .text-slate-300 {
 }
 
 html.light .text-zinc-400,
-html.light .text-slate-400 {
+html.light .text-slate-400,
+html.light .text-muted {
   color: #64748b !important;
 }
 
@@ -242,23 +247,125 @@ html.light .text-slate-500 {
   color: #64748b !important;
 }
 
-/* Light mode borders */
-html.light .border-zinc-800,
-html.light .border-slate-800,
-html.light .border-zinc-800\/60,
-html.light .border-zinc-800\/80,
-html.light .border-zinc-800\/40,
-html.light .border-slate-800\/60 {
-  border-color: #e2e8f0 !important;
+/* Subtle background number watermarks in light mode */
+html.light .text-zinc-800 {
+  color: #e2e8f0 !important;
 }
 
-html.light .border-zinc-700,
-html.light .border-slate-700,
-html.light .border-zinc-900 {
-  border-color: #cbd5e1 !important;
+/* Heading / Title text-white color conversion on light surfaces */
+html.light div:not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400) > .text-white,
+html.light section:not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-black *) {
+  color: #0f172a !important;
 }
 
-/* Light mode form controls */
+/* 4. Action Buttons & Interactive Controls */
+
+/* Primary buttons that were white on dark background now become bold dark slate on light background */
+html.light a.bg-white.text-black,
+html.light button.bg-white.text-black,
+html.light a.bg-white.text-zinc-950,
+html.light button.bg-white.text-zinc-950 {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html.light a.bg-white.text-black:hover,
+html.light button.bg-white.text-black:hover,
+html.light a.bg-white.text-zinc-950:hover,
+html.light button.bg-white.text-zinc-950:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+/* Solid color buttons retain clean high contrast text */
+html.light .bg-brand-600,
+html.light .bg-brand-700,
+html.light .bg-indigo-600,
+html.light .bg-purple-600,
+html.light .bg-rose-500,
+html.light .bg-rose-600,
+html.light .bg-emerald-600,
+html.light .bg-blue-600,
+html.light button.bg-brand-600,
+html.light button.bg-indigo-600,
+html.light button.bg-purple-600,
+html.light button.bg-rose-600,
+html.light button.bg-emerald-600,
+html.light a.bg-brand-600,
+html.light a.bg-indigo-600,
+html.light a.bg-purple-600,
+html.light a.bg-rose-600,
+html.light a.bg-emerald-600,
+html.light a.bg-gradient-to-r,
+html.light button.bg-gradient-to-r {
+  color: #ffffff !important;
+}
+
+html.light .bg-brand-600 *,
+html.light .bg-indigo-600 *,
+html.light .bg-purple-600 *,
+html.light .bg-rose-500 *,
+html.light .bg-rose-600 *,
+html.light .bg-emerald-600 *,
+html.light .bg-blue-600 * {
+  color: #ffffff !important;
+}
+
+/* Amber buttons preserve black text */
+html.light .bg-amber-400,
+html.light .bg-amber-300,
+html.light button.bg-amber-400,
+html.light a.bg-amber-400 {
+  color: #000000 !important;
+}
+
+html.light .bg-amber-400 *,
+html.light button.bg-amber-400 *,
+html.light a.bg-amber-400 * {
+  color: #000000 !important;
+}
+
+/* 5. Full-Screen Cinematic Video Hero Section (Always Dark & High Contrast) */
+html.light section.bg-black,
+html.light section.bg-black * {
+  color: inherit;
+}
+
+html.light section.bg-black h1,
+html.light section.bg-black h2,
+html.light section.bg-black h3,
+html.light section.bg-black .text-white {
+  color: #ffffff !important;
+}
+
+html.light section.bg-black .text-zinc-300 {
+  color: #d4d4d8 !important;
+}
+
+html.light section.bg-black .text-zinc-400 {
+  color: #a1a1aa !important;
+}
+
+html.light section.bg-black a.bg-white.text-black,
+html.light section.bg-black button.bg-white.text-black {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+html.light section.bg-black a.bg-white.text-black:hover,
+html.light section.bg-black button.bg-white.text-black:hover {
+  background-color: #e4e4e7 !important;
+  color: #000000 !important;
+}
+
+html.light section.bg-black a.bg-zinc-900\/80,
+html.light section.bg-black button.bg-zinc-900\/80 {
+  background-color: rgba(24, 24, 27, 0.8) !important;
+  color: #ffffff !important;
+  border-color: rgba(63, 63, 70, 1) !important;
+}
+
+/* 6. Form Controls, Textareas & Dropdowns */
 html.light input,
 html.light select,
 html.light textarea {
@@ -268,25 +375,42 @@ html.light textarea {
   border-color: #cbd5e1 !important;
 }
 
-html.light select option {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-}
-
 html.light input::placeholder,
 html.light textarea::placeholder {
   color: #94a3b8 !important;
 }
 
-/* Light mode glass cards & shadows */
+html.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #6366f1 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* 7. Tables, Modals, Popovers & Drawers */
+html.light th {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+}
+
+html.light tr:hover {
+  background-color: #f8fafc !important;
+}
+
 html.light .glass-card {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   border-color: #e2e8f0 !important;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06) !important;
 }
 
 html.light .shadow-2xl {
-  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.07) !important;
 }
 
 html.light .bg-grid-pattern {
@@ -307,7 +431,7 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #6366f1;
 }
 
-/* Print Isolation: Print ONLY the generated document preview sheet */
+/* 8. Print Isolation (Only Print Generated A4 Sheet) */
 @media print {
   @page {
     margin: 10mm;
