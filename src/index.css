@@ -495,7 +495,25 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #6366f1;
 }
 
-/* 8. Print Isolation (Only Print Generated A4 Sheet) */
+/* 8. Brand Logo Colors (Black in Light Mode, White in Dark Mode) */
+html.light .logo-brand-text,
+html.light header a .logo-brand-text,
+html.light footer .logo-brand-text,
+html.light aside .logo-brand-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html.dark .logo-brand-text,
+html:not(.light) .logo-brand-text,
+html.dark header a .logo-brand-text,
+html.dark footer .logo-brand-text,
+html.dark aside .logo-brand-text {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* 9. Print Isolation (Only Print Generated A4 Sheet) */
 @media print {
   @page {
     margin: 10mm;

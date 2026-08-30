@@ -120,22 +120,22 @@ export const AdminLayout: React.FC = () => {
 
       {/* MOBILE OFF-CANVAS SLIDE-IN SIDEBAR */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-slate-900 border-r border-slate-800 flex flex-col transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col transform transition-transform duration-300 ease-in-out lg:hidden ${
           isMobileDrawerOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="h-16 px-4 flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div className="h-16 px-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shrink-0">
           <Link to="/admin/dashboard" className="flex items-center gap-2" onClick={() => setIsMobileDrawerOpen(false)}>
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-amber-500 flex items-center justify-center text-white font-black text-sm shadow-glow-brand">
               V
             </div>
-            <span className="font-extrabold text-sm tracking-wider uppercase font-display bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <span className="font-black text-sm tracking-wider uppercase font-display text-slate-950 dark:text-white logo-brand-text">
               VELAMETRIC
             </span>
           </Link>
           <button
             onClick={() => setIsMobileDrawerOpen(false)}
-            className="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 touch-target"
+            className="text-slate-400 hover:text-slate-900 dark:hover:text-white p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 touch-target"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -144,23 +144,23 @@ export const AdminLayout: React.FC = () => {
 
         {/* Mobile User Details */}
         {currentUser && (
-          <div className="p-3 border-b border-slate-800 bg-slate-950/80 shrink-0">
+          <div className="p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 shrink-0">
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30 flex items-center justify-center font-bold text-xs">
+                <div className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 border border-brand-500/30 flex items-center justify-center font-bold text-xs">
                   {currentUser.full_name.charAt(0)}
                 </div>
                 <div className="overflow-hidden">
-                  <div className="text-xs font-bold text-white truncate">{currentUser.full_name}</div>
-                  <div className="text-[10px] text-amber-400 font-mono truncate">{currentUser.department} ({currentUser.user_code})</div>
+                  <div className="text-xs font-bold text-slate-900 dark:text-white truncate">{currentUser.full_name}</div>
+                  <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono truncate">{currentUser.department} ({currentUser.user_code})</div>
                 </div>
               </div>
               <div>
-                <label className="text-[9px] uppercase font-bold text-slate-400 block mb-1">Switch Initial Role Demo:</label>
+                <label className="text-[9px] uppercase font-bold text-slate-500 dark:text-slate-400 block mb-1">Switch Initial Role Demo:</label>
                 <select
                   value={currentUser.role}
                   onChange={(e) => switchRoleDemo(e.target.value as AgentRole)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-[11px] text-slate-300 font-bold focus:outline-none focus:border-brand-500"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-300 font-bold focus:outline-none focus:border-brand-500"
                 >
                   <option value="SUPER_ADMIN">👑 SUPERADMIN-001</option>
                   <option value="ADMIN">🏢 ADMIN-001</option>
@@ -178,11 +178,11 @@ export const AdminLayout: React.FC = () => {
 
         {renderNavItems(true)}
 
-        <div className="p-3 border-t border-slate-800 space-y-2 shrink-0 pb-safe">
+        <div className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2 shrink-0 pb-safe">
           <ThemeToggle variant="expanded" />
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 transition-colors touch-target"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-500/10 transition-colors touch-target"
           >
             <LogOut className="w-4 h-4 shrink-0" />
             <span>Sign Out</span>
@@ -191,16 +191,16 @@ export const AdminLayout: React.FC = () => {
       </aside>
 
       {/* DESKTOP SIDEBAR NAVIGATION (Hidden on mobile/tablet <lg) */}
-      <aside className={`hidden lg:flex ${collapsed ? 'w-20' : 'w-64'} bg-slate-900/90 border-r border-slate-800 flex-col transition-all duration-300 shrink-0 sticky top-0 h-screen z-40`}>
+      <aside className={`hidden lg:flex ${collapsed ? 'w-20' : 'w-64'} bg-white dark:bg-slate-900/90 border-r border-slate-200 dark:border-slate-800 flex-col transition-all duration-300 shrink-0 sticky top-0 h-screen z-40`}>
         
         {/* Sidebar Brand Header */}
-        <div className="h-16 px-4 flex items-center justify-between border-b border-slate-800">
+        <div className="h-16 px-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
           <Link to="/admin/dashboard" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-amber-500 flex items-center justify-center text-white font-black text-sm shadow-glow-brand">
               V
             </div>
             {!collapsed && (
-              <span className="font-extrabold text-sm tracking-wider uppercase font-display bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+              <span className="font-black text-sm tracking-wider uppercase font-display text-slate-950 dark:text-white logo-brand-text">
                 VELAMETRIC
               </span>
             )}
@@ -208,7 +208,7 @@ export const AdminLayout: React.FC = () => {
 
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 touch-target"
+            className="text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 touch-target"
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${collapsed ? '' : 'rotate-180'}`} />
