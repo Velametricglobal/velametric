@@ -372,6 +372,68 @@ let localProjects: PortfolioProject[] = [
     services_used: ['Model Portfolio', 'Beauty Photography', 'Hair Transformation BTS', 'Studio Retouching'],
     technologies: ['Diffused Key Softboxes', 'Hair Kicker Strobes', 'Prime 50mm f/1.8 Optics', 'Capture One Pro'],
     industry: 'Beauty & Model Portfolios'
+  },
+  {
+    id: 'proj-photo-5',
+    title: 'Gold Sequin Haute Couture & Silk Studio Editorial',
+    slug: 'gold-sequin-haute-couture-studio',
+    client: 'Velametric Haute Couture Studio',
+    project_type: 'photoshoot',
+    description: 'Exclusive studio fashion spread featuring geometric gold sequined haute couture gown against draped silk backdrop, captured with high-dynamic range studio strobes.',
+    challenge: 'Managing intense metallic sequin reflections without washing out skin highlight tones or crushing background silk folds.',
+    solution: 'Placed large cross-polarized softboxes with gentle ambient fill to balance sequin sparkle and organic skin luminosity.',
+    results: 'Featured as the headline look for regional couture collections with 100% positive editorial reception.',
+    featured_image: '/images/photoshoot/6c1a4692.jpg',
+    gallery: [
+      '/images/photoshoot/6c1a4692.jpg',
+      '/images/photoshoot/6c1a4689.jpg',
+      '/images/photoshoot/6c1a4690.jpg',
+      '/images/photoshoot/6c1a4691.jpg'
+    ],
+    videos: [],
+    completion_date: '2026-08-29',
+    testimonial_quote: 'The gold sequin gown shoot came out breathtaking. The light falloff and fabric textures look straight out of a luxury magazine.',
+    testimonial_author: 'Head of Couture, Velametric Atelier',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Haute Couture Editorial', 'Studio Strobe Lighting', 'Reflection Management', 'Color Retouching'],
+    technologies: ['Full-Frame Pro Sensor', 'Prime 85mm f/1.4 Lens', 'Octabox Soft Diffusers', 'Capture One Pro'],
+    industry: 'Haute Couture & Luxury Fashion'
+  },
+  {
+    id: 'proj-photo-6',
+    title: 'Pop Editorial & Contemporary Model Studio Lookbook',
+    slug: 'pop-editorial-urban-model-lookbook',
+    client: 'Velametric Talent & Model Agency',
+    project_type: 'photoshoot',
+    description: 'Vibrant studio model test shoot featuring high-contrast beauty lighting, dynamic hair motion styling, casual denim overlays, and expressive editorial poses.',
+    challenge: 'Balancing playful prop color tones (candy pops) with neutral high-fashion wardrobe and crisp background separation.',
+    solution: 'Designed a dynamic rim-lit studio setup paired with gentle directional wind accents to create authentic movement and expression.',
+    results: 'Delivered an 11-frame comprehensive agency comp card lookbook for international modeling placements.',
+    featured_image: '/images/photoshoot/img_4776.jpg',
+    gallery: [
+      '/images/photoshoot/img_4776.jpg',
+      '/images/photoshoot/img_4781.jpg',
+      '/images/photoshoot/img_4797.jpg',
+      '/images/photoshoot/img_4762.jpg',
+      '/images/photoshoot/img_4756.jpg',
+      '/images/photoshoot/6c1a4705.jpg',
+      '/images/photoshoot/6c1a4711.jpg',
+      '/images/photoshoot/6c1a4725.jpg',
+      '/images/photoshoot/6c1a4727.jpg',
+      '/images/photoshoot/img_4803.jpg',
+      '/images/photoshoot/img_4804.jpg',
+      '/images/photoshoot/img_4808.jpg'
+    ],
+    videos: [],
+    completion_date: '2026-08-30',
+    testimonial_quote: 'The vibrant pop aesthetic and sharp hair styling delivered the exact dynamic model portfolio look we needed.',
+    testimonial_author: 'Talent Scout, Velametric Agency',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Model Portfolio', 'Pop Editorial', 'High-Key Studio Lighting', 'Beauty Retouching'],
+    technologies: ['Prime 50mm f/1.8 Optics', 'Dual Softbox Array', 'Wind Machine Accents', 'Photoshop Master Engine'],
+    industry: 'Model Portfolios & Pop Fashion'
   }
 ];
 
