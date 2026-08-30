@@ -151,8 +151,7 @@ export type SectionType =
   | 'contact'
   | 'newsletter'
   | 'custom_html'
-  | 'video_reels'
-  | 'fashion_gallery';
+  | 'video_reels';
 
 export interface SectionVisibility {
   desktop: boolean;

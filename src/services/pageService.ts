@@ -162,26 +162,6 @@ export const defaultHomeSections: PageSection[] = [
     background_settings: { type: 'color' }
   },
 
-  // 4B. FASHION & MODEL PORTFOLIO SHOOT GALLERY
-  {
-    id: 'sec-fashion-gallery-4b',
-    page_id: 'page-home',
-    section_type: 'fashion_gallery',
-    name: '4B. Model Portfolio & Fashion Shoots',
-    position: 5,
-    is_enabled: true,
-    visibility: { desktop: true, tablet: true, mobile: true },
-    content: {
-      heading: 'Model Portfolio & Fashion Shoots.',
-      subheading: 'High-fashion model portfolios, commercial lookbooks, and botanical couture photography captured in natural Himalayan daylight.',
-      tagline: 'Velametric Fashion & Media Studio'
-    },
-    style: { paddingTop: '96px', paddingBottom: '96px', backgroundColor: '#09090b' },
-    responsive: { desktopCols: 5, tabletCols: 3, mobileCols: 2 },
-    animation: { type: 'fade-up', duration: 0.6 },
-    background_settings: { type: 'color' }
-  },
-
   // 5. EVENTS SECTION
   {
     id: 'sec-events-5',
