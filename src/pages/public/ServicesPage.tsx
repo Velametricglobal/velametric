@@ -124,8 +124,8 @@ export const ServicesPage: React.FC = () => {
             )}
           </div>
 
-          {/* Centered Category Pills Flexbox Container */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
+          {/* Centered Category Pills Flexbox / Scrollable Container on Mobile */}
+          <div className="flex sm:flex-wrap items-center sm:justify-center gap-2 overflow-x-auto custom-scrollbar pb-2 sm:pb-0 -mx-2 px-2 sm:mx-0 sm:px-0">
             {/* All Category Pill */}
             {(() => {
               const Icon = getCategoryIcon('all');
@@ -135,7 +135,7 @@ export const ServicesPage: React.FC = () => {
                 <button
                   key="cat-all"
                   onClick={() => setSelectedCat('all')}
-                  className={`group relative flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md ${
+                  className={`group relative flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md shrink-0 sm:shrink ${
                     isSelected
                       ? 'bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
                       : 'bg-zinc-950/80 text-zinc-300 hover:text-white border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-850'
@@ -162,7 +162,7 @@ export const ServicesPage: React.FC = () => {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCat(cat.id)}
-                  className={`group relative flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md ${
+                  className={`group relative flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md shrink-0 sm:shrink ${
                     isSelected
                       ? 'bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
                       : 'bg-zinc-950/80 text-zinc-300 hover:text-white border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-850'

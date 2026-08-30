@@ -41,7 +41,7 @@ export const PipelineKanban: React.FC = () => {
       </div>
 
       {/* Kanban Columns */}
-      <div className="flex gap-4 overflow-x-auto pb-6">
+      <div className="flex gap-3 sm:gap-4 overflow-x-auto custom-scrollbar pb-6 -mx-2 px-2 sm:mx-0 sm:px-0">
         {stages.map((stg) => {
           const stageDeals = deals.filter(d => d.stage_name === stg.name);
           const stageValue = stageDeals.reduce((sum, d) => sum + d.value, 0);

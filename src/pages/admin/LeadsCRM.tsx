@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Lead, LeadStatus, CommunicationChannel } from '../../types/database.types';
 import { leadService } from '../../services/leadService';
-import { Users, Search, Plus, Upload, Filter, Mail, Phone, Calendar, MessageSquare, Clock, Shield, Sparkles, GitPullRequest, FileSpreadsheet, UserCheck, ChevronRight, X, ExternalLink, Download } from 'lucide-react';
+import { Users, Search, Plus, Upload, Filter, Mail, Phone, Calendar, MessageSquare, Clock, Shield, Sparkles, GitPullRequest, FileSpreadsheet, UserCheck, ChevronRight, X, ExternalLink, Download, MessageCircle, MoreVertical } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ContactActionButtons } from '../../components/crm/ContactActionButtons';
 import { CommunicationDrawer } from '../../components/crm/CommunicationDrawer';
 import { AddLeadModal } from '../../components/crm/AddLeadModal';
 import { CSVImportModal } from '../../components/crm/CSVImportModal';
 
-// Unified CRM Sub-Navigation Bar
+// Unified Responsive CRM Sub-Navigation Bar
 export const CRMNavigationHeader: React.FC = () => {
   const location = useLocation();
 
   const crmTabs = [
     { label: 'Leads Repository', path: '/admin/leads', icon: Users },
-    { label: 'Sales Kanban Pipeline', path: '/admin/pipeline', icon: GitPullRequest },
-    { label: 'Follow-ups & Tasks', path: '/admin/follow-ups', icon: Clock },
-    { label: 'Event Registrations', path: '/admin/events', icon: Calendar, badge: 'LIVE' },
+    { label: 'Sales Kanban', path: '/admin/pipeline', icon: GitPullRequest },
+    { label: 'Follow-ups', path: '/admin/follow-ups', icon: Clock },
+    { label: 'Events', path: '/admin/events', icon: Calendar, badge: 'LIVE' },
     { label: 'Proposals & Invoices', path: '/admin/proposals', icon: FileSpreadsheet },
     { label: 'Client Roster', path: '/admin/clients', icon: UserCheck },
     { label: 'Reel Marketing', path: '/admin/marketing/reels', icon: Sparkles, badge: 'NEW' },
@@ -24,7 +24,7 @@ export const CRMNavigationHeader: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-2 bg-slate-900 border border-slate-800 p-2 rounded-2xl">
+    <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 p-1.5 sm:p-2 rounded-2xl overflow-x-auto custom-scrollbar -mx-1 px-1 sm:mx-0 sm:px-2 shrink-0">
       {crmTabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = location.pathname === tab.path || location.pathname.startsWith(`${tab.path}/`);
@@ -32,7 +32,7 @@ export const CRMNavigationHeader: React.FC = () => {
           <Link
             key={tab.path}
             to={tab.path}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 ${
               isActive
                 ? 'bg-brand-600 text-white shadow-md shadow-brand-500/20'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -130,32 +130,32 @@ export const LeadsCRM: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* CRM UNIFIED SUB-NAVIGATION HEADER */}
       <CRMNavigationHeader />
 
       {/* Top Header with PROMINENT [+ Add Lead] & [Import CSV] buttons */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl">
         <div>
           <div className="flex items-center gap-2 text-amber-400 font-mono text-[11px] uppercase tracking-wider font-bold">
             <Users className="w-3.5 h-3.5" /> CRM LEADS ENGINE & CSV IMPORT
           </div>
-          <h2 className="text-xl font-bold text-white font-display mt-0.5">Leads Repository</h2>
-          <p className="text-slate-400 text-xs mt-1">Manage inbound web inquiries, manual sales entries, and bulk CSV lead imports.</p>
+          <h2 className="text-lg sm:text-xl font-bold text-white font-display mt-0.5">Leads Repository</h2>
+          <p className="text-slate-400 text-xs mt-0.5 sm:mt-1">Manage inbound web inquiries, manual sales entries, and bulk CSV lead imports.</p>
         </div>
 
         {/* PROMINENT LEAD ACTION BUTTONS */}
-        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="px-5 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs flex items-center gap-2 transition-all shadow-xl"
+            className="flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs flex items-center justify-center gap-2 transition-all shadow-xl touch-target"
           >
             <Plus className="w-4 h-4" /> Add Lead
           </button>
           
           <button
             onClick={() => setIsImportModalOpen(true)}
-            className="px-5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-extrabold text-xs flex items-center gap-2 border border-slate-700 transition-all shadow-xl"
+            className="flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-extrabold text-xs flex items-center justify-center gap-2 border border-slate-700 transition-all shadow-xl touch-target"
           >
             <Upload className="w-4 h-4 text-emerald-400" /> Import CSV
           </button>
@@ -163,25 +163,25 @@ export const LeadsCRM: React.FC = () => {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+      <div className="bg-slate-900 border border-slate-800 p-3 sm:p-4 rounded-2xl flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 sm:gap-4 text-xs">
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
           <input
             type="text"
-            placeholder="Search LEAD-XXXXXX, name, email, company..."
+            placeholder="Search LEAD-XXXXXX, name, email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-xs sm:text-sm"
           />
         </div>
 
-        {/* Status Pills */}
-        <div className="flex flex-wrap gap-1.5 font-mono">
+        {/* Horizontally Scrollable Status Pills on Mobile */}
+        <div className="flex items-center gap-1.5 font-mono overflow-x-auto custom-scrollbar pb-1 md:pb-0">
           {['ALL', 'NEW', 'CONTACTED', 'QUALIFIED', 'PROPOSAL', 'WON', 'LOST'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all whitespace-nowrap shrink-0 ${
                 statusFilter === st ? 'bg-amber-400 text-black shadow-lg font-extrabold' : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
               }`}
             >
@@ -191,9 +191,82 @@ export const LeadsCRM: React.FC = () => {
         </div>
       </div>
 
-      {/* Leads Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
-        <div className="overflow-x-auto">
+      {/* MOBILE RESPONSIVE LEAD CARDS (< md screens) */}
+      <div className="md:hidden space-y-3">
+        {filteredLeads.length === 0 ? (
+          <div className="text-center py-10 bg-slate-900 border border-slate-800 rounded-2xl p-6 text-slate-400 text-xs">
+            No leads found matching your filter criteria.
+          </div>
+        ) : (
+          filteredLeads.map((l) => (
+            <div key={l.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3 shadow-lg">
+              {/* Header row: Code + Priority + Status */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 truncate">
+                  <span className="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                    {l.lead_code || `LEAD-${l.id.substr(0, 6)}`}
+                  </span>
+                  {l.priority === 'HIGH' && (
+                    <span className="text-[9px] font-bold uppercase text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20 font-mono">
+                      HIGH
+                    </span>
+                  )}
+                </div>
+
+                <select
+                  value={l.status}
+                  onChange={(e) => handleStatusChange(l.id, e.target.value as LeadStatus)}
+                  className={`border rounded-lg px-2 py-0.5 text-[10px] font-bold ${getStatusBadgeStyle(l.status)}`}
+                >
+                  <option value="NEW" className="bg-slate-900 text-white">NEW</option>
+                  <option value="CONTACTED" className="bg-slate-900 text-white">CONTACTED</option>
+                  <option value="QUALIFIED" className="bg-slate-900 text-white">QUALIFIED</option>
+                  <option value="MEETING" className="bg-slate-900 text-white">MEETING</option>
+                  <option value="PROPOSAL" className="bg-slate-900 text-white">PROPOSAL</option>
+                  <option value="NEGOTIATION" className="bg-slate-900 text-white">NEGOTIATION</option>
+                  <option value="WON" className="bg-slate-900 text-white">WON</option>
+                  <option value="LOST" className="bg-slate-900 text-white">LOST</option>
+                </select>
+              </div>
+
+              {/* Contact Information */}
+              <div>
+                <div className="font-bold text-white text-base font-display">{l.first_name} {l.last_name}</div>
+                <div className="text-slate-400 text-xs mt-0.5">{l.email}</div>
+                <div className="text-slate-300 text-xs font-semibold mt-0.5 flex items-center justify-between">
+                  <span>{l.company_name || 'Individual'}</span>
+                  <span className="text-amber-400 font-normal">{l.service_interest}</span>
+                </div>
+              </div>
+
+              {/* 1-Tap Quick Action Row */}
+              <div className="pt-2 border-t border-slate-800 flex items-center justify-between gap-2">
+                <ContactActionButtons
+                  contactName={`${l.first_name} ${l.last_name || ''}`}
+                  phone={l.phone || '+91 9876543210'}
+                  email={l.email}
+                  contactId={l.id}
+                  serviceInterest={l.service_interest}
+                  companyName={l.company_name}
+                  onOpenMessageDrawer={handleOpenDrawer}
+                  size="sm"
+                />
+
+                <button
+                  onClick={() => setSelectedLead(l)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs shrink-0"
+                >
+                  Notes & Details
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* DESKTOP LEADS TABLE (>= md screens) */}
+      <div className="hidden md:block bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-950 text-slate-400 uppercase font-semibold font-mono border-b border-slate-800">
               <tr>
@@ -267,19 +340,19 @@ export const LeadsCRM: React.FC = () => {
         </div>
       </div>
 
-      {/* Lead Detail & Timeline Modal */}
+      {/* Responsive Lead Detail & Timeline Modal / Drawer */}
       {selectedLead && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
-          <div className="w-full max-w-lg bg-slate-900 border-l border-slate-800 p-6 flex flex-col h-full overflow-y-auto space-y-6">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex justify-end">
+          <div className="w-full sm:max-w-lg bg-slate-900 border-l border-slate-800 p-4 sm:p-6 flex flex-col h-full overflow-y-auto space-y-5 custom-scrollbar">
             <div className="flex justify-between items-center pb-4 border-b border-slate-800">
               <div>
                 <span className="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
                   {selectedLead.lead_code || 'LEAD-000124'}
                 </span>
-                <h3 className="text-xl font-bold text-white font-display mt-1">{selectedLead.first_name} {selectedLead.last_name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white font-display mt-1">{selectedLead.first_name} {selectedLead.last_name}</h3>
                 <p className="text-xs text-slate-400">{selectedLead.company_name} — {selectedLead.email}</p>
               </div>
-              <button onClick={() => setSelectedLead(null)} className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white">
+              <button onClick={() => setSelectedLead(null)} className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white touch-target">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -297,7 +370,7 @@ export const LeadsCRM: React.FC = () => {
                   onOpenMessageDrawer={handleOpenDrawer}
                   size="md"
                 />
-                <div className="text-xs space-y-1 pt-2 border-t border-slate-800 font-mono">
+                <div className="text-xs space-y-1.5 pt-2 border-t border-slate-800 font-mono">
                   <div><span className="text-slate-400">Phone:</span> <span className="text-white font-medium">{selectedLead.phone || 'N/A'}</span></div>
                   <div><span className="text-slate-400">Source:</span> <span className="text-amber-400 font-medium">{selectedLead.source_name || 'Website'}</span></div>
                   <div><span className="text-slate-400">Service:</span> <span className="text-white font-medium">{selectedLead.service_interest}</span></div>
@@ -319,7 +392,7 @@ export const LeadsCRM: React.FC = () => {
                 />
                 <button
                   onClick={handleAddNote}
-                  className="px-4 py-2 rounded-xl bg-amber-400 text-black font-extrabold text-xs shadow-lg"
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-400 text-black font-extrabold text-xs shadow-lg touch-target"
                 >
                   Save Note to Timeline
                 </button>

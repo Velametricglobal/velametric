@@ -20,28 +20,28 @@ export const PortfolioPage: React.FC = () => {
   });
 
   return (
-    <div className="py-20 max-w-[1320px] mx-auto px-6 font-sans space-y-16 selection:bg-white selection:text-black">
+    <div className="py-10 sm:py-16 lg:py-20 max-w-[1320px] mx-auto px-4 sm:px-6 font-sans space-y-10 sm:space-y-16 selection:bg-white selection:text-black">
       
       {/* 1. EDITORIAL HEADER BANNER */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-zinc-900 text-amber-400 border border-zinc-800 backdrop-blur">
+      <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-zinc-900 text-amber-400 border border-zinc-800 backdrop-blur">
           <Sparkles className="w-3.5 h-3.5" /> Velametric Global Showcase
         </div>
 
-        <h1 className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tight font-display">
+        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight font-display">
           OUR WORK
         </h1>
 
-        <p className="text-zinc-400 text-base sm:text-xl leading-relaxed">
+        <p className="text-zinc-400 text-sm sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto px-2">
           Featured web platforms, specialized industry CRM systems, and commercial video reels.
         </p>
       </div>
 
       {/* 2. CATEGORY SWITCHER PILLS */}
-      <div className="flex justify-center gap-3">
+      <div className="flex flex-wrap sm:flex-nowrap justify-center gap-2 sm:gap-3">
         <button
           onClick={() => setFilter('ALL')}
-          className={`px-7 py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all ${
+          className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all touch-target ${
             filter === 'ALL' ? 'bg-white text-black font-extrabold shadow-2xl scale-105' : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
           }`}
         >
@@ -49,7 +49,7 @@ export const PortfolioPage: React.FC = () => {
         </button>
         <button
           onClick={() => setFilter('WEB')}
-          className={`px-7 py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all ${
+          className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all touch-target ${
             filter === 'WEB' ? 'bg-white text-black font-extrabold shadow-2xl scale-105' : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
           }`}
         >
@@ -57,7 +57,7 @@ export const PortfolioPage: React.FC = () => {
         </button>
         <button
           onClick={() => setFilter('VIDEO')}
-          className={`px-7 py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all flex items-center gap-2 ${
+          className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all flex items-center gap-2 touch-target ${
             filter === 'VIDEO' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white font-extrabold shadow-2xl scale-105' : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
           }`}
         >
@@ -66,7 +66,7 @@ export const PortfolioPage: React.FC = () => {
       </div>
 
       {/* 3. WORK SHOWCASE GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {filteredProjects.map((proj) => (
           <div key={proj.id} className="bg-zinc-900/90 border border-zinc-800 rounded-3xl overflow-hidden group hover:border-zinc-600 transition-all flex flex-col justify-between shadow-2xl backdrop-blur">
             <div>

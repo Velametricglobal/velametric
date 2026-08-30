@@ -647,7 +647,7 @@ export const DocumentWizard: React.FC = () => {
 
       <div className="flex flex-col md:flex-row gap-6 mt-2 flex-1 min-h-0">
         {/* Customization Sidebar (Left) - Hidden when printing */}
-        <div className="w-full md:w-72 lg:w-80 shrink-0 h-[600px] print:hidden">
+        <div className="w-full md:w-72 lg:w-80 shrink-0 max-h-[500px] md:h-[600px] overflow-y-auto custom-scrollbar print:hidden">
           <CustomizationSidebar 
             customization={payload.customization}
             paymentDetails={payload.payment_details}
@@ -658,8 +658,10 @@ export const DocumentWizard: React.FC = () => {
         </div>
 
         {/* Live Preview (Right) */}
-        <div className="flex-1 bg-white rounded-xl shadow-xl overflow-hidden border border-border print:shadow-none print:border-none print:m-0 print:p-0 print:h-auto print:w-full print:overflow-visible print:bg-white h-[600px] custom-scrollbar">
-          <LivePreview payload={payload} typeCode={documentType} />
+        <div className="flex-1 bg-white rounded-xl shadow-xl overflow-x-auto overflow-y-auto border border-border print:shadow-none print:border-none print:m-0 print:p-0 print:h-auto print:w-full print:overflow-visible print:bg-white min-h-[450px] md:h-[600px] custom-scrollbar p-1 sm:p-4">
+          <div className="min-w-[600px] md:min-w-0">
+            <LivePreview payload={payload} typeCode={documentType} />
+          </div>
         </div>
       </div>
     </div>
