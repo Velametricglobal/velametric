@@ -7,7 +7,13 @@
     color-scheme: dark;
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+  
+  html.light {
+    color-scheme: light;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: #070a0f;
@@ -15,7 +21,15 @@
     overflow-x: hidden;
     color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+
+  html.light body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    color-scheme: light;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
     letter-spacing: -0.02em;
@@ -118,6 +132,179 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #374151;
   border-radius: 4px;
+}
+
+/* ==========================================================================
+   GLOBAL LIGHT THEME OVERRIDES — WHOLE WEBSITE & CRM
+   ========================================================================== */
+html.light .bg-zinc-950,
+html.light .bg-obsidian-950,
+html.light .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+
+html.light .bg-zinc-900,
+html.light .bg-slate-900,
+html.light .bg-obsidian-900 {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-zinc-900\/90,
+html.light .bg-zinc-900\/95,
+html.light .bg-zinc-900\/98,
+html.light .bg-zinc-950\/95,
+html.light .bg-zinc-950\/90,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/95,
+html.light .bg-slate-950\/80 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+}
+
+html.light .bg-zinc-900\/80,
+html.light .bg-zinc-900\/70,
+html.light .bg-zinc-900\/60,
+html.light .bg-slate-900\/80 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .bg-zinc-800,
+html.light .bg-slate-800,
+html.light .bg-zinc-800\/80,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/80 {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-zinc-800\/50,
+html.light .bg-slate-800\/50,
+html.light .bg-slate-800\/40 {
+  background-color: #f8fafc !important;
+}
+
+html.light .bg-zinc-700,
+html.light .bg-slate-700 {
+  background-color: #e2e8f0 !important;
+}
+
+/* Light mode text colors */
+html.light .text-white {
+  color: #0f172a !important;
+}
+
+/* Maintain high contrast white text on solid background action buttons & tags */
+html.light .bg-brand-600 .text-white,
+html.light .bg-brand-700 .text-white,
+html.light .bg-indigo-600 .text-white,
+html.light .bg-purple-600 .text-white,
+html.light .bg-pink-600 .text-white,
+html.light .bg-rose-500 .text-white,
+html.light .bg-rose-600 .text-white,
+html.light .bg-emerald-600 .text-white,
+html.light .bg-blue-600 .text-white,
+html.light .bg-black .text-white,
+html.light .bg-primary .text-white,
+html.light button.bg-brand-600,
+html.light button.bg-indigo-600,
+html.light button.bg-purple-600,
+html.light button.bg-emerald-600,
+html.light button.bg-rose-600,
+html.light a.bg-brand-600,
+html.light a.bg-indigo-600,
+html.light a.bg-purple-600,
+html.light a.bg-emerald-600,
+html.light a.bg-gradient-to-r,
+html.light button.bg-gradient-to-r {
+  color: #ffffff !important;
+}
+
+html.light .text-zinc-100,
+html.light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html.light .text-zinc-200,
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.light .text-zinc-300,
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+
+html.light .text-zinc-400,
+html.light .text-slate-400 {
+  color: #64748b !important;
+}
+
+html.light .text-zinc-500,
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Light mode borders */
+html.light .border-zinc-800,
+html.light .border-slate-800,
+html.light .border-zinc-800\/60,
+html.light .border-zinc-800\/80,
+html.light .border-zinc-800\/40,
+html.light .border-slate-800\/60 {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .border-zinc-700,
+html.light .border-slate-700,
+html.light .border-zinc-900 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Light mode form controls */
+html.light input,
+html.light select,
+html.light textarea {
+  color-scheme: light !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Light mode glass cards & shadows */
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06) !important;
+}
+
+html.light .shadow-2xl {
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
 }
 
 /* Print Isolation: Print ONLY the generated document preview sheet */

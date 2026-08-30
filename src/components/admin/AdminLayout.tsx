@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { AgentRole } from '../../types/database.types';
 import { CurrencySelector } from '../common/CurrencySelector';
+import { ThemeToggle } from '../common/ThemeToggle';
 import {
   LayoutDashboard, Users, UserCheck, Briefcase, GitPullRequest, Clock,
   Laptop, FolderKanban, FileText, Star, Layers, Layout, Menu, X, Image as ImageIcon,
@@ -177,7 +178,8 @@ export const AdminLayout: React.FC = () => {
 
         {renderNavItems(true)}
 
-        <div className="p-3 border-t border-slate-800 shrink-0 pb-safe">
+        <div className="p-3 border-t border-slate-800 space-y-2 shrink-0 pb-safe">
+          <ThemeToggle variant="expanded" />
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 transition-colors touch-target"
@@ -260,7 +262,14 @@ export const AdminLayout: React.FC = () => {
         {renderNavItems(false)}
 
         {/* Sidebar Footer */}
-        <div className="p-3 border-t border-slate-800 space-y-1 shrink-0">
+        <div className="p-3 border-t border-slate-800 space-y-2 shrink-0">
+          {!collapsed ? (
+            <ThemeToggle variant="expanded" />
+          ) : (
+            <div className="flex justify-center">
+              <ThemeToggle />
+            </div>
+          )}
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 transition-colors"
@@ -296,6 +305,9 @@ export const AdminLayout: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Dark & Light Theme Switcher */}
+            <ThemeToggle />
+
             {/* Quick Currency Selector Pill */}
             <CurrencySelector compact />
 

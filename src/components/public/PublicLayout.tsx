@@ -4,6 +4,7 @@ import { SiteSettings, Service } from '../../types/database.types';
 import { settingsService } from '../../services/settingsService';
 import { serviceService } from '../../services/serviceService';
 import { BackgroundMusicPlayer } from './BackgroundMusicPlayer';
+import { ThemeToggle } from '../common/ThemeToggle';
 import { Laptop, Phone, Mail, ArrowRight, ChevronDown, Menu, X, User, Video, MessageSquare, Send, Zap } from 'lucide-react';
 
 interface PublicLayoutProps {
@@ -97,10 +98,11 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
           </nav>
 
           {/* Right Action CTAs */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-4 shrink-0 ml-2">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0 ml-2">
+            <ThemeToggle />
             <Link
               to="/login"
-              className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 whitespace-nowrap"
+              className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 whitespace-nowrap touch-target"
             >
               <User className="w-3.5 h-3.5 text-amber-400" /> Log In
             </Link>
@@ -112,8 +114,9 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
             </Link>
           </div>
 
-          {/* Mobile Right Controls: Doc Gen Shortcut & Menu Toggle */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Right Controls: Theme Switcher, Doc Gen Shortcut & Menu Toggle */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+            <ThemeToggle />
             <Link
               to="/tools/document-generator"
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[10px] font-extrabold text-black bg-amber-400 hover:bg-amber-300 whitespace-nowrap shadow-md"
@@ -138,6 +141,9 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <div className="lg:hidden bg-zinc-900/98 border-b border-zinc-800 p-5 space-y-3 text-xs font-bold uppercase tracking-wider absolute top-full left-0 right-0 z-50 shadow-2xl backdrop-blur-2xl max-h-[85vh] overflow-y-auto custom-scrollbar">
+              <div className="pb-1">
+                <ThemeToggle variant="expanded" />
+              </div>
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-white py-2.5 px-3 rounded-xl hover:bg-zinc-800/80 border-b border-zinc-800/40">
                 <span>Home</span>
                 <ArrowRight className="w-3.5 h-3.5 text-zinc-500" />

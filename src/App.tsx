@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { AuthProvider } from './context/AuthContext';
 import { AudioProvider } from './context/AudioContext';
 import { CurrencyProvider } from './context/CurrencyContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
 
 import { PublicLayout } from './components/public/PublicLayout';
@@ -112,112 +113,99 @@ class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, {
 export const App: React.FC = () => {
   return (
     <SafeErrorBoundary>
-      <BrowserRouter>
-        <AuthProvider>
-          <CurrencyProvider>
-            <AudioProvider>
-              <ScrollToTop />
-              <Routes>
-              {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
-              <Route path="/" element={<PublicLayout />}>
-                <Route index element={<HomePage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="services" element={<ServicesPage />} />
-                <Route path="services/:slug" element={<ServiceDetailPage />} />
-                <Route path="portfolio" element={<PortfolioPage />} />
-                <Route path="portfolio/:slug" element={<PortfolioDetailPage />} />
-                <Route path="case-studies" element={<CaseStudiesPage />} />
-                <Route path="case-studies/:slug" element={<CaseStudyDetailPage />} />
-                <Route path="resources" element={<ResourcesPage />} />
-                <Route path="resources/:slug" element={<ResourceDetailPage />} />
-                <Route path="contact" element={<ContactPage />} />
-                <Route path="request-quote" element={<QuoteRequestPage />} />
-                <Route path="event-registration" element={<EventRegistrationPage />} />
-                <Route path="sponsor-registration" element={<SponsorRegistrationPage />} />
-                <Route path="become-a-sponsor" element={<SponsorRegistrationPage />} />
-                <Route path="privacy-policy" element={<LegalPages />} />
-                <Route path="terms-and-conditions" element={<LegalPages />} />
-                <Route path="payment-terms" element={<LegalPages />} />
-                <Route path="tools/document-generator" element={<DocumentGeneratorLanding />} />
-                <Route path="tools/document-generator/wizard" element={<DocumentWizard />} />
-              </Route>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <CurrencyProvider>
+              <AudioProvider>
+                <ScrollToTop />
+                <Routes>
+                {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
+                <Route path="/" element={<PublicLayout />}>
+                  <Route index element={<HomePage />} />
+                  <Route path="about" element={<AboutPage />} />
+                  <Route path="services" element={<ServicesPage />} />
+                  <Route path="services/:slug" element={<ServiceDetailPage />} />
+                  <Route path="portfolio" element={<PortfolioPage />} />
+                  <Route path="portfolio/:slug" element={<PortfolioDetailPage />} />
+                  <Route path="case-studies" element={<CaseStudiesPage />} />
+                  <Route path="case-studies/:slug" element={<CaseStudyDetailPage />} />
+                  <Route path="resources" element={<ResourcesPage />} />
+                  <Route path="resources/:slug" element={<ResourceDetailPage />} />
+                  <Route path="contact" element={<ContactPage />} />
+                  <Route path="request-quote" element={<QuoteRequestPage />} />
+                  <Route path="event-registration" element={<EventRegistrationPage />} />
+                  <Route path="sponsor-registration" element={<SponsorRegistrationPage />} />
+                  <Route path="become-a-sponsor" element={<SponsorRegistrationPage />} />
+                  <Route path="privacy-policy" element={<LegalPages />} />
+                  <Route path="terms-and-conditions" element={<LegalPages />} />
+                  <Route path="payment-terms" element={<LegalPages />} />
+                  <Route path="cookie-policy" element={<LegalPages />} />
+                  <Route path="security" element={<LegalPages />} />
+                  
+                  {/* DOCUMENT GENERATOR PUBLIC ROUTES */}
+                  <Route path="documents" element={<DocumentGeneratorLanding />} />
+                  <Route path="documents/create" element={<DocumentWizard />} />
+                  <Route path="documents/create/:templateId" element={<DocumentWizard />} />
+                </Route>
 
-              {/* PUBLIC LOGIN ROUTES */}
-              <Route path="/admin/login" element={<LoginPage />} />
-              <Route path="/login" element={<LoginPage />} />
+                {/* ADMIN LOGIN */}
+                <Route path="/admin/login" element={<LoginPage />} />
 
-              {/* MANDATORY AUTHENTICATED PRIVATE ADMIN & DASHBOARD ROUTES */}
-              <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-                <Route index element={<Navigate to="/admin/dashboard" replace />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="users" element={<UserManagementAdmin />} />
-                <Route path="roles" element={<RolesPermissionsAdmin />} />
-                <Route path="departments" element={<DepartmentsAdmin />} />
-                <Route path="security" element={<SecurityAuditAdmin />} />
-                <Route path="setup" element={<InitialSetupAdmin />} />
-                <Route path="homepage-builder" element={<HomepageBuilder />} />
-                <Route path="events" element={<EventsAdmin />} />
-                
-                {/* LEADS & CRM ROUTES */}
-                <Route path="leads" element={<LeadsCRM />} />
-                <Route path="crm/leads" element={<LeadsCRM />} />
-                <Route path="crm/leads/new" element={<LeadsCRM />} />
-                <Route path="crm/leads/import" element={<LeadsCRM />} />
-                <Route path="crm/leads/:id" element={<LeadsCRM />} />
+                {/* ADMIN PANEL PROTECTED ROUTES */}
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="users" element={<UserManagementAdmin />} />
+                  <Route path="roles" element={<RolesPermissionsAdmin />} />
+                  <Route path="departments" element={<DepartmentsAdmin />} />
+                  <Route path="security" element={<SecurityAuditAdmin />} />
+                  <Route path="setup" element={<InitialSetupAdmin />} />
+                  <Route path="homepage-builder" element={<HomepageBuilder />} />
+                  <Route path="leads" element={<LeadsCRM />} />
+                  <Route path="pipeline" element={<PipelineKanban />} />
+                  <Route path="follow-ups" element={<FollowUps />} />
+                  <Route path="communication" element={<CommunicationCenterAdmin />} />
+                  <Route path="marketing/reels" element={<ReelMarketingAdmin />} />
+                  <Route path="services" element={<ServicesCMS />} />
+                  <Route path="testimonials" element={<TestimonialsCMS />} />
+                  <Route path="portfolio" element={<PortfolioCMS />} />
+                  <Route path="case-studies" element={<CaseStudiesCMS />} />
+                  <Route path="proposals" element={<ProposalsInvoices />} />
+                  <Route path="invoices" element={<ProposalsInvoices />} />
+                  <Route path="media" element={<MediaLibrary />} />
+                  <Route path="settings" element={<SiteSettingsAdmin />} />
+                  <Route path="navigation" element={<NavigationAdmin />} />
+                  <Route path="events" element={<EventsAdmin />} />
+                  
+                  {/* DOCUMENT GENERATOR ADMIN */}
+                  <Route path="documents/analytics" element={<DocumentAnalytics />} />
+                  <Route path="documents/settings" element={<DocumentGeneratorSettings />} />
+                </Route>
 
-                <Route path="pipeline" element={<PipelineKanban />} />
-                <Route path="follow-ups" element={<FollowUps />} />
-                <Route path="communication" element={<CommunicationCenterAdmin />} />
-                <Route path="marketing/reels" element={<ReelMarketingAdmin />} />
-                <Route path="campaigns" element={<ReelMarketingAdmin />} />
+                {/* USER PROTECTED ROUTES */}
+                <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                  <Route path="/my-documents" element={<MyDocuments />} />
+                  <Route path="/account/subscription" element={<SubscriptionManagement />} />
+                  <Route path="/account/company-profile" element={<CompanyProfile />} />
+                </Route>
 
-                {/* INDEPENDENT CONTENT CMS ROUTES */}
-                <Route path="services" element={<ServicesCMS />} />
-                <Route path="content/services" element={<ServicesCMS />} />
-                <Route path="content/services/new" element={<ServicesCMS />} />
-                <Route path="content/services/:id/edit" element={<ServicesCMS />} />
-
-                <Route path="portfolio" element={<PortfolioCMS />} />
-                <Route path="case-studies" element={<CaseStudiesCMS />} />
-
-                <Route path="testimonials" element={<TestimonialsCMS />} />
-                <Route path="content/testimonials" element={<TestimonialsCMS />} />
-                <Route path="content/testimonials/new" element={<TestimonialsCMS />} />
-                <Route path="content/testimonials/:id/edit" element={<TestimonialsCMS />} />
-
-                <Route path="pages" element={<HomepageBuilder />} />
-                <Route path="navigation" element={<NavigationAdmin />} />
-                <Route path="media" element={<MediaLibrary />} />
-                <Route path="blog" element={<ResourcesPage />} />
-                <Route path="proposals" element={<ProposalsInvoices />} />
-                <Route path="invoices" element={<ProposalsInvoices />} />
-                <Route path="payments" element={<ProposalsInvoices />} />
-                <Route path="clients" element={<LeadsCRM />} />
-                <Route path="team" element={<Dashboard />} />
-                <Route path="notifications" element={<Dashboard />} />
-                <Route path="analytics" element={<Dashboard />} />
-                <Route path="settings" element={<SiteSettingsAdmin />} />
-                
-                {/* DOCUMENT GENERATOR ADMIN */}
-                <Route path="documents/analytics" element={<DocumentAnalytics />} />
-                <Route path="documents/settings" element={<DocumentGeneratorSettings />} />
-              </Route>
-
-              {/* USER PROTECTED ROUTES */}
-              <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-                <Route path="/my-documents" element={<MyDocuments />} />
-                <Route path="/account/subscription" element={<SubscriptionManagement />} />
-                <Route path="/account/company-profile" element={<CompanyProfile />} />
-              </Route>
-
-              {/* FALLBACK CATCH-ALL 404 ROUTE */}
-              <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
-            </Routes>
-          </AudioProvider>
-        </CurrencyProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </SafeErrorBoundary>
+                {/* FALLBACK CATCH-ALL 404 ROUTE */}
+                <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
+              </Routes>
+            </AudioProvider>
+          </CurrencyProvider>
+        </AuthProvider>
+      </BrowserRouter>
+      </ThemeProvider>
+    </SafeErrorBoundary>
   );
 };
 export default App;
