@@ -240,6 +240,104 @@ let localProjects: PortfolioProject[] = [
         duration: '1:15'
       }
     ]
+  },
+
+  // 3. EDITORIAL & HIGH-FASHION PHOTOSHOOTS (GOOGLE DRIVE PORTFOLIO)
+  {
+    id: 'proj-photo-1',
+    title: 'Haute Couture & Modern Fashion Lookbook',
+    slug: 'haute-couture-fashion-lookbook',
+    client: 'Velametric Fashion Atelier',
+    project_type: 'photoshoot',
+    description: 'Modern haute couture lookbook and outdoor daylight fashion portraiture emphasizing intricate sunflower embroidery, dynamic postures, and pristine outdoor natural lighting.',
+    challenge: 'Balancing intense direct daylight exposure while maintaining texture in bright white silk and vivid yellow floral embroidery.',
+    solution: 'Captured using wide dynamic range prime portrait lenses with subtle fill reflectors to achieve clean skin tones and true-to-life fabric color fidelity.',
+    results: 'Featured in top regional designer fashion showcases and generated over 350+ lookbook inquiries with high client retention.',
+    featured_image: 'https://lh3.googleusercontent.com/d/1piVAMmJyG4IBpyL0Zd2vwkELBECsnkoD=w1600',
+    gallery: [
+      'https://lh3.googleusercontent.com/d/1piVAMmJyG4IBpyL0Zd2vwkELBECsnkoD=w1600',
+      'https://lh3.googleusercontent.com/d/1QOswxKo5_5oCxO3EuyrmR3v_ppdM8kmj=w1600',
+      'https://lh3.googleusercontent.com/d/1RTFrjOKoP6wBFgof5LSAEogUeUSNalpg=w1600',
+      'https://lh3.googleusercontent.com/d/1lH-XqKiY5AsiEY89l7Q-PoTCYltIOe_H=w1600',
+      'https://lh3.googleusercontent.com/d/1EVX3ZA-C5Ohd3xyqT_jWa63RMoYqsLZZ=w1600',
+      'https://lh3.googleusercontent.com/d/1d3sOnRhD-nBrKdFEyTRgUHS4jO-7AdQL=w1600',
+      'https://lh3.googleusercontent.com/d/1EnBJ97gHmyeZL8vxLj_aYNGdR-S7qy2G=w1600',
+      'https://lh3.googleusercontent.com/d/1cG8qHCfKnDPzOvp6sSoNI8p-CFbek7sk=w1600',
+      'https://lh3.googleusercontent.com/d/1xJyYhWdGvy3COQ7AjW07D7-4bIqbZm8v=w1600',
+      'https://lh3.googleusercontent.com/d/1KJHJk0s554UwKCEK46VUldmpP3iYGffI=w1600',
+      'https://lh3.googleusercontent.com/d/1Uchf34YSaF4zM0otHgfzgOawNfBMFxIp=w1600'
+    ],
+    videos: [],
+    completion_date: '2026-08-25',
+    testimonial_quote: 'The clarity, colors, and framing of the lookbook shoot exceeded our expectations. Truly world-class fashion imagery.',
+    testimonial_author: 'Lead Fashion Designer, Velametric Atelier',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Fashion Photography', 'Model Portfolio', 'Editorial Retouching', 'Color Grading'],
+    technologies: ['Nikon Full-Frame Sensor', 'Prime 85mm f/1.4 Lens', 'Natural Ambient Lighting', 'Capture One Pro'],
+    industry: 'Fashion & Apparel'
+  },
+  {
+    id: 'proj-photo-2',
+    title: 'Heritage Bridal & Traditional Haute Couture',
+    slug: 'heritage-bridal-haute-couture',
+    client: 'Velametric Bridal & Heritage Atelier',
+    project_type: 'photoshoot',
+    description: 'Traditional Himalayan and North-Indian ethnic bridal photoshoot capturing handcrafted gold jewellery, royal lavender embroidered lehenga, and scenic golden hour atmosphere.',
+    challenge: 'Capturing intricate gold Nath and jewellery shimmer against soft evening twilight without harsh flash reflections.',
+    solution: 'Used fast telephoto f/2.8 zoom optics during peak sunset golden hour to create creamy bokeh backgrounds and warm ambient skin tones.',
+    results: 'Delivered high-resolution editorial spread with 100% client satisfaction and 500+ social media shares across campaigns.',
+    featured_image: 'https://lh3.googleusercontent.com/d/1dLLsr6dFQfKtfjLvE_vT5dgzA9pqj31K=w1600',
+    gallery: [
+      'https://lh3.googleusercontent.com/d/1dLLsr6dFQfKtfjLvE_vT5dgzA9pqj31K=w1600',
+      'https://lh3.googleusercontent.com/d/1HiU3kGD1KY_Hgfe6vbdFymGfQXGcrp_t=w1600',
+      'https://lh3.googleusercontent.com/d/11C6k1ouR5CDwTyj7AFa6a18qN_XWJmen=w1600',
+      'https://lh3.googleusercontent.com/d/12cQDqq-aYO-NRtihc7YeE_fO_OAKV0Ik=w1600',
+      'https://lh3.googleusercontent.com/d/1x_5PghMOrOwylNOcY_YtCGdb9adApirx=w1600',
+      'https://lh3.googleusercontent.com/d/156B2_kmnbZNVLyVE36wPkGj-I4x63Bbk=w1600',
+      'https://lh3.googleusercontent.com/d/1YwKrTV0sTYYz-qcfp5jC13YW5AMk2L1Y=w1600',
+      'https://lh3.googleusercontent.com/d/1NtCl2ZOOpYK_HAGdoHYfqUfuqFho-MJU=w1600',
+      'https://lh3.googleusercontent.com/d/1rD7V3UslyH0SBKh7YMXe6xG14FRQcb-l=w1600',
+      'https://lh3.googleusercontent.com/d/1-_ItNxcIE7rn5SajzW2t38-WXZ5WZPaz=w1600',
+      'https://lh3.googleusercontent.com/d/1b5a7itz-843ET6z208dSA3xEAwLbgxRd=w1600',
+      'https://lh3.googleusercontent.com/d/1EuwMkpLwEwQJtKeGqSAeqIsIViKqiFEZ=w1600'
+    ],
+    videos: [],
+    completion_date: '2026-08-27',
+    testimonial_quote: 'The bridal photos captured the soul and royal elegance of our traditional jewellery collection flawlessly.',
+    testimonial_author: 'Creative Director, Heritage Bridal Atelier',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Bridal Photography', 'Jewellery Showcases', 'Sunset Cinematography', 'High-End Retouching'],
+    technologies: ['Nikon FX Pro Series', '70-200mm f/2.8 VR', 'Golden Hour Lighting', 'Color Master Suite'],
+    industry: 'Bridal & Luxury Jewellery'
+  },
+  {
+    id: 'proj-photo-3',
+    title: 'Fine-Art Studio & Silver Jewellery Portraits',
+    slug: 'fine-art-studio-jewellery-portraits',
+    client: 'Velametric Fine Art Studio',
+    project_type: 'photoshoot',
+    description: 'Studio-lit fine art jewellery and silver ornament photoshoot with shimmering high-key backdrop, crisp skin tones, and detailed accessory emphasis.',
+    challenge: 'Highlighting fine micro-details in silver filigree jewelry against high-sparkle background surfaces.',
+    solution: 'Controlled multi-point softbox studio lighting with dedicated rim lights to separate the subject and maximize jewelry luster.',
+    results: 'Produced signature commercial catalog imagery ready for luxury print catalogues, web banners, and billboard campaigns.',
+    featured_image: 'https://lh3.googleusercontent.com/d/1nv9rec8Xzc4mX0DjFakrB2dsQAUOiWtc=w1600',
+    gallery: [
+      'https://lh3.googleusercontent.com/d/1nv9rec8Xzc4mX0DjFakrB2dsQAUOiWtc=w1600',
+      'https://lh3.googleusercontent.com/d/1XspKQB7nwI7i2FjiN2UdCMbsh4rrGARD=w1600',
+      'https://lh3.googleusercontent.com/d/1aojQ31j8KiCX6s-py0QIcVlqEdDGWvVh=w1600',
+      'https://lh3.googleusercontent.com/d/1nE9GxhVqJ0kbqbsLB_0WN-lxEllN7mKw=w1600'
+    ],
+    videos: [],
+    completion_date: '2026-08-28',
+    testimonial_quote: 'Studio portraits and jewellery sharpness were of the absolute highest caliber. Perfect for our luxury catalog.',
+    testimonial_author: 'Brand Manager, Fine Art Jewellery Studio',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Studio Photography', 'Jewellery Macro Detail', 'Beauty Retouching', 'Glamour Lighting'],
+    technologies: ['Strobe Softbox Array', 'Nikon Micro-NIKKOR', 'High-Key Sparkle Wall', 'Photoshop Raw Engine'],
+    industry: 'Fine Art & Studio Portraiture'
   }
 ];
 
