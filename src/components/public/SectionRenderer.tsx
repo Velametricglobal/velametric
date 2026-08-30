@@ -825,48 +825,48 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
   // 10. CONTACT US
   if (section.id.includes('contact') || section.name.includes('Contact')) {
     return (
-      <section className="py-16 sm:py-28 bg-zinc-950 border-b border-zinc-800/80">
+      <section className="py-16 sm:py-28 bg-white dark:bg-zinc-950 border-b border-slate-200 dark:border-zinc-800/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 block">
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 block font-mono">
               Direct Contact
             </span>
-            <h2 className="text-2xl sm:text-5xl font-black text-white font-display uppercase tracking-tight">
+            <h2 className="text-2xl sm:text-5xl font-black text-slate-900 dark:text-white font-display uppercase tracking-tight">
               {content.heading || "Let's Talk."}
             </h2>
 
             <div className="space-y-3 sm:space-y-4 text-xs font-mono">
-              <div className="flex items-center gap-3 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+              <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm">
+                <Phone className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <div className="text-zinc-400 text-[10px]">Phone Support</div>
-                  <div className="text-white font-bold">{content.phone || '+1 (800) 555-VELA'}</div>
+                  <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Phone Support</div>
+                  <div className="text-slate-900 dark:text-white font-bold">{content.phone || '+1 (800) 555-VELA'}</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
-                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+              <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm">
+                <Mail className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <div className="text-zinc-400 text-[10px]">Email Address</div>
-                  <div className="text-white font-bold">{content.email || 'hello@velametric.com'}</div>
+                  <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Email Address</div>
+                  <div className="text-slate-900 dark:text-white font-bold">{content.email || 'hello@velametric.com'}</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+              <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm">
+                <MapPin className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <div className="text-zinc-400 text-[10px]">Uttarakhand Headquarters</div>
-                  <div className="text-white font-bold">{content.office_dehradun || 'Dehradun, Uttarakhand'}</div>
+                  <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Uttarakhand Headquarters</div>
+                  <div className="text-slate-900 dark:text-white font-bold">{content.office_dehradun || 'Dehradun, Uttarakhand'}</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-6 rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-900 h-64 sm:h-[380px]">
+          <div className="lg:col-span-6 rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 bg-slate-100 dark:bg-zinc-900 h-64 sm:h-[380px] shadow-lg">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110204.74618210356!2d78.009183!3d30.316494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390929c356c888b5%3A0x76707323605e542!2sDehradun%2C%20Uttarakhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               title="Dehradun Map"
-              className="w-full h-full border-0 grayscale opacity-80 invert"
+              className="w-full h-full border-0"
               allowFullScreen
               loading="lazy"
             />
