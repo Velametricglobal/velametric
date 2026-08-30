@@ -149,8 +149,12 @@ export const App: React.FC = () => {
                   <Route path="documents/create/:templateId" element={<DocumentWizard />} />
                 </Route>
 
-                {/* ADMIN LOGIN */}
+                {/* LOGIN & AUTHENTICATION ROUTES (RESOLVE /login, /admin/login, /auth/login) */}
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/admin/login" element={<LoginPage />} />
+                <Route path="/auth/login" element={<LoginPage />} />
+                <Route path="/portal" element={<LoginPage />} />
+                <Route path="/agent-portal" element={<LoginPage />} />
 
                 {/* ADMIN PANEL PROTECTED ROUTES */}
                 <Route
