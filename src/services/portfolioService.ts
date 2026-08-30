@@ -340,6 +340,38 @@ let localProjects: PortfolioProject[] = [
     services_used: ['Studio Photography', 'Jewellery Macro Detail', 'Beauty Retouching', 'Glamour Lighting'],
     technologies: ['Strobe Softbox Array', 'Nikon Micro-NIKKOR', 'High-Key Sparkle Wall', 'Photoshop Raw Engine'],
     industry: 'Fine Art & Studio Portraiture'
+  },
+  {
+    id: 'proj-photo-4',
+    title: 'Contemporary Beauty, Hair & Glamour Studio Portfolio',
+    slug: 'contemporary-beauty-glamour-portfolio',
+    client: 'Velametric Beauty & Talent Studio',
+    project_type: 'photoshoot',
+    description: 'Contemporary beauty makeover, hair transformation, and high-fashion model portfolio shoot highlighting studio rim lighting, editorial makeup artistry, and lifestyle hair curls.',
+    challenge: 'Achieving consistent color temperature between close-up makeup detail and dynamic full-length hair styling movement.',
+    solution: 'Engineered dual diffused softbox key lights paired with hair kicker strobes for multidimensional depth and silky hair texture definition.',
+    results: 'Created an 8-frame agency model comp card lookbook with 100% approval from commercial casting directors.',
+    featured_image: '/images/photoshoot/bp_photo_12.jpg',
+    gallery: [
+      '/images/photoshoot/bp_photo_12.jpg',
+      '/images/photoshoot/bp_photo_4.jpg',
+      '/images/photoshoot/bp_photo_5.jpg',
+      '/images/photoshoot/bp_photo_8.jpg',
+      '/images/photoshoot/bp_photo_9.jpg',
+      '/images/photoshoot/bp_photo_10.jpg',
+      '/images/photoshoot/bp_photo_11.jpg',
+      '/images/photoshoot/bp_photo_13.jpg',
+      '/images/photoshoot/bp_photo_1.jpg'
+    ],
+    videos: [],
+    completion_date: '2026-08-29',
+    testimonial_quote: 'The studio lighting, hair definition, and color accuracy in these portfolio frames gave our models the competitive edge.',
+    testimonial_author: 'Artistic Director, Velametric Beauty Studio',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Model Portfolio', 'Beauty Photography', 'Hair Transformation BTS', 'Studio Retouching'],
+    technologies: ['Diffused Key Softboxes', 'Hair Kicker Strobes', 'Prime 50mm f/1.8 Optics', 'Capture One Pro'],
+    industry: 'Beauty & Model Portfolios'
   }
 ];
 
