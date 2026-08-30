@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PortfolioProject, VideoReel } from '../../types/database.types';
 import { portfolioService } from '../../services/portfolioService';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Globe, Sparkles, Video, Play, Instagram, ArrowRight, Film, Camera, X, ChevronLeft, ChevronRight, CheckCircle2, Calendar, Phone, MessageSquare } from 'lucide-react';
+import { ExternalLink, Globe, Sparkles, Video, Play, Instagram, ArrowRight, Film, Camera, X, ChevronLeft, ChevronRight, CheckCircle2, Calendar, Phone, MessageSquare, Wand2, Eye, ZoomIn, ZoomOut } from 'lucide-react';
 
 export const PortfolioPage: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
@@ -23,6 +23,10 @@ export const PortfolioPage: React.FC = () => {
     title: ''
   });
 
+  // Retouching View Mode: 'retouched' (default) vs 'raw'
+  const [isRawView, setIsRawView] = useState<boolean>(false);
+  const [isZoomed, setIsZoomed] = useState<boolean>(false);
+
   useEffect(() => {
     portfolioService.getProjects().then(setProjects);
   }, []);
@@ -35,6 +39,8 @@ export const PortfolioPage: React.FC = () => {
       title,
       description
     });
+    setIsRawView(false);
+    setIsZoomed(false);
   };
 
   const handleNextImage = () => {
@@ -42,6 +48,7 @@ export const PortfolioPage: React.FC = () => {
       ...prev,
       currentIndex: (prev.currentIndex + 1) % prev.images.length
     }));
+    setIsZoomed(false);
   };
 
   const handlePrevImage = () => {
@@ -49,6 +56,7 @@ export const PortfolioPage: React.FC = () => {
       ...prev,
       currentIndex: (prev.currentIndex - 1 + prev.images.length) % prev.images.length
     }));
+    setIsZoomed(false);
   };
 
   const filteredProjects = projects.filter(p => {
@@ -59,6 +67,12 @@ export const PortfolioPage: React.FC = () => {
   });
 
   const fashionShoots = projects.filter(p => p.project_type === 'fashion_photography' || p.id.includes('fashion'));
+
+  // Calculate current image URL based on Retouched vs RAW toggle
+  const currentImageUrl = lightboxData.images[lightboxData.currentIndex] || '';
+  const displayImageUrl = isRawView && currentImageUrl.includes('/images/portfolio/')
+    ? currentImageUrl.replace('/images/portfolio/', '/images/portfolio/originals/')
+    : currentImageUrl;
 
   return (
     <div className="py-10 sm:py-16 lg:py-20 max-w-[1360px] mx-auto px-4 sm:px-6 font-sans space-y-10 sm:space-y-16 selection:bg-white selection:text-black">
@@ -74,8 +88,13 @@ export const PortfolioPage: React.FC = () => {
         </h1>
 
         <p className="text-zinc-400 text-sm sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto px-2">
-          High-fashion model portfolio shoots, custom enterprise CRM platforms, and commercial video reels with Destiny, Dapflix & Ekraahee Films.
+          High-fashion model portfolio shoots with studio-grade skin retouching & dynamic lighting, custom enterprise CRM platforms, and commercial video reels with Destiny, Dapflix & Ekraahee Films.
         </p>
+
+        {/* Studio Retouching Quality Seal */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono font-bold">
+          <Wand2 className="w-3.5 h-3.5" /> Master Color Graded • Radiant Skin Retouching • Studio HDR Lighting
+        </div>
       </div>
 
       {/* 2. CATEGORY SWITCHER PILLS (With Fashion Shoots) */}
@@ -155,7 +174,7 @@ export const PortfolioPage: React.FC = () => {
                   {/* Type Badge */}
                   {isFashion ? (
                     <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-amber-400 text-black rounded-full font-mono flex items-center gap-1 shadow-lg">
-                      <Camera className="w-3 h-3" /> FASHION SHOOT
+                      <Sparkles className="w-3 h-3" /> STUDIO RETOUCHED
                     </span>
                   ) : isVideo ? (
                     <span className="absolute top-4 right-4 text-[10px] font-extrabold px-3 py-1 bg-purple-500 text-white rounded-full font-mono flex items-center gap-1">
@@ -171,7 +190,7 @@ export const PortfolioPage: React.FC = () => {
                   {isFashion && (
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-xs">
                       <span className="px-4 py-2 rounded-full bg-white/90 text-black font-extrabold text-xs shadow-2xl flex items-center gap-1.5 transform scale-95 group-hover:scale-100 transition-transform">
-                        <Camera className="w-3.5 h-3.5 text-amber-500" /> View Gallery ({proj.gallery?.length || 1} Photos)
+                        <Wand2 className="w-3.5 h-3.5 text-amber-500" /> View Master Gallery ({proj.gallery?.length || 1} Frames)
                       </span>
                     </div>
                   )}
@@ -257,7 +276,7 @@ export const PortfolioPage: React.FC = () => {
                     onClick={() => openLightbox(proj.gallery || [proj.featured_image], 0, proj.title, proj.description)}
                     className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl touch-target"
                   >
-                    <Camera className="w-4 h-4" /> Open Full-Screen Shoot Gallery
+                    <Wand2 className="w-4 h-4" /> View Retouched Studio Gallery
                   </button>
                 ) : isVideo && proj.instagram_url ? (
                   <a
@@ -293,25 +312,55 @@ export const PortfolioPage: React.FC = () => {
         })}
       </div>
 
-      {/* 4. HIGH-RESOLUTION FULL-SCREEN PHOTOSHOOT LIGHTBOX MODAL */}
+      {/* 4. HIGH-RESOLUTION FULL-SCREEN PHOTOSHOOT LIGHTBOX MODAL WITH RETOUCHING TOGGLE */}
       {lightboxData.isOpen && (
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-6 overflow-hidden animate-in fade-in duration-200">
           {/* Lightbox Header */}
-          <div className="flex items-center justify-between z-10 border-b border-zinc-800 pb-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 z-10 border-b border-zinc-800 pb-3">
             <div>
               <span className="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest font-mono flex items-center gap-1.5">
-                <Camera className="w-3.5 h-3.5" /> High-Resolution Model Shoot Gallery
+                <Wand2 className="w-3.5 h-3.5" /> Master Color Graded & Skin Retouched (4K Studio)
               </span>
               <h3 className="text-sm sm:text-lg font-bold text-white font-display mt-0.5">{lightboxData.title}</h3>
             </div>
             
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
-                Frame {lightboxData.currentIndex + 1} of {lightboxData.images.length}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Compare Mode Toggle: Retouched vs RAW */}
+              <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-full p-0.5">
+                <button
+                  onClick={() => setIsRawView(false)}
+                  className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 transition-all ${
+                    !isRawView ? 'bg-amber-400 text-black shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Wand2 className="w-3 h-3" /> Master Retouched
+                </button>
+                <button
+                  onClick={() => setIsRawView(true)}
+                  className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 transition-all ${
+                    isRawView ? 'bg-zinc-700 text-white shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Eye className="w-3 h-3" /> Original RAW
+                </button>
+              </div>
+
+              {/* Zoom Toggle */}
+              <button
+                onClick={() => setIsZoomed(!isZoomed)}
+                className="p-2 rounded-full bg-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-700 transition-all touch-target"
+                title={isZoomed ? "Zoom Out" : "Zoom In"}
+              >
+                {isZoomed ? <ZoomOut className="w-4 h-4" /> : <ZoomIn className="w-4 h-4" />}
+              </button>
+
+              <span className="text-xs font-mono text-zinc-400 hidden md:inline">
+                {lightboxData.currentIndex + 1} / {lightboxData.images.length}
               </span>
+
               <button
                 onClick={() => setLightboxData(prev => ({ ...prev, isOpen: false }))}
-                className="p-2.5 rounded-full bg-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-700 transition-all touch-target"
+                className="p-2 rounded-full bg-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-700 transition-all touch-target"
                 aria-label="Close Lightbox"
               >
                 <X className="w-5 h-5" />
@@ -320,7 +369,7 @@ export const PortfolioPage: React.FC = () => {
           </div>
 
           {/* Main Photo View Area with Left/Right Navigation */}
-          <div className="relative flex-1 flex items-center justify-center my-3 max-h-[75vh]">
+          <div className="relative flex-1 flex items-center justify-center my-3 max-h-[75vh] overflow-hidden">
             {/* Prev Button */}
             {lightboxData.images.length > 1 && (
               <button
@@ -332,13 +381,24 @@ export const PortfolioPage: React.FC = () => {
               </button>
             )}
 
-            {/* Active Image */}
-            <div className="max-w-full max-h-full flex items-center justify-center overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl">
+            {/* Active Image with Retouching View Mode & Zoom */}
+            <div className={`max-w-full max-h-full flex items-center justify-center overflow-auto rounded-2xl border border-zinc-800 shadow-2xl transition-all duration-300 ${isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'}`} onClick={() => setIsZoomed(!isZoomed)}>
               <img
-                src={lightboxData.images[lightboxData.currentIndex]}
+                src={displayImageUrl}
                 alt={`Shoot Photo ${lightboxData.currentIndex + 1}`}
-                className="max-h-[68vh] sm:max-h-[72vh] w-auto max-w-full object-contain rounded-xl"
+                className={`max-w-full object-contain rounded-xl transition-all duration-300 ${
+                  isZoomed ? 'scale-150 max-h-[90vh]' : 'max-h-[66vh] sm:max-h-[70vh] w-auto'
+                }`}
               />
+            </div>
+
+            {/* Retouching Mode Badge */}
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20">
+              <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider backdrop-blur-md border ${
+                isRawView ? 'bg-zinc-900/90 text-zinc-300 border-zinc-700' : 'bg-amber-400/90 text-black border-amber-300 font-extrabold shadow-lg'
+              }`}>
+                {isRawView ? '📸 Original Unretouched RAW' : '✨ Velvet Skin & Studio Light Master'}
+              </span>
             </div>
 
             {/* Next Button */}
@@ -360,7 +420,10 @@ export const PortfolioPage: React.FC = () => {
               {lightboxData.images.map((thumb, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setLightboxData(prev => ({ ...prev, currentIndex: idx }))}
+                  onClick={() => {
+                    setLightboxData(prev => ({ ...prev, currentIndex: idx }));
+                    setIsZoomed(false);
+                  }}
                   className={`w-12 h-16 sm:w-14 sm:h-18 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
                     lightboxData.currentIndex === idx ? 'border-amber-400 scale-105 shadow-lg' : 'border-zinc-800 opacity-60 hover:opacity-100'
                   }`}
@@ -373,7 +436,7 @@ export const PortfolioPage: React.FC = () => {
             {/* Shoot Enquiry Actions */}
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <a
-                href="https://wa.me/919876543210?text=Hi%20Velametric,%20I%20would%20like%20to%20book%20a%20model%20portfolio%20shoot%20similar%20to%20your%20showcase."
+                href="https://wa.me/919876543210?text=Hi%20Velametric,%20I%20would%20like%20to%20book%20a%20model%20portfolio%20shoot%20with%20high-end%20studio%20retouching."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 sm:flex-initial px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg touch-target"
