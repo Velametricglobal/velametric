@@ -139,42 +139,42 @@
    ========================================================================== */
 
 /* 1. Canvas & Surface Backgrounds */
-html.light .bg-zinc-950,
+html.light .bg-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-obsidian-950,
 html.light .bg-slate-950,
 html.light .bg-background {
   background-color: #f8fafc !important;
 }
 
-html.light .bg-zinc-900,
-html.light .bg-slate-900,
+html.light .bg-zinc-900:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-slate-900:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-obsidian-900,
 html.light .bg-surface,
 html.light .bg-secondary {
   background-color: #ffffff !important;
 }
 
-html.light .bg-zinc-900\/98,
-html.light .bg-zinc-900\/95,
-html.light .bg-zinc-900\/90,
-html.light .bg-zinc-950\/95,
-html.light .bg-zinc-950\/90,
+html.light .bg-zinc-900\/98:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-900\/95:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-900\/90:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-950\/95:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-950\/90:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-slate-900\/95,
 html.light .bg-slate-900\/90,
 html.light .bg-slate-950\/80 {
   background-color: rgba(255, 255, 255, 0.96) !important;
 }
 
-html.light .bg-zinc-900\/80,
-html.light .bg-zinc-900\/70,
-html.light .bg-zinc-900\/60,
+html.light .bg-zinc-900\/80:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-900\/70:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-900\/60:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-slate-900\/80 {
   background-color: rgba(255, 255, 255, 0.92) !important;
 }
 
-html.light .bg-zinc-800,
-html.light .bg-slate-800,
-html.light .bg-zinc-800\/80,
+html.light .bg-zinc-800:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-slate-800:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .bg-zinc-800\/80:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-slate-800\/80,
 html.light .bg-slate-800\/60 {
   background-color: #f1f5f9 !important;
@@ -184,11 +184,12 @@ html.light .bg-zinc-800\/50,
 html.light .bg-slate-800\/50,
 html.light .bg-slate-800\/40,
 html.light .bg-zinc-800\/40,
-html.light .bg-slate-950\/60 {
+html.light .bg-slate-950\/60,
+html.light .bg-zinc-950\/80:not(.hero-cinematic-section *):not(section.bg-black *) {
   background-color: #f1f5f9 !important;
 }
 
-html.light .bg-zinc-700,
+html.light .bg-zinc-700:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .bg-slate-700 {
   background-color: #e2e8f0 !important;
 }
@@ -202,19 +203,19 @@ html.light [class*="to-zinc-"]:not(.hero-cinematic-section *):not(section.bg-bla
 }
 
 /* 2. Global Borders & Dividers */
-html.light .border-zinc-800,
-html.light .border-slate-800,
-html.light .border-zinc-800\/80,
-html.light .border-zinc-800\/60,
-html.light .border-zinc-800\/40,
+html.light .border-zinc-800:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .border-slate-800:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .border-zinc-800\/80:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .border-zinc-800\/60:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .border-zinc-800\/40:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .border-slate-800\/60,
 html.light .border-slate-800\/40 {
   border-color: #e2e8f0 !important;
 }
 
-html.light .border-zinc-700,
+html.light .border-zinc-700:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .border-slate-700,
-html.light .border-zinc-900,
+html.light .border-zinc-900:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .border-slate-900 {
   border-color: #cbd5e1 !important;
 }
@@ -229,14 +230,14 @@ html.light h6:not(.hero-cinematic-section *):not(section.bg-black *) {
   color: #0f172a;
 }
 
-html.light .text-zinc-100,
-html.light .text-slate-100,
+html.light .text-zinc-100:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .text-slate-100:not(.hero-cinematic-section *):not(section.bg-black *),
 html.light .text-text {
   color: #0f172a !important;
 }
 
-html.light .text-zinc-200,
-html.light .text-slate-200 {
+html.light .text-zinc-200:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *) {
   color: #1e293b !important;
 }
 
@@ -266,14 +267,14 @@ html.light .text-amber-400:not(.hero-cinematic-section *):not(section.bg-black *
 }
 
 /* Subtle background number watermarks in light mode */
-html.light .text-zinc-800,
-html.light .text-slate-200 {
+html.light .text-zinc-800:not(.hero-cinematic-section *):not(section.bg-black *),
+html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *) {
   color: #e2e8f0 !important;
 }
 
 /* Heading / Title text-white color conversion on light surfaces */
-html.light div:not(.hero-cinematic-section *):not(section.bg-black *):not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400) > .text-white,
-html.light section:not(.hero-cinematic-section):not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-black *):not(.hero-cinematic-section *) {
+html.light div:not(.hero-cinematic-section *):not(section.bg-black *):not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400):not(.bg-amber-500) > .text-white,
+html.light section:not(.hero-cinematic-section):not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-amber-500 *):not(.bg-black *):not(.hero-cinematic-section *) {
   color: #0f172a !important;
 }
 
@@ -370,17 +371,24 @@ html.light section.bg-black .text-white {
   color: #ffffff !important;
 }
 
+html.light .hero-cinematic-section .text-amber-300,
+html.light .hero-cinematic-section .text-amber-400 {
+  color: #fcd34d !important;
+}
+
 html.light .hero-cinematic-section .hero-subheading,
+html.light .hero-cinematic-section .text-zinc-100,
 html.light .hero-cinematic-section .text-zinc-200,
 html.light .hero-cinematic-section .text-zinc-300,
+html.light section.bg-black .text-zinc-100,
 html.light section.bg-black .text-zinc-200,
 html.light section.bg-black .text-zinc-300 {
-  color: #e4e4e7 !important;
+  color: #f1f5f9 !important;
 }
 
 html.light .hero-cinematic-section .text-zinc-400,
 html.light section.bg-black .text-zinc-400 {
-  color: #a1a1aa !important;
+  color: #d4d4d8 !important;
 }
 
 html.light .hero-cinematic-section a.bg-white,
@@ -399,6 +407,8 @@ html.light section.bg-black button.bg-white:hover {
   color: #000000 !important;
 }
 
+html.light .hero-cinematic-section a.bg-black\/70,
+html.light .hero-cinematic-section button.bg-black\/70,
 html.light .hero-cinematic-section a.bg-zinc-900\/90,
 html.light .hero-cinematic-section a.bg-zinc-900\/80,
 html.light .hero-cinematic-section button.bg-zinc-900\/90,
@@ -407,9 +417,16 @@ html.light section.bg-black a.bg-zinc-900\/90,
 html.light section.bg-black a.bg-zinc-900\/80,
 html.light section.bg-black button.bg-zinc-900\/90,
 html.light section.bg-black button.bg-zinc-900\/80 {
-  background-color: rgba(24, 24, 27, 0.9) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
   color: #ffffff !important;
-  border-color: rgba(63, 63, 70, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+html.light .hero-cinematic-section a[class*="bg-amber"],
+html.light .hero-cinematic-section button[class*="bg-amber"] {
+  background-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fde68a !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
 }
 
 /* 6. Form Controls, Textareas & Dropdowns */

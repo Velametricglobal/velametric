@@ -75,18 +75,18 @@ export const ServicesPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
           {/* Live Search Bar */}
           <div className="relative w-full md:w-96">
-            <Search className="w-4 h-4 absolute left-4 top-3.5 text-zinc-400" />
+            <Search className="w-4 h-4 absolute left-4 top-3.5 text-slate-400 dark:text-zinc-400" />
             <input
               type="text"
               placeholder="Search services, marketing, loans, web apps..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-zinc-950/90 border border-zinc-800 rounded-2xl pl-11 pr-10 py-3 text-xs text-white placeholder-zinc-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 focus:outline-none transition-all shadow-inner"
+              className="w-full bg-slate-50 dark:bg-zinc-950/90 border border-slate-200 dark:border-zinc-800 rounded-2xl pl-11 pr-10 py-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-all shadow-inner"
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')} 
-                className="absolute right-3.5 top-3.5 text-zinc-500 hover:text-white p-0.5 rounded-full hover:bg-zinc-800 transition-colors"
+                className="absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-white p-0.5 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors"
                 title="Clear Search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -96,28 +96,28 @@ export const ServicesPage: React.FC = () => {
 
           {/* Right Status Info & Currency Selector Pill */}
           <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-            <div className="text-[11px] font-mono text-zinc-400 hidden sm:block">
-              Showing <span className="text-amber-400 font-bold">{filteredServices.length}</span> of {services.length} offerings
+            <div className="text-[11px] font-mono text-slate-500 dark:text-zinc-400 hidden sm:block">
+              Showing <span className="text-amber-600 dark:text-amber-400 font-bold">{filteredServices.length}</span> of {services.length} offerings
             </div>
 
-            <div className="flex items-center gap-2.5 bg-zinc-950/90 px-4 py-2 rounded-2xl border border-zinc-800/90 shadow-sm">
-              <span className="text-[10px] font-extrabold text-zinc-400 uppercase font-mono tracking-wider">Currency:</span>
+            <div className="flex items-center gap-2.5 bg-slate-50 dark:bg-zinc-950/90 px-4 py-2 rounded-2xl border border-slate-200 dark:border-zinc-800/90 shadow-sm">
+              <span className="text-[10px] font-extrabold text-slate-600 dark:text-zinc-400 uppercase font-mono tracking-wider">Currency:</span>
               <CurrencySelector compact />
             </div>
           </div>
         </div>
 
         {/* Subtle Glowing Divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 dark:via-zinc-800 to-transparent" />
 
         {/* ORGANIZED CATEGORY NAVIGATION PILLS (CENTER ALIGNED) */}
         <div>
-          <div className="flex items-center justify-between mb-3 text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-wider">
-            <span className="flex items-center gap-1.5"><SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" /> Select Category Filter:</span>
+          <div className="flex items-center justify-between mb-3 text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+            <span className="flex items-center gap-1.5"><SlidersHorizontal className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" /> Select Category Filter:</span>
             {selectedCat !== 'all' && (
               <button 
                 onClick={() => setSelectedCat('all')} 
-                className="text-amber-400 hover:underline text-[10px] font-bold"
+                className="text-amber-600 dark:text-amber-400 hover:underline text-[10px] font-bold"
               >
                 Reset to All ({services.length})
               </button>
@@ -137,14 +137,14 @@ export const ServicesPage: React.FC = () => {
                   onClick={() => setSelectedCat('all')}
                   className={`group relative flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md shrink-0 sm:shrink ${
                     isSelected
-                      ? 'bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
-                      : 'bg-zinc-950/80 text-zinc-300 hover:text-white border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-850'
+                      ? 'bg-amber-500 hover:bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
+                      : 'bg-slate-100 dark:bg-zinc-950/80 text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-850'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-amber-400'}`} />
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-amber-600 dark:text-amber-400'}`} />
                   <span>All Offerings</span>
                   <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-mono font-bold ${
-                    isSelected ? 'bg-black/20 text-black' : 'bg-zinc-800 text-zinc-400 group-hover:text-white'
+                    isSelected ? 'bg-black/20 text-black' : 'bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white'
                   }`}>
                     {count}
                   </span>
@@ -164,14 +164,14 @@ export const ServicesPage: React.FC = () => {
                   onClick={() => setSelectedCat(cat.id)}
                   className={`group relative flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 shadow-md shrink-0 sm:shrink ${
                     isSelected
-                      ? 'bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
-                      : 'bg-zinc-950/80 text-zinc-300 hover:text-white border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-850'
+                      ? 'bg-amber-500 hover:bg-amber-400 text-black font-extrabold shadow-amber-500/20 scale-[1.02]'
+                      : 'bg-slate-100 dark:bg-zinc-950/80 text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-850'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-amber-400'}`} />
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-amber-600 dark:text-amber-400'}`} />
                   <span>{cat.name}</span>
                   <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-mono font-bold ${
-                    isSelected ? 'bg-black/20 text-black' : 'bg-zinc-800 text-zinc-400 group-hover:text-white'
+                    isSelected ? 'bg-black/20 text-black' : 'bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white'
                   }`}>
                     {count}
                   </span>
@@ -183,15 +183,15 @@ export const ServicesPage: React.FC = () => {
 
         {/* Selected Category Detail Banner */}
         {activeCategoryObj && (
-          <div className="pt-3 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400 font-mono animate-in fade-in duration-300">
+          <div className="pt-3 border-t border-slate-200 dark:border-zinc-800/60 flex items-center justify-between text-xs text-slate-500 dark:text-zinc-400 font-mono animate-in fade-in duration-300">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>Viewing Category: <strong className="text-white font-display">{activeCategoryObj.name}</strong></span>
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+              <span>Viewing Category: <strong className="text-slate-900 dark:text-white font-display">{activeCategoryObj.name}</strong></span>
               {activeCategoryObj.description && (
-                <span className="hidden md:inline text-zinc-500">— {activeCategoryObj.description}</span>
+                <span className="hidden md:inline text-slate-500 dark:text-zinc-500">— {activeCategoryObj.description}</span>
               )}
             </div>
-            <span className="text-amber-400 font-bold">{getCategoryCount(activeCategoryObj.id)} Service Packages</span>
+            <span className="text-amber-600 dark:text-amber-400 font-bold">{getCategoryCount(activeCategoryObj.id)} Service Packages</span>
           </div>
         )}
       </div>
@@ -199,36 +199,36 @@ export const ServicesPage: React.FC = () => {
       {/* Services List & Package Cards */}
       <div className="space-y-16">
         {filteredServices.length === 0 ? (
-          <div className="text-center py-16 bg-zinc-900 border border-zinc-800 rounded-3xl p-8 space-y-4 shadow-2xl">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/20">
+          <div className="text-center py-16 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 space-y-4 shadow-xl">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-500/20">
               <Search className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold text-white font-display">No Offerings Found</h3>
-            <p className="text-zinc-400 text-xs max-w-md mx-auto">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">No Offerings Found</h3>
+            <p className="text-slate-500 dark:text-zinc-400 text-xs max-w-md mx-auto">
               We couldn't find any products or services matching "{searchQuery}". Try searching for keywords like "website", "marketing", "subsidy", or "reels".
             </p>
             <button 
               onClick={() => { setSearchQuery(''); setSelectedCat('all'); }} 
-              className="px-6 py-2.5 rounded-xl bg-white text-black font-extrabold text-xs hover:bg-zinc-200 transition-all shadow-lg inline-flex items-center gap-1.5"
+              className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-black dark:hover:bg-zinc-200 font-extrabold text-xs transition-all shadow-lg inline-flex items-center gap-1.5"
             >
               Reset All Search Filters
             </button>
           </div>
         ) : (
           filteredServices.map((srv) => (
-            <div key={srv.id} className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-6 sm:p-8 space-y-8 backdrop-blur-xl shadow-2xl">
+            <div key={srv.id} className="bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 space-y-8 backdrop-blur-xl shadow-xl dark:shadow-2xl">
               {/* Service Title Header */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-800 pb-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 dark:border-zinc-800 pb-6">
                 <div>
-                  <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest font-mono bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full inline-block mb-1.5">
+                  <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest font-mono bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full inline-block mb-1.5">
                     {srv.category_name}
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white font-display">{srv.name}</h2>
-                  <p className="text-zinc-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">{srv.short_description}</p>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white font-display">{srv.name}</h2>
+                  <p className="text-slate-600 dark:text-zinc-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">{srv.short_description}</p>
                 </div>
                 <Link
                   to={`/services/${srv.slug}`}
-                  className="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs flex items-center gap-1.5 shrink-0 transition-all shadow-md"
+                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-white font-bold text-xs flex items-center gap-1.5 shrink-0 transition-all shadow-sm"
                 >
                   Full Details & Inclusions <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
@@ -246,8 +246,8 @@ export const ServicesPage: React.FC = () => {
                         key={pkg.id}
                         className={`rounded-3xl p-6 flex flex-col justify-between relative transition-all duration-300 ${
                           isEnterprise
-                            ? 'bg-gradient-to-b from-amber-500/10 via-zinc-900 to-zinc-950 border-2 border-amber-500/50 shadow-2xl scale-[1.02] z-10'
-                            : 'bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700'
+                            ? 'bg-amber-50/50 dark:bg-gradient-to-b dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-950 border-2 border-amber-500 shadow-xl scale-[1.02] z-10'
+                            : 'bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700 shadow-sm'
                         }`}
                       >
                         {/* Package Badge */}
@@ -260,26 +260,26 @@ export const ServicesPage: React.FC = () => {
                         <div className="space-y-4">
                           {/* Header & Target Audience */}
                           <div>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 font-mono">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-500 font-mono">
                               {pkg.tier}
                             </span>
-                            <h3 className="text-xl font-bold text-white mt-0.5 font-display">{pkg.name}</h3>
-                            <p className="text-[11px] text-amber-400/90 font-medium mt-1">{pkg.target_audience}</p>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-0.5 font-display">{pkg.name}</h3>
+                            <p className="text-[11px] text-amber-600 dark:text-amber-400 font-medium mt-1">{pkg.target_audience}</p>
                           </div>
 
                           {/* Price Tag */}
-                          <div className="py-3 border-y border-zinc-800/80">
+                          <div className="py-3 border-y border-slate-200 dark:border-zinc-800/80">
                             {isOrg ? (
                               <div>
-                                <div className="text-2xl font-black text-white font-display">Contact Us</div>
-                                <div className="text-[11px] text-emerald-400 font-semibold font-mono">For a Custom Quotation</div>
+                                <div className="text-2xl font-black text-slate-900 dark:text-white font-display">Contact Us</div>
+                                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold font-mono">For a Custom Quotation</div>
                               </div>
                             ) : (
                               <div>
-                                <div className="text-3xl font-black text-white font-display">
+                                <div className="text-3xl font-black text-slate-900 dark:text-white font-display">
                                   {formatAmount(pkg.price)}
                                 </div>
-                                <div className="text-[10px] text-zinc-400 font-mono mt-0.5">
+                                <div className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono mt-0.5">
                                   {pkg.price_display_type === 'PER_MONTH' && 'Starting at / Month'}
                                   {pkg.price_display_type === 'PER_PROJECT' && 'Starting at / Project'}
                                   {pkg.price_display_type === 'PER_CASE' && 'Starting at / Case'}
@@ -292,16 +292,16 @@ export const ServicesPage: React.FC = () => {
 
                           {/* Inclusions List */}
                           <div>
-                            <div className="text-[11px] font-bold text-zinc-300 uppercase tracking-wider mb-2 font-mono">Key Inclusions:</div>
+                            <div className="text-[11px] font-bold text-slate-900 dark:text-zinc-300 uppercase tracking-wider mb-2 font-mono">Key Inclusions:</div>
                             <ul className="space-y-2">
                               {pkg.inclusions.slice(0, 7).map((inc, idx) => (
-                                <li key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
-                                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                                <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-zinc-300">
+                                  <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                                   <span>{inc}</span>
                                 </li>
                               ))}
                               {pkg.inclusions.length > 7 && (
-                                <li className="text-[10px] text-amber-400 font-semibold font-mono pt-1">
+                                <li className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold font-mono pt-1">
                                   + {pkg.inclusions.length - 7} more inclusions (view full details)
                                 </li>
                               )}
@@ -310,9 +310,9 @@ export const ServicesPage: React.FC = () => {
 
                           {/* Exclusions Brief */}
                           {pkg.exclusions && pkg.exclusions.length > 0 && (
-                            <div className="pt-2 border-t border-zinc-800/60">
-                              <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-1 font-mono">Excludes:</div>
-                              <div className="text-[11px] text-zinc-400 italic line-clamp-2">
+                            <div className="pt-2 border-t border-slate-200 dark:border-zinc-800/60">
+                              <div className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-wider mb-1 font-mono">Excludes:</div>
+                              <div className="text-[11px] text-slate-500 dark:text-zinc-400 italic line-clamp-2">
                                 {pkg.exclusions.slice(0, 3).join(', ')}...
                               </div>
                             </div>
@@ -320,15 +320,15 @@ export const ServicesPage: React.FC = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="pt-6 mt-6 border-t border-zinc-800/80 space-y-2">
+                        <div className="pt-6 mt-6 border-t border-slate-200 dark:border-zinc-800/80 space-y-2">
                           <button
                             onClick={() => setActiveEnquiry({ service: srv, packageItem: pkg })}
-                            className={`w-full py-3 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all shadow-lg ${
+                            className={`w-full py-3 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all shadow-md ${
                               isEnterprise
-                                ? 'bg-amber-400 hover:bg-amber-300 text-black'
+                                ? 'bg-amber-500 hover:bg-amber-400 text-black'
                                 : isOrg
-                                ? 'bg-emerald-500 hover:bg-emerald-400 text-black'
-                                : 'bg-white hover:bg-zinc-200 text-black'
+                                ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                                : 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black'
                             }`}
                           >
                             {pkg.cta_text || (isOrg ? 'Request a Quotation' : 'Get Started')} <ArrowRight className="w-3.5 h-3.5" />
@@ -336,7 +336,7 @@ export const ServicesPage: React.FC = () => {
 
                           <Link
                             to={`/services/${srv.slug}`}
-                            className="w-full py-2 text-center text-[11px] font-bold text-zinc-400 hover:text-white block transition-colors"
+                            className="w-full py-2 text-center text-[11px] font-bold text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white block transition-colors"
                           >
                             View Details & Comparison
                           </Link>

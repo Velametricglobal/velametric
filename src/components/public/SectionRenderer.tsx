@@ -142,15 +142,15 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
 
         {/* HERO CONTENT OVERLAY */}
         <div className="relative z-10 max-w-[1280px] mx-auto text-center space-y-6 sm:space-y-8 w-full">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-white/10 backdrop-blur-md text-amber-300 border border-white/20 shadow-lg">
-            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> Velametric Global Business & Media Engine
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-black/60 backdrop-blur-md !text-amber-300 border border-amber-400/40 shadow-2xl">
+            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" /> Velametric Global Business & Media Engine
           </div>
 
-          <h1 className="hero-title text-3xl sm:text-6xl lg:text-8xl font-black tracking-tight text-white font-display uppercase leading-tight sm:leading-[1.02] max-w-5xl mx-auto break-words drop-shadow-md">
+          <h1 className="hero-title text-3xl sm:text-6xl lg:text-8xl font-black tracking-tight !text-white font-display uppercase leading-tight sm:leading-[1.02] max-w-5xl mx-auto break-words drop-shadow-2xl">
             {content.heading || 'We Create. We Market. We Grow.'}
           </h1>
 
-          <p className="hero-subheading text-xs sm:text-xl lg:text-2xl text-zinc-200 max-w-3xl mx-auto font-normal leading-relaxed px-2 drop-shadow">
+          <p className="hero-subheading text-xs sm:text-xl lg:text-2xl !text-zinc-100 max-w-3xl mx-auto font-medium leading-relaxed px-2 drop-shadow-lg">
             {content.subheading || 'From digital experiences and marketing to media, video, finance and unforgettable events — we turn ideas into measurable impact.'}
           </p>
 
@@ -158,14 +158,14 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             <SmartLink
               to={content.primaryCtaUrl || '/request-quote'}
               openInNewTab={content.primaryCtaOpenNewTab}
-              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-black bg-white hover:bg-zinc-200 transition-all transform active:scale-95 shadow-2xl text-center"
+              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-black !text-black !bg-white hover:!bg-zinc-200 transition-all transform active:scale-95 shadow-2xl text-center"
             >
               {content.primaryCtaText || 'Start a Project'}
             </SmartLink>
             <SmartLink
               to={content.secondaryCtaUrl || '/portfolio'}
               openInNewTab={content.secondaryCtaOpenNewTab}
-              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 backdrop-blur transition-all text-center"
+              className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-black !text-white !bg-black/70 hover:!bg-black/90 border border-white/30 backdrop-blur transition-all text-center shadow-xl"
             >
               {content.secondaryCtaText || 'Explore Our Work'}
             </SmartLink>
@@ -173,7 +173,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <SmartLink
                 to={content.eventCtaUrl || '/event-registration'}
                 openInNewTab={content.eventCtaOpenNewTab}
-                className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-extrabold text-amber-300 bg-amber-500/20 border border-amber-500/40 backdrop-blur hover:bg-amber-500/30 transition-all text-center"
+                className="w-full sm:w-auto px-7 py-3.5 sm:px-9 sm:py-4 rounded-full text-xs sm:text-sm font-black !text-amber-300 !bg-amber-500/30 hover:!bg-amber-500/40 border border-amber-400/60 backdrop-blur transition-all text-center shadow-xl"
               >
                 {content.eventCtaText}
               </SmartLink>
