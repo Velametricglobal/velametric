@@ -65,16 +65,16 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
                     <Link
                       key={srv.id}
                       to={`/services/${srv.slug}`}
-                      className="p-3.5 rounded-2xl hover:bg-zinc-800 transition-all flex items-start gap-3 group"
+                      className="p-3.5 rounded-2xl hover:bg-amber-100/80 dark:hover:bg-zinc-800/90 border border-transparent hover:border-amber-300 dark:hover:border-amber-500/30 transition-all flex items-start gap-3 group"
                     >
-                      <div className="p-2.5 rounded-xl bg-white/10 text-white shrink-0">
-                        {srv.slug.includes('video') ? <Video className="w-4 h-4 text-rose-400" /> : <Laptop className="w-4 h-4" />}
+                      <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-white/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-400 group-hover:text-black dark:group-hover:bg-amber-400 dark:group-hover:text-black transition-colors shrink-0">
+                        {srv.slug.includes('video') ? <Video className="w-4 h-4 text-rose-500 dark:text-rose-400" /> : <Laptop className="w-4 h-4" />}
                       </div>
                       <div>
-                        <div className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors font-display">
+                        <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-800 dark:group-hover:text-amber-400 transition-colors font-display">
                           {srv.name}
                         </div>
-                        <div className="text-[11px] text-zinc-400 line-clamp-1 mt-0.5">{srv.short_description}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-zinc-400 group-hover:text-slate-700 dark:group-hover:text-zinc-200 line-clamp-1 mt-0.5">{srv.short_description}</div>
                       </div>
                     </Link>
                   ))}
@@ -82,17 +82,17 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
               )}
             </div>
 
-            <Link to="/portfolio" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors whitespace-nowrap">
+            <Link to="/portfolio" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               Our Work
             </Link>
-            <Link to="/case-studies" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors whitespace-nowrap">
+            <Link to="/case-studies" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               Case Studies
             </Link>
-            <Link to="/resources" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors whitespace-nowrap">
+            <Link to="/resources" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               Resources
             </Link>
 
-            <Link to="/about" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors whitespace-nowrap">
+            <Link to="/about" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               About Us
             </Link>
           </nav>
@@ -102,9 +102,9 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
             <ThemeToggle />
             <Link
               to="/login"
-              className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 whitespace-nowrap touch-target"
+              className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 hover:text-amber-800 dark:text-zinc-300 dark:hover:text-white transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-amber-100/70 border border-slate-200 hover:border-amber-300 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 whitespace-nowrap touch-target"
             >
-              <User className="w-3.5 h-3.5 text-amber-400" /> Log In
+              <User className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" /> Log In
             </Link>
             <Link
               to="/tools/document-generator"
