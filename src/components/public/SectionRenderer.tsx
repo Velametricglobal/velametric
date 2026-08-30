@@ -454,6 +454,11 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
   if (section.section_type === 'fashion_gallery' || section.id.includes('fashion') || section.id.includes('model-shoot')) {
     const shootPhotos = [
       {
+        url: '/images/portfolio/model-portfolio-polka-lollipop-smile-01.jpg',
+        title: 'Retro Polka Dot Pop Look',
+        tag: 'Youth Commercial'
+      },
+      {
         url: '/images/portfolio/model-portfolio-sunflower-01.jpg',
         title: 'Sunflower Couture Profile',
         tag: 'Botanical Couture'
@@ -462,11 +467,6 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         url: '/images/portfolio/model-portfolio-urban-fur-01.jpg',
         title: 'Urban Fur & Houndstooth',
         tag: 'Contemporary Editorial'
-      },
-      {
-        url: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
-        title: 'Playful Studio Portrait',
-        tag: 'High-Key Studio'
       },
       {
         url: '/images/portfolio/model-portfolio-gold-sequin-glam-01.jpg',
@@ -479,9 +479,19 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         tag: 'Drapery & Form'
       },
       {
-        url: '/images/portfolio/model-portfolio-black-crop-standing-01.jpg',
-        title: 'Windblown Athletic Silhouette',
-        tag: 'Street Glamour'
+        url: '/images/portfolio/model-portfolio-polka-heart-01.jpg',
+        title: 'K-Style Finger Heart Pose',
+        tag: 'Pop Culture Lookbook'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-polka-headphones-lying-01.jpg',
+        title: 'Studio Headphone Lifestyle',
+        tag: 'Music & Audio Commercial'
+      },
+      {
+        url: '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
+        title: 'Playful Studio Portrait',
+        tag: 'High-Key Studio'
       },
       {
         url: '/images/portfolio/model-portfolio-urban-fur-02.jpg',
@@ -489,19 +499,9 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
         tag: 'Portrait Lighting'
       },
       {
-        url: '/images/portfolio/model-portfolio-sunflower-02.jpg',
-        title: 'Daylight Floral Couture',
-        tag: 'Outdoor Fashion'
-      },
-      {
-        url: '/images/portfolio/model-portfolio-black-crop-seated-01.jpg',
-        title: 'Minimalist Stool Editorial',
-        tag: 'Studio Test Series'
-      },
-      {
-        url: '/images/portfolio/model-portfolio-editorial-seating-01.jpg',
-        title: 'Seated Fashion Editorial',
-        tag: 'Lookbook Shoot'
+        url: '/images/portfolio/model-portfolio-black-crop-windblown-02.jpg',
+        title: 'Windblown Athletic Silhouette',
+        tag: 'Street Glamour'
       }
     ];
 

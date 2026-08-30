@@ -355,6 +355,7 @@ let localProjects: PortfolioProject[] = [
     gallery: [
       '/images/portfolio/model-portfolio-lollipop-portrait-01.jpg',
       '/images/portfolio/model-portfolio-black-crop-standing-01.jpg',
+      '/images/portfolio/model-portfolio-black-crop-windblown-02.jpg',
       '/images/portfolio/model-portfolio-black-crop-seated-01.jpg'
     ],
     videos: ['https://www.instagram.com/destiny_in_productions/?hl=en'],
@@ -421,6 +422,53 @@ let localProjects: PortfolioProject[] = [
         instagram_url: 'https://www.instagram.com/ekraaheefilms/?hl=en#',
         views_count: '510K',
         duration: '0:42'
+      }
+    ]
+  },
+  {
+    id: 'proj-fashion-5',
+    title: 'Retro Polka Dot & Pop K-Style — Youth Commercial Lookbook',
+    slug: 'retro-polka-dot-youth-lookbook',
+    client: 'Velametric Fashion & Media Studio',
+    project_type: 'fashion_photography',
+    instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+    production_partner: {
+      name: 'Destiny Productions & Dapflix',
+      instagram_handle: '@destiny_in_productions',
+      instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+      tagline: 'Pop Youth Commercials, Beauty Direction & Viral Media',
+      role: 'Creative Direction & Fashion Photography'
+    },
+    description: 'Vibrant retro-pop youth commercial lookbook featuring double space buns, monochrome polka dot off-shoulder tops, playful candy props, studio headphones, and high-key commercial beauty lighting.',
+    challenge: 'Directing spontaneous, authentic lifestyle expressions while balancing clean high-key white cyclorama reflections with sharp jewelry and headphone details.',
+    solution: 'High-speed Profoto lighting with beauty dish key and rim backlight emphasizing hair silhouette and pop-art makeup vibrancy.',
+    results: 'Commercial campaign acquired by regional lifestyle retail apparel brands with over 320,000+ short-form video impressions.',
+    featured_image: '/images/portfolio/model-portfolio-polka-lollipop-smile-01.jpg',
+    gallery: [
+      '/images/portfolio/model-portfolio-polka-lollipop-smile-01.jpg',
+      '/images/portfolio/model-portfolio-polka-heart-01.jpg',
+      '/images/portfolio/model-portfolio-polka-lollipop-pout-01.jpg',
+      '/images/portfolio/model-portfolio-polka-headphones-lying-01.jpg'
+    ],
+    videos: ['https://www.instagram.com/destiny_in_productions/?hl=en'],
+    completion_date: '2026-08-30',
+    testimonial_quote: 'The pop-culture energy and expressive lighting produced some of the freshest youth lifestyle marketing frames we have ever released.',
+    testimonial_author: 'Brand Marketing Lead, Youth Apparel Network',
+    is_featured: true,
+    status: 'PUBLISHED',
+    services_used: ['Youth Commercial Modeling', 'Pop Culture Lookbooks', 'Beauty & Hair Direction', 'Studio Lifestyle Shoots'],
+    technologies: ['Sony A7R V', 'Beauty Dish 27"', 'Profoto B10X Strobes', 'Capture One Pro'],
+    industry: 'Fashion & Commercial Photography',
+    video_reels: [
+      {
+        id: 'reel-f5',
+        title: 'Retro Polka Dot Pop Lookbook Reel',
+        video_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        thumbnail_url: '/images/portfolio/model-portfolio-polka-lollipop-smile-01.jpg',
+        partner_name: 'Destiny Productions',
+        instagram_url: 'https://www.instagram.com/destiny_in_productions/?hl=en',
+        views_count: '420K',
+        duration: '0:30'
       }
     ]
   }
