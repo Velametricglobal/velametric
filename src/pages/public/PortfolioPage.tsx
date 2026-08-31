@@ -25,7 +25,7 @@ import {
 
 export const PortfolioPage: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
-  const [filter, setFilter] = useState<'ALL' | 'PHOTOSHOOT' | 'WEB' | 'VIDEO'>('PHOTOSHOOT');
+  const [filter, setFilter] = useState<'PHOTOSHOOT' | 'WEB' | 'VIDEO'>('PHOTOSHOOT');
   const [photoshootViewMode, setPhotoshootViewMode] = useState<'3D' | 'GRID'>('3D');
   const [activeReelModal, setActiveReelModal] = useState<VideoReel | null>(null);
   const [activePhotoModal, setActivePhotoModal] = useState<{ images: string[]; index: number; title: string; client?: string; category?: string } | null>(null);
@@ -121,17 +121,6 @@ export const PortfolioPage: React.FC = () => {
           }`}
         >
           <Camera className="w-4 h-4 text-black dark:text-inherit" /> Fashion & Photoshoots (3D Stage)
-        </button>
-
-        <button
-          onClick={() => setFilter('ALL')}
-          className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all touch-target ${
-            filter === 'ALL'
-              ? 'bg-slate-950 dark:bg-white text-white dark:text-black shadow-xl scale-105'
-              : 'bg-white dark:bg-zinc-900 text-slate-700 dark:text-zinc-400 hover:text-black dark:hover:text-white border border-slate-200 dark:border-zinc-800'
-          }`}
-        >
-          All Grid Work ({projects.length})
         </button>
 
         <button
