@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Page, Service, PortfolioProject, CaseStudy } from '../../types/database.types';
-import { pageService } from '../../services/pageService';
+import { pageService, defaultHomeSections } from '../../services/pageService';
 import { serviceService } from '../../services/serviceService';
 import { portfolioService } from '../../services/portfolioService';
 import { SectionRenderer } from '../../components/public/SectionRenderer';
@@ -23,6 +23,9 @@ export const HomePage: React.FC = () => {
       setServices(srv);
       setProjects(proj);
       setCaseStudies(cs);
+      setLoading(false);
+    }).catch((err) => {
+      console.error('Error fetching homepage data:', err);
       setLoading(false);
     });
   };
@@ -49,11 +52,13 @@ export const HomePage: React.FC = () => {
     );
   }
 
-  const sections = page?.sections || [];
+  const rawSections = page?.sections && page.sections.length > 0 ? page.sections : defaultHomeSections;
+  const enabledSections = rawSections.filter(s => s.is_enabled !== false);
+  const sections = enabledSections.length > 0 ? enabledSections : defaultHomeSections;
 
   return (
-    <div className="bg-zinc-950 text-white font-sans selection:bg-amber-400 selection:text-black">
-      {sections.filter(s => s.is_enabled !== false).map((sec) => (
+    <div className="bg-zinc-950 text-white font-sans selection:bg-amber-400 selection:text-black min-h-screen">
+      {sections.map((sec) => (
         <SectionRenderer
           key={sec.id}
           section={sec}
