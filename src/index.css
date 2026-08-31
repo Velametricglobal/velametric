@@ -559,3 +559,26 @@ html.dark aside .logo-brand-text {
     max-width: 100% !important;
   }
 }
+
+/* Anti-theft & Secure Photo Lookbook Protection */
+.secure-media,
+.secure-media img,
+img.secure-image {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.secure-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: transparent;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}

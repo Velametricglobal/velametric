@@ -21,7 +21,7 @@ import {
   Sliders,
   X,
   Share2,
-  Download,
+  ShieldCheck,
   Info,
   Calendar,
   MapPin,
@@ -369,7 +369,10 @@ export const PhotoProfilesPage: React.FC = () => {
   const currentProfile = profiles[activeIndex] || profiles[0];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white selection:bg-amber-400 selection:text-black font-sans pb-24 relative overflow-hidden">
+    <div
+      onContextMenu={(e) => e.preventDefault()}
+      className="min-h-screen bg-slate-950 text-white selection:bg-amber-400 selection:text-black font-sans pb-24 relative overflow-hidden secure-media select-none"
+    >
       
       {/* 3D Radiant Ambient Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-amber-500/15 via-purple-600/10 to-transparent blur-[140px] pointer-events-none rounded-full" />
@@ -378,7 +381,7 @@ export const PhotoProfilesPage: React.FC = () => {
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-10 sm:pt-14 space-y-10 sm:space-y-14 relative z-10">
 
-        {/* 1. EDITORIAL TITLE & CONTROLS HEADER */}
+        {/* 1. EDITORIAL TITLE HEADER */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-zinc-800/80 pb-8">
           <div className="space-y-2 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-extrabold uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/25 backdrop-blur-md shadow-lg">
@@ -392,56 +395,11 @@ export const PhotoProfilesPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Right Action Controls: Mode Switcher & Admin Button */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {/* 3D Mode Selector */}
-            <div className="flex items-center gap-1 bg-zinc-900/90 border border-zinc-800 p-1 rounded-2xl backdrop-blur-md shadow-lg">
-              <button
-                onClick={() => setSliderMode('coverflow')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  sliderMode === 'coverflow' ? 'bg-amber-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                3D Stage
-              </button>
-              <button
-                onClick={() => setSliderMode('cylinder')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  sliderMode === 'cylinder' ? 'bg-amber-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                3D Ring
-              </button>
-              <button
-                onClick={() => setSliderMode('stack')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  sliderMode === 'stack' ? 'bg-amber-500 text-black shadow-md' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                3D Stack
-              </button>
+          <div className="flex items-center gap-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-zinc-900/90 border border-zinc-800 text-[11px] font-mono font-semibold text-zinc-400 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span>Drag / Swipe to Rotate Lookbooks</span>
             </div>
-
-            {/* AutoPlay Toggle */}
-            <button
-              onClick={() => setIsAutoPlay(!isAutoPlay)}
-              className={`p-2.5 rounded-2xl border transition-all flex items-center gap-1.5 text-xs font-bold ${
-                isAutoPlay
-                  ? 'bg-amber-500/10 border-amber-500/40 text-amber-400'
-                  : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
-              }`}
-              title={isAutoPlay ? 'Pause Auto Rotation' : 'Start Auto Rotation'}
-            >
-              {isAutoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-            </button>
-
-            {/* Admin Direct Manager Button */}
-            <Link
-              to="/admin/portfolio"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider hover:opacity-95 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform hover:scale-105"
-            >
-              <Images className="w-4 h-4" /> Manage Photos ⚙️
-            </Link>
           </div>
         </div>
 
@@ -522,16 +480,18 @@ export const PhotoProfilesPage: React.FC = () => {
                 } group cursor-pointer`}
               >
                 {/* Inner Card Frame */}
-                <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5">
-                  {/* Background Profile Photo with 3D Parallax */}
+                <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none">
+                  {/* Background Profile Photo with 3D Parallax & Anti-Theft Protection */}
                   <img
                     src={profile.coverImage}
                     alt={profile.name}
-                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
+                    className={`absolute inset-0 w-full h-full object-cover secure-image pointer-events-none transition-transform duration-700 ${
                       isCenter ? 'scale-105 group-hover:scale-110' : 'scale-100'
                     }`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 pointer-events-none" />
 
                   {/* 3D Holographic Glare */}
                   {isCenter && (
@@ -741,14 +701,20 @@ export const PhotoProfilesPage: React.FC = () => {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 select-none">
                   {currentProfile.gallery.slice(0, 6).map((imgUrl, i) => (
                     <div
                       key={i}
                       onClick={() => setActiveLightbox({ images: currentProfile.gallery, index: i, profile: currentProfile })}
                       className="h-20 sm:h-24 rounded-xl overflow-hidden cursor-pointer border border-zinc-800 hover:border-amber-400 hover:scale-105 transition-all relative group/thumb shadow-md"
                     >
-                      <img src={imgUrl} alt={`Frame ${i + 1}`} className="w-full h-full object-cover" />
+                      <img
+                        src={imgUrl}
+                        alt={`Frame ${i + 1}`}
+                        draggable={false}
+                        onDragStart={(e) => e.preventDefault()}
+                        className="w-full h-full object-cover secure-image pointer-events-none"
+                      />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center">
                         <Maximize2 className="w-4 h-4 text-white" />
                       </div>
@@ -778,9 +744,12 @@ export const PhotoProfilesPage: React.FC = () => {
 
       </div>
 
-      {/* 5. 4K CINEMATIC LIGHTBOX MODAL */}
+      {/* 5. 4K CINEMATIC LIGHTBOX MODAL (PROTECTED VIEW) */}
       {activeLightbox && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-6 animate-fadeIn">
+        <div
+          onContextMenu={(e) => e.preventDefault()}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-6 animate-fadeIn select-none secure-media"
+        >
           {/* Top Lightbox Bar */}
           <div className="flex items-center justify-between z-10">
             <div>
@@ -792,34 +761,44 @@ export const PhotoProfilesPage: React.FC = () => {
               </h3>
             </div>
 
-            <div className="flex items-center gap-2">
-              <a
-                href={activeLightbox.images[activeLightbox.index]}
-                download
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center transition-colors border border-zinc-800"
-                title="View Full Resolution"
-              >
-                <Download className="w-4 h-4" />
-              </a>
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-zinc-400 backdrop-blur-md">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Protected Lookbook
+              </span>
 
               <button
                 onClick={() => setActiveLightbox(null)}
-                className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-rose-600 text-white flex items-center justify-center transition-colors border border-zinc-800"
+                className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-rose-600 text-white flex items-center justify-center transition-colors border border-zinc-800 shadow-lg"
+                title="Close Lookbook"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Main Zoom Stage */}
-          <div className="relative flex-1 flex items-center justify-center my-4 overflow-hidden">
-            <img
-              src={activeLightbox.images[activeLightbox.index]}
-              alt={`Frame ${activeLightbox.index + 1}`}
-              className="max-w-full max-h-[72vh] object-contain rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-scaleUp"
-            />
+          {/* Main Zoom Stage with Transparent Protection Shield */}
+          <div
+            onContextMenu={(e) => e.preventDefault()}
+            className="relative flex-1 flex items-center justify-center my-4 overflow-hidden"
+          >
+            <div className="relative max-w-full max-h-[72vh] flex items-center justify-center">
+              <img
+                src={activeLightbox.images[activeLightbox.index]}
+                alt={`Frame ${activeLightbox.index + 1}`}
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                className="max-w-full max-h-[72vh] object-contain rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-scaleUp secure-image pointer-events-none"
+              />
+              {/* Invisible Click & Drag Shield Layer */}
+              <div
+                className="secure-shield"
+                onContextMenu={(e) => e.preventDefault()}
+              />
+              {/* Watermark Protection Tag */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[10px] font-mono text-zinc-300 pointer-events-none select-none tracking-widest uppercase z-30 whitespace-nowrap shadow-lg">
+                🔒 VELAMETRIC GLOBAL • PROTECTED WORK
+              </div>
+            </div>
 
             {/* Lightbox Nav Arrows */}
             {activeLightbox.images.length > 1 && (
@@ -831,7 +810,7 @@ export const PhotoProfilesPage: React.FC = () => {
                       index: (activeLightbox.index - 1 + activeLightbox.images.length) % activeLightbox.images.length
                     })
                   }
-                  className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black flex items-center justify-center backdrop-blur border border-white/20 transition-all shadow-xl"
+                  className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black flex items-center justify-center backdrop-blur border border-white/20 transition-all shadow-xl z-40"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -843,7 +822,7 @@ export const PhotoProfilesPage: React.FC = () => {
                       index: (activeLightbox.index + 1) % activeLightbox.images.length
                     })
                   }
-                  className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black flex items-center justify-center backdrop-blur border border-white/20 transition-all shadow-xl"
+                  className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black flex items-center justify-center backdrop-blur border border-white/20 transition-all shadow-xl z-40"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
@@ -857,13 +836,19 @@ export const PhotoProfilesPage: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => setActiveLightbox({ ...activeLightbox, index: idx })}
-                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border-2 transition-all shrink-0 relative ${
                   activeLightbox.index === idx
                     ? 'border-amber-400 scale-110 shadow-lg'
                     : 'border-zinc-800 opacity-60 hover:opacity-100'
                 }`}
               >
-                <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                <img
+                  src={imgUrl}
+                  alt={`Thumbnail ${idx + 1}`}
+                  draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="w-full h-full object-cover secure-image pointer-events-none"
+                />
               </button>
             ))}
           </div>
