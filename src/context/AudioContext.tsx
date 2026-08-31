@@ -15,7 +15,7 @@ interface AudioContextType {
   setVolume: (vol: number) => void;
 }
 
-const AudioContext = createContext<AudioContextType | undefined>(undefined);
+const MusicAudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [settings, setSettings] = useState<BackgroundMusicSettings | null>(null);
   const [volume, setVolumeState] = useState<number>(0.2); // Default 20%
   
-  const audioCtxRef = useRef<AudioContext | null>(null);
+  const audioCtxRef = useRef<any | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
   const oscillatorsRef = useRef<OscillatorNode[]>([]);
   const userManuallyPausedRef = useRef<boolean>(false);
@@ -35,6 +35,8 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (cfg) {
         setVolumeState((cfg.default_volume || 20) / 100);
       }
+    }).catch(err => {
+      console.error('Error loading music settings:', err);
     });
 
     const storedPref = localStorage.getItem('website_music_enabled');
@@ -47,10 +49,13 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     try {
       if (!audioCtxRef.current) {
         const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        audioCtxRef.current = new AudioContextClass();
+        if (AudioContextClass) {
+          audioCtxRef.current = new AudioContextClass();
+        }
       }
 
       const ctx = audioCtxRef.current;
+      if (!ctx) return;
 
       if (ctx.state === 'suspended') {
         ctx.resume();
@@ -58,56 +63,63 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
       // Clear existing active oscillators
       oscillatorsRef.current.forEach(osc => {
-        try {
-          osc.stop();
-          osc.disconnect();
-        } catch (e) {}
+        try { osc.stop(); osc.disconnect(); } catch (e) {}
       });
       oscillatorsRef.current = [];
 
+      // Create master gain
       const masterGain = ctx.createGain();
-      masterGain.gain.setValueAtTime(volume || 0.15, ctx.currentTime);
-
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(450, ctx.currentTime);
-
-      masterGain.connect(filter);
-      filter.connect(ctx.destination);
+      masterGain.gain.setValueAtTime(volume * 0.15, ctx.currentTime);
+      masterGain.connect(ctx.destination);
       gainNodeRef.current = masterGain;
 
-      // Relaxing Corporate Ambient Chords (A2, E3, A3, C#4, E4)
-      const freqs = [110.00, 164.81, 220.00, 277.18, 329.63];
+      // Pentatonic warm atmospheric chord frequencies (E minor ambient pad)
+      const freqs = [164.81, 196.00, 246.94, 293.66, 329.63];
+
       freqs.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
+        const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+        const noteGain = ctx.createGain();
+
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
+        // Slow gentle frequency modulation (vibrato / warmth)
         const lfo = ctx.createOscillator();
-        lfo.frequency.setValueAtTime(0.12 + idx * 0.03, ctx.currentTime);
         const lfoGain = ctx.createGain();
-        lfoGain.gain.setValueAtTime(2.5, ctx.currentTime);
-        lfo.connect(lfoGain);
-        lfoGain.connect(osc.detune);
+        lfo.frequency.value = 0.1 + idx * 0.05;
+        lfoGain.gain.value = 1.5;
+        lfo.connect(osc.frequency);
         lfo.start();
 
-        osc.connect(masterGain);
+        noteGain.gain.setValueAtTime(0.01, ctx.currentTime);
+        noteGain.gain.exponentialRampToValueAtTime(0.2 / freqs.length, ctx.currentTime + 3);
+
+        if (panner) {
+          panner.pan.value = (idx - 2) * 0.35;
+          osc.connect(noteGain);
+          noteGain.connect(panner);
+          panner.connect(masterGain);
+        } else {
+          osc.connect(noteGain);
+          noteGain.connect(masterGain);
+        }
+
         osc.start();
         oscillatorsRef.current.push(osc);
       });
 
       setIsPlaying(true);
       setIsAutoplayBlocked(false);
-    } catch (e) {
-      console.warn('AudioContext synth error:', e);
+    } catch (err) {
+      console.warn('Audio Autoplay policy / Synth initialization blocked:', err);
+      setIsAutoplayBlocked(true);
+      setIsPlaying(false);
     }
   };
 
   const stopSoundSynth = () => {
     try {
-      if (gainNodeRef.current && audioCtxRef.current) {
-        gainNodeRef.current.gain.setValueAtTime(0, audioCtxRef.current.currentTime);
-      }
       oscillatorsRef.current.forEach(osc => {
         try {
           osc.stop();
@@ -115,13 +127,9 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         } catch (e) {}
       });
       oscillatorsRef.current = [];
-      if (audioCtxRef.current && audioCtxRef.current.state === 'running') {
-        audioCtxRef.current.suspend();
-      }
-    } catch (e) {
-      console.warn('Error stopping synth:', e);
-    } finally {
       setIsPlaying(false);
+    } catch (e) {
+      console.error('Error stopping synth:', e);
     }
   };
 
@@ -148,42 +156,34 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const setVolume = (vol: number) => {
     setVolumeState(vol);
     if (gainNodeRef.current && audioCtxRef.current) {
-      gainNodeRef.current.gain.setValueAtTime(vol, audioCtxRef.current.currentTime);
+      try {
+        gainNodeRef.current.gain.setValueAtTime(vol * 0.15, audioCtxRef.current.currentTime);
+      } catch (e) {}
     }
   };
 
-  // Automatic load playback attempt + gesture fallback
+  // Listen to unlock audio on first user gesture
   useEffect(() => {
-    if (!settings || !settings.enabled) return;
-
-    if (userManuallyPausedRef.current) {
-      setIsPlaying(false);
-      return;
-    }
-
-    if (settings.autoplay) {
-      startSoundSynth();
-    }
-
-    const handleGesture = () => {
-      if (!userManuallyPausedRef.current && !isPlaying) {
+    const handleFirstInteraction = () => {
+      if (!userManuallyPausedRef.current && settings?.enabled && settings?.autoplay && !isPlaying) {
         startSoundSynth();
       }
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
     };
 
-    window.addEventListener('click', handleGesture, { once: true });
-    window.addEventListener('touchstart', handleGesture, { once: true });
-    window.addEventListener('keydown', handleGesture, { once: true });
+    window.addEventListener('click', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
 
     return () => {
-      window.removeEventListener('click', handleGesture);
-      window.removeEventListener('touchstart', handleGesture);
-      window.removeEventListener('keydown', handleGesture);
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      stopSoundSynth();
     };
   }, [settings]);
 
   return (
-    <AudioContext.Provider
+    <MusicAudioContext.Provider
       value={{
         isPlaying,
         isAutoplayBlocked,
@@ -198,12 +198,12 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }}
     >
       {children}
-    </AudioContext.Provider>
+    </MusicAudioContext.Provider>
   );
 };
 
 export const useAudio = () => {
-  const ctx = useContext(AudioContext);
+  const ctx = useContext(MusicAudioContext);
   if (!ctx) {
     throw new Error('useAudio must be used within an AudioProvider');
   }

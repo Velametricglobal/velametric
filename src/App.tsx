@@ -72,20 +72,31 @@ const ScrollToTop = () => {
 };
 
 // Global Safe Error Boundary to prevent constructor injection / malformed SSR crashes
-class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; errorMessage: string }> {
+class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; errorMessage: string; errorStack?: string }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
-    this.state = { hasError: false, errorMessage: '' };
+    this.state = { hasError: false, errorMessage: '', errorStack: '' };
   }
 
   static getDerivedStateFromError(error: unknown) {
     const msg = error instanceof Error ? error.message : 'An unexpected error occurred.';
-    return { hasError: true, errorMessage: msg };
+    const stack = error instanceof Error ? error.stack : '';
+    return { hasError: true, errorMessage: msg, errorStack: stack };
   }
 
   componentDidCatch(error: unknown, errorInfo: React.ErrorInfo) {
     console.error('Unhandled application error caught safely:', error, errorInfo);
   }
+
+  handleResetAndRecover = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+    } catch (e) {
+      console.error('Failed clearing storage:', e);
+    }
+    window.location.href = '/';
+  };
 
   render() {
     if (this.state.hasError) {
@@ -96,14 +107,37 @@ class SafeErrorBoundary extends React.Component<{ children: React.ReactNode }, {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold mb-2">Something went wrong</h1>
-          <p className="text-zinc-400 max-w-md mb-6 text-sm">The application encountered an unexpected error. Please refresh the page to continue.</p>
-          <button 
-            onClick={() => window.location.href = '/'}
-            className="px-6 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-all"
-          >
-            Return to Home
-          </button>
+          <h1 className="text-2xl font-bold mb-2 font-display">Something went wrong</h1>
+          <p className="text-zinc-400 max-w-md mb-4 text-xs leading-relaxed">
+            The application caught an unexpected state. Click below to recover and clear stale local cache.
+          </p>
+
+          {this.state.errorMessage && (
+            <div className="mb-6 p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-amber-400 max-w-lg text-left overflow-x-auto">
+              <div className="font-bold text-red-400 mb-1">Error: {this.state.errorMessage}</div>
+              {this.state.errorStack && (
+                <div className="text-[10px] text-zinc-500 line-clamp-3 font-mono">{this.state.errorStack}</div>
+              )}
+            </div>
+          )}
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button 
+              onClick={() => {
+                this.setState({ hasError: false });
+                window.location.href = '/';
+              }}
+              className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-black rounded-xl font-bold text-xs transition-all shadow-lg"
+            >
+              Return to Home
+            </button>
+            <button 
+              onClick={this.handleResetAndRecover}
+              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-xl font-bold text-xs transition-all"
+            >
+              Clear Storage & Reset
+            </button>
+          </div>
         </div>
       );
     }

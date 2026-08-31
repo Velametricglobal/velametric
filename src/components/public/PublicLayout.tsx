@@ -5,7 +5,7 @@ import { settingsService } from '../../services/settingsService';
 import { serviceService } from '../../services/serviceService';
 import { BackgroundMusicPlayer } from './BackgroundMusicPlayer';
 import { ThemeToggle } from '../common/ThemeToggle';
-import { Laptop, Phone, Mail, ArrowRight, ChevronDown, Menu, X, User, Video, MessageSquare, Send, Zap } from 'lucide-react';
+import { Laptop, Phone, Mail, ArrowRight, ChevronDown, Menu, X, User, Video, MessageSquare, Send, Zap, Camera } from 'lucide-react';
 
 interface PublicLayoutProps {
   children?: React.ReactNode;
