@@ -629,6 +629,20 @@ export const portfolioService = {
     return JSON.parse(JSON.stringify(proj));
   },
 
+  async restoreProjectDefaults(projectId: string): Promise<PortfolioProject | null> {
+    const defaultProj = localProjects.find(p => p.id === projectId);
+    if (!defaultProj) return null;
+
+    const projects = loadProjectsFromStorage();
+    const idx = projects.findIndex(p => p.id === projectId);
+    if (idx !== -1) {
+      projects[idx] = JSON.parse(JSON.stringify(defaultProj));
+      saveProjectsToStorage(projects);
+      return JSON.parse(JSON.stringify(projects[idx]));
+    }
+    return null;
+  },
+
   async resetProjectsToDefault(): Promise<PortfolioProject[]> {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(STORAGE_KEY_PROJECTS);
