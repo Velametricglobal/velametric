@@ -221,70 +221,70 @@ html.light .border-slate-900 {
 }
 
 /* 3. Typography & Headings */
-html.light h1:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light h2:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light h3:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light h4:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light h5:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light h6:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light h1:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light h2:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light h3:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light h4:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light h5:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light h6:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #0f172a;
 }
 
-html.light .text-zinc-100:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-slate-100:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-text {
+html.light .text-zinc-100:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-100:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-text:not(.coverflow-card *):not(.coverflow-stage *) {
   color: #0f172a !important;
 }
 
-html.light .text-zinc-200:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light .text-zinc-200:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #1e293b !important;
 }
 
-html.light .text-zinc-300:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-slate-300:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light .text-zinc-300:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-300:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #334155 !important;
 }
 
-html.light .text-zinc-400:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-slate-400:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-muted {
+html.light .text-zinc-400:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-400:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-muted:not(.coverflow-card *):not(.coverflow-stage *) {
   color: #64748b !important;
 }
 
-html.light .text-zinc-500,
-html.light .text-slate-500 {
+html.light .text-zinc-500:not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-500:not(.coverflow-card *):not(.coverflow-stage *) {
   color: #64748b !important;
 }
 
 /* Brand & Amber Accents on light surfaces */
-html.light .text-brand-400:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light .text-brand-400:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #4f46e5 !important; /* Rich Indigo */
 }
 
-html.light .text-amber-400:not(.hero-cinematic-section *):not(section.bg-black *):not(button *):not(a *) {
+html.light .text-amber-400:not(.hero-cinematic-section *):not(section.bg-black *):not(button *):not(a *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #d97706 !important; /* Rich warm amber */
 }
 
 /* Subtle background number watermarks in light mode */
-html.light .text-zinc-800:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light .text-zinc-800:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light .text-slate-200:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #e2e8f0 !important;
 }
 
 /* Heading / Title text-white color conversion on light surfaces */
-html.light div:not(.hero-cinematic-section *):not(section.bg-black *):not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400):not(.bg-amber-500) > .text-white,
-html.light section:not(.hero-cinematic-section):not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-amber-500 *):not(.bg-black *):not(.hero-cinematic-section *) {
+html.light div:not(.hero-cinematic-section *):not(section.bg-black *):not(.bg-black):not(.bg-brand-600):not(.bg-indigo-600):not(.bg-purple-600):not(.bg-pink-600):not(.bg-rose-500):not(.bg-rose-600):not(.bg-emerald-600):not(.bg-blue-600):not(.bg-amber-400):not(.bg-amber-500):not(.coverflow-card *):not(.coverflow-stage *) > .text-white,
+html.light section:not(.hero-cinematic-section):not(.bg-black) > div .text-white:not(button *):not(a *):not(.bg-brand-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not(.bg-pink-600 *):not(.bg-rose-500 *):not(.bg-rose-600 *):not(.bg-emerald-600 *):not(.bg-blue-600 *):not(.bg-amber-400 *):not(.bg-amber-500 *):not(.bg-black *):not(.hero-cinematic-section *):not(.coverflow-card *):not(.coverflow-stage *) {
   color: #0f172a !important;
 }
 
 /* 4. Action Buttons & Interactive Controls */
 
 /* Primary buttons that were white on dark background now become bold dark slate on light background */
-html.light a.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light button.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light a.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *),
-html.light button.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *) {
+html.light a.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light button.bg-white.text-black:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light a.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *),
+html.light button.bg-white.text-zinc-950:not(.hero-cinematic-section *):not(section.bg-black *):not(.coverflow-card *):not(.coverflow-stage *) {
   background-color: #0f172a !important;
   color: #ffffff !important;
 }

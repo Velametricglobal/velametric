@@ -242,11 +242,17 @@ export const PortfolioPage: React.FC = () => {
 
                     {/* Top Badges */}
                     <div className="relative z-10 flex items-center justify-between">
-                      <span className="card-client-badge px-3 py-1 rounded-full bg-black/85 text-white text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border border-white/20 shadow-md">
+                      <span
+                        style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.85)', borderColor: 'rgba(255,255,255,0.25)' }}
+                        className="card-client-badge px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border shadow-md"
+                      >
                         {proj.client}
                       </span>
 
-                      <span className="card-frames-badge px-3 py-1 rounded-full bg-amber-400 text-black text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border border-amber-300/40">
+                      <span
+                        style={{ color: '#000000', backgroundColor: '#fbbf24', borderColor: 'rgba(255,255,255,0.4)' }}
+                        className="card-frames-badge px-3 py-1 rounded-full text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border"
+                      >
                         <Star className="w-3 h-3 fill-black" /> {proj.gallery?.length || 8} FRAMES
                       </span>
                     </div>
@@ -254,13 +260,22 @@ export const PortfolioPage: React.FC = () => {
                     {/* Bottom Details */}
                     <div className="relative z-10 space-y-3">
                       <div className="space-y-1">
-                        <div className="card-category text-[11px] font-extrabold font-mono uppercase tracking-widest text-amber-400 flex items-center gap-1.5 drop-shadow">
+                        <div
+                          style={{ color: '#fbbf24', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}
+                          className="card-category text-[11px] font-extrabold font-mono uppercase tracking-widest flex items-center gap-1.5"
+                        >
                           <Flame className="w-3.5 h-3.5 text-amber-400" /> {proj.industry}
                         </div>
-                        <h3 className="card-title text-xl sm:text-2xl font-black text-white uppercase tracking-tight font-display drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+                        <h3
+                          style={{ color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.9)' }}
+                          className="card-title text-xl sm:text-2xl font-black uppercase tracking-tight font-display"
+                        >
                           {proj.title}
                         </h3>
-                        <p className="card-desc text-[11px] text-zinc-200 line-clamp-2 leading-relaxed drop-shadow">
+                        <p
+                          style={{ color: '#e2e8f0', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}
+                          className="card-desc text-[11px] line-clamp-2 leading-relaxed"
+                        >
                           {proj.description}
                         </p>
                       </div>
