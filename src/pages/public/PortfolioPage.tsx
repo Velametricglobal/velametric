@@ -32,6 +32,13 @@ export const PortfolioPage: React.FC = () => {
           </div>
 
           <Link
+            to="/photo-profiles"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-gradient-to-r from-amber-500 to-yellow-400 text-black hover:opacity-90 transition-all shadow-md transform hover:scale-105"
+          >
+            <Camera className="w-3.5 h-3.5" /> 3D Photo Profiles Slider ↗
+          </Link>
+
+          <Link
             to="/admin/portfolio"
             className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest bg-slate-900 dark:bg-white hover:bg-amber-500 text-white dark:text-black dark:hover:bg-amber-400 transition-all shadow-sm"
           >
@@ -50,6 +57,13 @@ export const PortfolioPage: React.FC = () => {
 
       {/* 2. CATEGORY SWITCHER PILLS */}
       <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+        <Link
+          to="/photo-profiles"
+          className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-300 text-black shadow-[0_0_25px_rgba(245,158,11,0.4)] hover:scale-105"
+        >
+          <Sparkles className="w-4 h-4 fill-black" /> 3D Animated Slider View
+        </Link>
+
         <button
           onClick={() => setFilter('ALL')}
           className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all touch-target ${
@@ -58,7 +72,7 @@ export const PortfolioPage: React.FC = () => {
               : 'bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-black dark:hover:text-white border border-slate-200 dark:border-zinc-800'
           }`}
         >
-          All Work ({projects.length})
+          All Grid Work ({projects.length})
         </button>
 
         <button

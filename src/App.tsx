@@ -13,6 +13,7 @@ import { ServicesPage } from './pages/public/ServicesPage';
 import { ServiceDetailPage } from './pages/public/ServiceDetailPage';
 import { PortfolioPage } from './pages/public/PortfolioPage';
 import { PortfolioDetailPage } from './pages/public/PortfolioDetailPage';
+import { PhotoProfilesPage } from './pages/public/PhotoProfilesPage';
 import { CaseStudiesPage } from './pages/public/CaseStudiesPage';
 import { CaseStudyDetailPage } from './pages/public/CaseStudyDetailPage';
 import { ResourcesPage, ResourceDetailPage } from './pages/public/ResourcesPage';
@@ -128,6 +129,8 @@ export const App: React.FC = () => {
                   <Route path="services/:slug" element={<ServiceDetailPage />} />
                   <Route path="portfolio" element={<PortfolioPage />} />
                   <Route path="portfolio/:slug" element={<PortfolioDetailPage />} />
+                  <Route path="photo-profiles" element={<PhotoProfilesPage />} />
+                  <Route path="profiles" element={<PhotoProfilesPage />} />
                   <Route path="case-studies" element={<CaseStudiesPage />} />
                   <Route path="case-studies/:slug" element={<CaseStudyDetailPage />} />
                   <Route path="resources" element={<ResourcesPage />} />

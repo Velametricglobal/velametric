@@ -85,6 +85,9 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
             <Link to="/portfolio" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               Our Work
             </Link>
+            <Link to="/photo-profiles" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors whitespace-nowrap flex items-center gap-1">
+              <Camera className="w-3.5 h-3.5" /> 3D Profiles
+            </Link>
             <Link to="/case-studies" className="text-[11px] xl:text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white transition-colors whitespace-nowrap">
               Case Studies
             </Link>
@@ -155,6 +158,10 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
               <Link to="/portfolio" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
                 <span>Our Work & Video Reels</span>
                 <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+              </Link>
+              <Link to="/photo-profiles" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-amber-600 dark:text-amber-400 py-2.5 px-3 rounded-xl hover:bg-amber-500/10 border-b border-slate-200/60 dark:border-zinc-800/40">
+                <span className="flex items-center gap-1.5"><Camera className="w-4 h-4" /> 3D Photo Profiles</span>
+                <ArrowRight className="w-3.5 h-3.5 text-amber-500" />
               </Link>
               <Link to="/case-studies" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
                 <span>Case Studies</span>
