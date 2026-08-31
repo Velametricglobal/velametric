@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth, INITIAL_SETUP_AGENT_USERS } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { ThemeToggle } from '../../components/common/ThemeToggle';
-import { Lock, Mail, Key, ShieldCheck, ArrowRight, Eye, EyeOff, Sparkles, UserCheck, CheckCircle2, ArrowLeft, Home } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -32,15 +32,6 @@ export const LoginPage: React.FC = () => {
       navigate(result.defaultPath);
     } else {
       setError(result.error || 'Invalid credentials. Access Denied.');
-    }
-  };
-
-  const handleFillCredentials = (userCode: string) => {
-    const acc = INITIAL_SETUP_AGENT_USERS[userCode];
-    if (acc) {
-      setLoginInput(acc.user_code);
-      setPassword(acc.password[0]);
-      setError('');
     }
   };
 
@@ -142,51 +133,6 @@ export const LoginPage: React.FC = () => {
             {loading ? 'Verifying Credentials...' : 'Sign In To Dashboard →'}
           </button>
         </form>
-
-        {/* QUICK CREDENTIAL SELECTOR FOR FIRST-TIME USERS */}
-        <div className="pt-5 border-t border-slate-200 dark:border-slate-800 space-y-3">
-          <div className="flex justify-between items-center text-[10px] uppercase font-bold tracking-widest text-amber-600 dark:text-amber-400 font-mono">
-            <span className="flex items-center gap-1.5"><Key className="w-3 h-3" /> Select Initial Account Credentials</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 text-[11px]">
-            <button
-              type="button"
-              onClick={() => handleFillCredentials('SUPERADMIN-001')}
-              className="p-2 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all"
-            >
-              <div className="font-bold text-slate-900 dark:text-white">👑 Super Admin</div>
-              <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">SUPERADMIN-001</div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleFillCredentials('SALES-MANAGER-001')}
-              className="p-2 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all"
-            >
-              <div className="font-bold text-slate-900 dark:text-white">💼 Sales Manager</div>
-              <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">SALES-MANAGER-001</div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleFillCredentials('EVENT-001')}
-              className="p-2 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all"
-            >
-              <div className="font-bold text-slate-900 dark:text-white">🎟️ Event Manager</div>
-              <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">EVENT-001</div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleFillCredentials('FINANCE-001')}
-              className="p-2 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl text-left transition-all"
-            >
-              <div className="font-bold text-slate-900 dark:text-white">💰 Finance Manager</div>
-              <div className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">FINANCE-001</div>
-            </button>
-          </div>
-        </div>
 
       </div>
     </div>
