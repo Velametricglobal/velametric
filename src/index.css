@@ -582,3 +582,77 @@ img.secure-image {
   user-select: none;
   -webkit-user-select: none;
 }
+
+/* ==========================================================================
+   3D COVERFLOW & RUNWAY STAGE STYLING (LIGHT & DARK THEME OPTIMIZED)
+   ========================================================================== */
+
+/* Light Mode 3D Stage & Background */
+html.light .coverflow-stage {
+  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 3D Card Typography Protection (Always Crisp White & Gold on Photo Scrim) */
+.coverflow-card,
+.coverflow-card * {
+  color-scheme: dark !important;
+}
+
+.coverflow-card h3,
+.coverflow-card .card-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+.coverflow-card .card-category {
+  color: #fbbf24 !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
+}
+
+.coverflow-card .card-desc {
+  color: #e2e8f0 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+}
+
+.coverflow-card .card-client-badge {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.coverflow-card .card-frames-badge {
+  background: #f59e0b !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.coverflow-card .card-action-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%) !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.5) !important;
+}
+
+.coverflow-card .card-action-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #fef08a 100%) !important;
+  box-shadow: 0 14px 30px -5px rgba(245, 158, 11, 0.65) !important;
+}
+
+html.light .coverflow-arrow-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.18) !important;
+}
+
+html.light .coverflow-arrow-btn:hover {
+  background: #f59e0b !important;
+  color: #000000 !important;
+  border-color: #f59e0b !important;
+}
+

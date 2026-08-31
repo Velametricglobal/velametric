@@ -405,7 +405,7 @@ export const PhotoProfilesPage: React.FC = () => {
 
         {/* 2. THE SIGNATURE 3D ANIMATED SLIDER STAGE */}
         <div
-          className="relative w-full h-[460px] sm:h-[540px] lg:h-[620px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing [perspective:1800px] overflow-hidden rounded-3xl bg-zinc-950/60 border border-zinc-900/90 shadow-2xl backdrop-blur-2xl"
+          className="coverflow-stage relative w-full h-[460px] sm:h-[540px] lg:h-[620px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing [perspective:1800px] overflow-hidden rounded-3xl bg-slate-50 dark:bg-zinc-950/60 border border-slate-200 dark:border-zinc-900/90 shadow-2xl backdrop-blur-2xl"
           onMouseDown={handleTouchStart}
           onMouseMove={handleTouchMove}
           onMouseUp={handleTouchEnd}
@@ -473,14 +473,14 @@ export const PhotoProfilesPage: React.FC = () => {
                   transformStyle: 'preserve-3d',
                   transition: isDragging ? 'none' : 'all 0.65s cubic-bezier(0.25, 1, 0.5, 1)'
                 }}
-                className={`absolute w-[280px] sm:w-[340px] lg:w-[400px] h-[390px] sm:h-[470px] lg:h-[530px] rounded-3xl p-1 bg-gradient-to-b ${
+                className={`coverflow-card absolute w-[280px] sm:w-[340px] lg:w-[400px] h-[390px] sm:h-[470px] lg:h-[530px] rounded-3xl p-1 bg-gradient-to-b ${
                   isCenter
-                    ? 'from-amber-400 via-amber-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.4),0_0_35px_rgba(245,158,11,0.2)] ring-2 ring-amber-400'
-                    : 'from-zinc-700/60 to-zinc-900/90 shadow-xl border border-zinc-800'
+                    ? 'from-amber-400 via-amber-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.45),0_15px_30px_-10px_rgba(0,0,0,0.15)] ring-2 ring-amber-400'
+                    : 'from-zinc-700/60 to-zinc-900/90 shadow-xl border border-zinc-700/80 dark:border-zinc-800'
                 } group cursor-pointer`}
               >
                 {/* Inner Card Frame */}
-                <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none">
+                <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none text-white">
                   {/* Background Profile Photo with 3D Parallax & Anti-Theft Protection */}
                   <img
                     src={profile.coverImage}
@@ -491,7 +491,7 @@ export const PhotoProfilesPage: React.FC = () => {
                       isCenter ? 'scale-105 group-hover:scale-110' : 'scale-100'
                     }`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 pointer-events-none" />
 
                   {/* 3D Holographic Glare */}
                   {isCenter && (
@@ -500,11 +500,11 @@ export const PhotoProfilesPage: React.FC = () => {
 
                   {/* Top Badges */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-black/80 text-white text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border border-white/20">
+                    <span className="card-client-badge px-3 py-1 rounded-full bg-black/85 text-white text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border border-white/20 shadow-md">
                       {profile.stats.frames} High-Res Frames
                     </span>
 
-                    <span className="px-3 py-1 rounded-full bg-amber-500 text-black text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg">
+                    <span className="card-frames-badge px-3 py-1 rounded-full bg-amber-400 text-black text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border border-amber-300/40">
                       <Star className="w-3 h-3 fill-black" /> {profile.stats.year}
                     </span>
                   </div>
@@ -512,13 +512,13 @@ export const PhotoProfilesPage: React.FC = () => {
                   {/* Bottom Profile Details */}
                   <div className="relative z-10 space-y-3">
                     <div className="space-y-1">
-                      <div className="text-[11px] font-bold font-mono uppercase tracking-widest text-amber-400 flex items-center gap-1.5">
+                      <div className="card-category text-[11px] font-extrabold font-mono uppercase tracking-widest text-amber-400 flex items-center gap-1.5 drop-shadow">
                         <Flame className="w-3.5 h-3.5 text-amber-400" /> {profile.category}
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight font-display drop-shadow-md">
+                      <h3 className="card-title text-2xl sm:text-3xl font-black text-white uppercase tracking-tight font-display drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                         {profile.name}
                       </h3>
-                      <p className="text-[11px] text-zinc-300 line-clamp-2 leading-relaxed">
+                      <p className="card-desc text-[11px] text-zinc-200 line-clamp-2 leading-relaxed drop-shadow">
                         {profile.theme}
                       </p>
                     </div>
@@ -531,7 +531,7 @@ export const PhotoProfilesPage: React.FC = () => {
                             e.stopPropagation();
                             setActiveLightbox({ images: profile.gallery, index: 0, profile });
                           }}
-                          className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-300 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
+                          className="card-action-btn flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
                         >
                           <Eye className="w-4 h-4" /> Open 4K Lookbook
                         </button>
@@ -539,7 +539,7 @@ export const PhotoProfilesPage: React.FC = () => {
                         <Link
                           to={`/portfolio/${profile.slug}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-11 h-11 rounded-xl bg-black/70 hover:bg-white hover:text-black text-white border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-md"
+                          className="w-11 h-11 rounded-xl bg-black/80 hover:bg-amber-400 hover:text-black text-white border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-md shrink-0"
                           title="View Full Story"
                         >
                           <ExternalLink className="w-4 h-4" />
@@ -558,7 +558,7 @@ export const PhotoProfilesPage: React.FC = () => {
               e.stopPropagation();
               prevSlide();
             }}
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-amber-500 text-white hover:text-black border border-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+            className="coverflow-arrow-btn absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 dark:bg-black/70 hover:bg-amber-400 text-slate-800 dark:text-white hover:text-black border border-slate-300 dark:border-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 group"
             aria-label="Previous Profile"
           >
             <ChevronLeft className="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" />
@@ -569,7 +569,7 @@ export const PhotoProfilesPage: React.FC = () => {
               e.stopPropagation();
               nextSlide();
             }}
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-amber-500 text-white hover:text-black border border-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 group"
+            className="coverflow-arrow-btn absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/95 dark:bg-black/70 hover:bg-amber-400 text-slate-800 dark:text-white hover:text-black border border-slate-300 dark:border-white/20 backdrop-blur-xl flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 group"
             aria-label="Next Profile"
           >
             <ChevronRight className="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" />

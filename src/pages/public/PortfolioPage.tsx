@@ -175,7 +175,7 @@ export const PortfolioPage: React.FC = () => {
 
           {/* 3D Runway Stage */}
           <div
-            className="relative w-full h-[460px] sm:h-[540px] lg:h-[600px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing [perspective:1800px] overflow-hidden rounded-3xl bg-zinc-950/80 border border-zinc-900 shadow-2xl backdrop-blur-2xl"
+            className="coverflow-stage relative w-full h-[460px] sm:h-[540px] lg:h-[600px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing [perspective:1800px] overflow-hidden rounded-3xl bg-slate-50 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-900 shadow-2xl backdrop-blur-2xl"
             onMouseDown={handleTouchStart}
             onMouseMove={handleTouchMove}
             onMouseUp={handleTouchEnd}
@@ -221,13 +221,13 @@ export const PortfolioPage: React.FC = () => {
                     transformStyle: 'preserve-3d',
                     transition: isDragging ? 'none' : 'all 0.65s cubic-bezier(0.25, 1, 0.5, 1)'
                   }}
-                  className={`absolute w-[280px] sm:w-[340px] lg:w-[390px] h-[390px] sm:h-[460px] lg:h-[510px] rounded-3xl p-1 bg-gradient-to-b ${
+                  className={`coverflow-card absolute w-[280px] sm:w-[340px] lg:w-[390px] h-[390px] sm:h-[460px] lg:h-[510px] rounded-3xl p-1 bg-gradient-to-b ${
                     isCenter
-                      ? 'from-amber-400 via-amber-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.4),0_0_35px_rgba(245,158,11,0.2)] ring-2 ring-amber-400'
-                      : 'from-zinc-700/60 to-zinc-900/90 shadow-xl border border-zinc-800'
+                      ? 'from-amber-400 via-amber-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.45),0_15px_30px_-10px_rgba(0,0,0,0.15)] ring-2 ring-amber-400'
+                      : 'from-zinc-700/60 to-zinc-900/90 shadow-xl border border-zinc-700/80 dark:border-zinc-800'
                   } group cursor-pointer`}
                 >
-                  <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none">
+                  <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none text-white">
                     {/* Background Cover */}
                     <img
                       src={proj.featured_image}
@@ -238,30 +238,30 @@ export const PortfolioPage: React.FC = () => {
                         isCenter ? 'scale-105 group-hover:scale-110' : 'scale-100'
                       }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 pointer-events-none" />
 
                     {/* Top Badges */}
                     <div className="relative z-10 flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full bg-black/80 text-white text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border border-white/20">
-                        {proj.gallery?.length || 8} Frames
+                      <span className="card-client-badge px-3 py-1 rounded-full bg-black/85 text-white text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border border-white/20 shadow-md">
+                        {proj.client}
                       </span>
 
-                      <span className="px-3 py-1 rounded-full bg-amber-500 text-black text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg">
-                        <Star className="w-3 h-3 fill-black" /> PHOTOSHOOT
+                      <span className="card-frames-badge px-3 py-1 rounded-full bg-amber-400 text-black text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border border-amber-300/40">
+                        <Star className="w-3 h-3 fill-black" /> {proj.gallery?.length || 8} FRAMES
                       </span>
                     </div>
 
                     {/* Bottom Details */}
                     <div className="relative z-10 space-y-3">
                       <div className="space-y-1">
-                        <div className="text-[11px] font-bold font-mono uppercase tracking-widest text-amber-400 flex items-center gap-1.5">
+                        <div className="card-category text-[11px] font-extrabold font-mono uppercase tracking-widest text-amber-400 flex items-center gap-1.5 drop-shadow">
                           <Flame className="w-3.5 h-3.5 text-amber-400" /> {proj.industry}
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight font-display drop-shadow-md">
+                        <h3 className="card-title text-xl sm:text-2xl font-black text-white uppercase tracking-tight font-display drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                           {proj.title}
                         </h3>
-                        <p className="text-[11px] text-zinc-300 line-clamp-2 leading-relaxed">
-                          {proj.client} • {proj.description}
+                        <p className="card-desc text-[11px] text-zinc-200 line-clamp-2 leading-relaxed drop-shadow">
+                          {proj.description}
                         </p>
                       </div>
 
@@ -278,7 +278,7 @@ export const PortfolioPage: React.FC = () => {
                                 category: proj.industry
                               });
                             }}
-                            className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-300 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
+                            className="card-action-btn flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
                           >
                             <Eye className="w-4 h-4" /> Open 4K Lookbook
                           </button>
@@ -286,7 +286,8 @@ export const PortfolioPage: React.FC = () => {
                           <Link
                             to={`/portfolio/${proj.slug}`}
                             onClick={(e) => e.stopPropagation()}
-                            className="w-11 h-11 rounded-xl bg-black/70 hover:bg-white hover:text-black text-white border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-md"
+                            className="w-11 h-11 rounded-xl bg-black/80 hover:bg-amber-400 hover:text-black text-white border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-md shrink-0"
+                            title="View Project Page"
                           >
                             <ExternalLink className="w-4 h-4" />
                           </Link>
@@ -304,7 +305,7 @@ export const PortfolioPage: React.FC = () => {
                 e.stopPropagation();
                 prev3DSlide();
               }}
-              className="absolute left-3 sm:left-6 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-2xl"
+              className="coverflow-arrow-btn absolute left-3 sm:left-6 z-40 w-12 h-12 rounded-full bg-white/95 dark:bg-black/70 hover:bg-amber-400 text-slate-800 dark:text-white hover:text-black border border-slate-300 dark:border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-2xl"
               aria-label="Previous Lookbook"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -315,7 +316,7 @@ export const PortfolioPage: React.FC = () => {
                 e.stopPropagation();
                 next3DSlide();
               }}
-              className="absolute right-3 sm:right-6 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-amber-400 text-white hover:text-black border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-2xl"
+              className="coverflow-arrow-btn absolute right-3 sm:right-6 z-40 w-12 h-12 rounded-full bg-white/95 dark:bg-black/70 hover:bg-amber-400 text-slate-800 dark:text-white hover:text-black border border-slate-300 dark:border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-2xl"
               aria-label="Next Lookbook"
             >
               <ChevronRight className="w-6 h-6" />
