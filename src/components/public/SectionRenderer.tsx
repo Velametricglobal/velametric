@@ -7,6 +7,7 @@ import {
   HelpCircle, Megaphone, Calendar, CreditCard, ShieldCheck, Newspaper, Camera, ExternalLink, Star
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Production3DShowcase } from './Production3DShowcase';
 
 interface SectionRendererProps {
   section: PageSection;
@@ -445,6 +446,9 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               </div>
             ))}
           </div>
+
+          {/* 3D Interactive Media & Video Production Showcase Stage */}
+          <Production3DShowcase />
         </div>
       </section>
     );
