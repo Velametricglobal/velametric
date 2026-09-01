@@ -182,10 +182,24 @@ export const App: React.FC = () => {
                   <Route path="cookie-policy" element={<LegalPages />} />
                   <Route path="security" element={<LegalPages />} />
                   
-                  {/* DOCUMENT GENERATOR PUBLIC ROUTES */}
+                  {/* DOCUMENT GENERATOR PUBLIC ROUTES & ALIASES */}
                   <Route path="documents" element={<DocumentGeneratorLanding />} />
                   <Route path="documents/create" element={<DocumentWizard />} />
                   <Route path="documents/create/:templateId" element={<DocumentWizard />} />
+                  <Route path="documents/wizard" element={<DocumentWizard />} />
+                  <Route path="documents/wizard/:templateId" element={<DocumentWizard />} />
+
+                  <Route path="document-generator" element={<DocumentGeneratorLanding />} />
+                  <Route path="document-generator/wizard" element={<DocumentWizard />} />
+                  <Route path="document-generator/wizard/:templateId" element={<DocumentWizard />} />
+                  <Route path="document-generator/create" element={<DocumentWizard />} />
+                  <Route path="document-generator/create/:templateId" element={<DocumentWizard />} />
+
+                  <Route path="tools/document-generator" element={<DocumentGeneratorLanding />} />
+                  <Route path="tools/document-generator/wizard" element={<DocumentWizard />} />
+                  <Route path="tools/document-generator/wizard/:templateId" element={<DocumentWizard />} />
+                  <Route path="tools/document-generator/create" element={<DocumentWizard />} />
+                  <Route path="tools/document-generator/create/:templateId" element={<DocumentWizard />} />
                 </Route>
 
                 {/* LOGIN & AUTHENTICATION ROUTES (RESOLVE /login, /admin/login, /auth/login) */}
