@@ -843,8 +843,10 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm">
                 <Phone className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Phone Support</div>
-                  <div className="text-slate-900 dark:text-white font-bold">{content.phone || '+1 (800) 555-VELA'}</div>
+                  <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Phone / WhatsApp Support</div>
+                  <a href={`tel:${(content.phone || '+91-8679766348').replace(/[^0-9+]/g, '')}`} className="text-slate-900 dark:text-white font-bold hover:text-amber-500 transition-colors">
+                    {content.phone || '+91-8679766348'}
+                  </a>
                 </div>
               </div>
 
@@ -852,7 +854,9 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
                 <Mail className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
                   <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Email Address</div>
-                  <div className="text-slate-900 dark:text-white font-bold">{content.email || 'hello@velametric.com'}</div>
+                  <a href={`mailto:${content.email || 'velametricglobal@gmail.com'}`} className="text-slate-900 dark:text-white font-bold hover:text-amber-500 transition-colors">
+                    {content.email || 'velametricglobal@gmail.com'}
+                  </a>
                 </div>
               </div>
 
@@ -860,7 +864,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
                 <MapPin className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
                   <div className="text-slate-500 dark:text-zinc-400 text-[10px]">Uttarakhand Headquarters</div>
-                  <div className="text-slate-900 dark:text-white font-bold">{content.office_dehradun || 'Dehradun, Uttarakhand'}</div>
+                  <div className="text-slate-900 dark:text-white font-bold">{content.office_dehradun || '114 H Block Nehru Colony Dehradun-248001 (Uttarakhand)'}</div>
                 </div>
               </div>
             </div>

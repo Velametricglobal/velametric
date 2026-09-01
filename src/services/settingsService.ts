@@ -51,10 +51,10 @@ let localMusicTracks: BackgroundMusicTrack[] = [
 let localSiteSettings: SiteSettings = {
   company_name: 'Velametric Global',
   description: 'Everything to build your website, run your CRM, manage financial loan advisory, and produce high-impact video reels.',
-  contact_email: 'hello@velametric.com',
-  contact_phone: '+1 (800) 555-VELA',
-  contact_whatsapp: '+1 (800) 555-8352',
-  contact_address: 'Dehradun Headquarters & Joshiyara, Uttarkashi Regional Office',
+  contact_email: 'velametricglobal@gmail.com',
+  contact_phone: '+91-8679766348',
+  contact_whatsapp: '+91-8679766348',
+  contact_address: '114 H Block Nehru Colony Dehradun-248001 (Uttarakhand)',
   google_maps_url: 'https://maps.google.com',
   social_links: {
     instagram: 'https://www.instagram.com/destiny_in_productions/?hl=en',

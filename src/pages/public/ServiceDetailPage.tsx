@@ -96,7 +96,7 @@ export const ServiceDetailPage: React.FC = () => {
               Get Started / Order Package <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/918679766348"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-xl"

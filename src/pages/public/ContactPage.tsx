@@ -71,7 +71,9 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <div className="text-xs font-semibold text-zinc-400 uppercase font-mono">Email Support</div>
-                <div className="text-base font-bold text-white">hello@velametric.com</div>
+                <a href="mailto:velametricglobal@gmail.com" className="text-base font-bold text-white hover:text-amber-400 transition-colors">
+                  velametricglobal@gmail.com
+                </a>
               </div>
             </div>
 
@@ -81,7 +83,9 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <div className="text-xs font-semibold text-zinc-400 uppercase font-mono">Direct Line / WhatsApp</div>
-                <div className="text-base font-bold text-white">+1 (800) 555-VELA</div>
+                <a href="tel:+918679766348" className="text-base font-bold text-white hover:text-amber-400 transition-colors">
+                  +91-8679766348
+                </a>
               </div>
             </div>
 
@@ -91,7 +95,9 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <div className="text-xs font-semibold text-zinc-400 uppercase font-mono">Headquarters</div>
-                <div className="text-base font-bold text-white">Dehradun, Uttarakhand & Regional Office: Joshiyara, Uttarkashi</div>
+                <div className="text-base font-bold text-white leading-snug">
+                  114 H Block Nehru Colony Dehradun-248001 (Uttarakhand)
+                </div>
               </div>
             </div>
           </div>
@@ -151,7 +157,7 @@ export const ContactPage: React.FC = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+91 9876543210"
+                  placeholder="+91 8679766348"
                   className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-base sm:text-xs focus:outline-none focus:border-amber-400"
                 />
               </div>

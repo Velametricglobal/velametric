@@ -278,9 +278,9 @@ export const AboutPage: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 font-mono">
                   Primary Headquarters
                 </span>
-                <h3 className="text-xl font-bold text-white font-display">Dehradun, Uttarakhand</h3>
+                <h3 className="text-xl font-bold text-white font-display">114 H Block Nehru Colony, Dehradun - 248001</h3>
                 <p className="text-zinc-400 text-xs leading-relaxed">
-                  Our primary hub for software engineering, agency operations, digital marketing, and financial advisory consulting.
+                  Uttarakhand • Our primary hub for software engineering, CRM platforms, digital marketing, and financial advisory consulting.
                 </p>
               </div>
             </div>

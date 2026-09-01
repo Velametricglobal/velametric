@@ -279,11 +279,11 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 
                   {/* Bottom Quick Links / Contact in Drawer */}
                   <div className="relative z-10 mt-3 pt-3 border-t border-white/15 flex items-center justify-between text-[10px] font-mono normal-case">
-                    <a href="tel:+919876543210" className="brand-link transition-colors flex items-center gap-1">
-                      <Phone className="w-3 h-3 text-amber-400" /> +91 98765 43210
+                    <a href="tel:+918679766348" className="brand-link transition-colors flex items-center gap-1">
+                      <Phone className="w-3 h-3 text-amber-400" /> +91 86797 66348
                     </a>
                     <span className="text-zinc-600">•</span>
-                    <a href="mailto:contact@velametricglobal.company" className="brand-link transition-colors flex items-center gap-1">
+                    <a href="mailto:velametricglobal@gmail.com" className="brand-link transition-colors flex items-center gap-1">
                       <Mail className="w-3 h-3 text-amber-400" /> Email Support
                     </a>
                   </div>
@@ -306,11 +306,11 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
 
       {/* STICKY MOBILE ACTION BAR (CALL | WHATSAPP | ENQUIRE) */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zinc-900/95 border-t border-slate-200 dark:border-zinc-800/80 backdrop-blur-xl px-3 py-2 pb-safe flex items-center justify-around text-[10px] font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 print:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.15)]">
-        <a href="tel:+919876543210" className="flex flex-col items-center gap-1 py-1 px-2.5 text-slate-900 dark:text-white touch-target">
+        <a href="tel:+918679766348" className="flex flex-col items-center gap-1 py-1 px-2.5 text-slate-900 dark:text-white touch-target">
           <Phone className="w-4 h-4 text-amber-500 dark:text-amber-400" />
           <span>Call</span>
         </a>
-        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 py-1 px-2.5 text-emerald-600 dark:text-emerald-400 touch-target">
+        <a href="https://wa.me/918679766348" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 py-1 px-2.5 text-emerald-600 dark:text-emerald-400 touch-target">
           <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           <span>WhatsApp</span>
         </a>

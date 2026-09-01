@@ -16,7 +16,7 @@ interface ContactActionButtonsProps {
 
 export const ContactActionButtons: React.FC<ContactActionButtonsProps> = ({
   contactName,
-  phone = '+91 9876543210',
+  phone = '+91 8679766348',
   email,
   contactId,
   serviceInterest,

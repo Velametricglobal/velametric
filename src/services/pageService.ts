@@ -374,10 +374,10 @@ export const defaultHomeSections: PageSection[] = [
     visibility: { desktop: true, tablet: true, mobile: true },
     content: {
       heading: "Let's Talk.",
-      phone: '+1 (800) 555-VELA',
-      whatsapp: '+1 (800) 555-8352',
-      email: 'hello@velametric.com',
-      office_dehradun: 'Headquarters: Dehradun, Uttarakhand',
+      phone: '+91-8679766348',
+      whatsapp: '+91-8679766348',
+      email: 'velametricglobal@gmail.com',
+      office_dehradun: 'Headquarters: 114 H Block Nehru Colony Dehradun-248001 (Uttarakhand)',
       office_uttarkashi: 'Regional Office: Joshiyara, Uttarkashi',
       working_hours: 'Monday – Saturday: 9:00 AM – 7:00 PM IST',
       map_url: 'https://maps.google.com'
