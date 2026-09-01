@@ -715,4 +715,60 @@ html.light .mobile-bottom-brand-card .brand-link:hover {
   color: #fbbf24 !important;
 }
 
+/* ==========================================================================
+   PRISTINE PRINT & PDF EXPORT ISOLATION
+   ========================================================================== */
+@media print {
+  /* Strictly hide all website chrome, headers, footers, players, drawers, and buttons */
+  header,
+  footer,
+  nav,
+  aside,
+  .print\:hidden,
+  [class*="BackgroundMusicPlayer"],
+  [aria-label*="music" i],
+  [title*="music" i],
+  .fixed,
+  .sticky {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  /* Reset document root to full clean white paper */
+  html,
+  body,
+  #root,
+  .min-h-screen {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure live preview document takes 100% natural paper width */
+  .container-custom,
+  [class*="LivePreview"],
+  .min-w-\[600px\] {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  @page {
+    size: auto;
+    margin: 10mm 15mm 15mm 15mm;
+  }
+}
+
+
 

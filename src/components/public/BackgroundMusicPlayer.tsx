@@ -9,7 +9,7 @@ export const BackgroundMusicPlayer: React.FC = () => {
   if (!settings || !settings.enabled) return null;
 
   return (
-    <div className="fixed bottom-16 lg:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2">
+    <div className="fixed bottom-16 lg:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2 print:hidden pointer-events-auto">
       {/* Floating Track Info Tooltip */}
       <div
         className={`hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg border text-xs font-bold transition-all duration-300 pointer-events-none ${
