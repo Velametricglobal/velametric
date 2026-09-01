@@ -330,7 +330,7 @@ export const PortfolioPage: React.FC = () => {
                       alt={proj.title}
                       draggable={false}
                       onDragStart={(e) => e.preventDefault()}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out secure-image pointer-events-none"
+                      className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 ease-out secure-image pointer-events-none"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
                     
@@ -423,7 +423,7 @@ export const PortfolioPage: React.FC = () => {
                                 alt="Thumb"
                                 draggable={false}
                                 onDragStart={(e) => e.preventDefault()}
-                                className="w-full h-full object-cover secure-image pointer-events-none"
+                                className="w-full h-full object-cover object-top secure-image pointer-events-none"
                               />
                             </div>
                           ))}

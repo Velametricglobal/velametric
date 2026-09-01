@@ -100,12 +100,12 @@ export const PortfolioDetailPage: React.FC = () => {
         <img
           src={project.featured_image}
           alt={project.title}
-          className="w-full h-[380px] sm:h-[540px] object-cover group-hover:scale-102 transition-transform duration-500"
+          className="w-full max-h-[80vh] min-h-[420px] sm:min-h-[580px] lg:min-h-[640px] object-cover object-top group-hover:scale-[1.01] transition-transform duration-700"
         />
         {gallery.length > 0 && (
           <button
             onClick={() => setActivePhotoModalIndex(0)}
-            className="absolute bottom-6 right-6 px-5 py-2.5 rounded-full bg-black/80 hover:bg-amber-400 text-white hover:text-black border border-white/20 text-xs font-bold uppercase tracking-wider backdrop-blur flex items-center gap-2 transition-all shadow-xl"
+            className="absolute bottom-6 right-6 px-6 py-3 rounded-full bg-black/85 hover:bg-amber-400 text-white hover:text-black border border-white/25 text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-2 transition-all shadow-2xl hover:scale-105 active:scale-95"
           >
             <Images className="w-4 h-4" /> View Full Gallery ({gallery.length} Frames)
           </button>
@@ -188,7 +188,7 @@ export const PortfolioDetailPage: React.FC = () => {
                 <img
                   src={imgUrl}
                   alt={`Gallery Frame ${idx + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span className="px-3.5 py-1.5 rounded-full bg-white text-black font-extrabold text-[10px] uppercase tracking-wider flex items-center gap-1 shadow-lg">

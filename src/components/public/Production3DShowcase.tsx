@@ -269,7 +269,7 @@ export const Production3DShowcase: React.FC = () => {
                   alt={item.title}
                   draggable={false}
                   onDragStart={(e) => e.preventDefault()}
-                  className={`absolute inset-0 w-full h-full object-cover secure-image pointer-events-none transition-transform duration-700 ${
+                  className={`absolute inset-0 w-full h-full object-cover object-top secure-image pointer-events-none transition-transform duration-700 ${
                     isCenter ? 'scale-105 group-hover:scale-110' : 'scale-100'
                   }`}
                 />
