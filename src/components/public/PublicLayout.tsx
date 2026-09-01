@@ -190,54 +190,109 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
               className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            <div className="lg:hidden bg-white/98 dark:bg-zinc-900/98 border-b border-slate-200 dark:border-zinc-800 p-5 space-y-3 text-xs font-bold uppercase tracking-wider absolute top-full left-0 right-0 z-50 shadow-2xl backdrop-blur-2xl max-h-[85vh] overflow-y-auto custom-scrollbar">
-              <div className="pb-1">
+            <div className="lg:hidden bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-zinc-900 dark:via-zinc-950 dark:to-black border-b border-slate-200 dark:border-zinc-800 p-5 space-y-3 text-xs font-bold uppercase tracking-wider absolute top-full left-0 right-0 z-50 shadow-2xl backdrop-blur-2xl max-h-[85vh] overflow-y-auto custom-scrollbar relative overflow-hidden">
+              {/* Ambient Background Glows */}
+              <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-amber-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 left-0 w-72 h-72 bg-gradient-to-tr from-amber-500/10 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-4 right-2 font-display font-black text-5xl text-slate-200/40 dark:text-zinc-800/20 select-none pointer-events-none uppercase tracking-tighter">
+                VELAMETRIC
+              </div>
+
+              <div className="pb-1 relative z-10">
                 <ThemeToggle variant="expanded" />
               </div>
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
-                <span>Home</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
-              </Link>
-              <Link to="/services" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
-                <span>Products & Services</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
-              </Link>
 
-              {/* Our Work Section in Mobile Drawer */}
-              <div className="space-y-1 rounded-2xl bg-slate-50 dark:bg-zinc-800/50 p-2 border border-slate-200/70 dark:border-zinc-800/70">
-                <div className="text-[10px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest px-2.5 pt-1">
-                  Our Work & Creations
-                </div>
-                <Link to="/portfolio" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2 px-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800">
-                  <span className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-500" /> Portfolio & Video Reels</span>
+              <div className="relative z-10 space-y-2">
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-200/70 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
+                  <span>Home</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
                 </Link>
-                <Link to="/photo-profiles" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-amber-600 dark:text-amber-400 py-2 px-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20">
-                  <span className="flex items-center gap-2"><Camera className="w-3.5 h-3.5 text-amber-500" /> 3D Photo Profiles Slider</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-amber-500" />
+                <Link to="/services" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-200/70 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
+                  <span>Products & Services</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+                </Link>
+
+                {/* Our Work Section in Mobile Drawer */}
+                <div className="space-y-1 rounded-2xl bg-white/80 dark:bg-zinc-800/50 p-2.5 border border-slate-200/80 dark:border-zinc-800/70 shadow-sm">
+                  <div className="text-[10px] font-extrabold text-slate-500 dark:text-zinc-400 uppercase tracking-widest px-2.5 pt-1">
+                    Our Work & Creations
+                  </div>
+                  <Link to="/portfolio" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2 px-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800">
+                    <span className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-500" /> Portfolio & Video Reels</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+                  </Link>
+                  <Link to="/photo-profiles" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-amber-700 dark:text-amber-400 py-2 px-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20">
+                    <span className="flex items-center gap-2"><Camera className="w-3.5 h-3.5 text-amber-500" /> 3D Photo Profiles Slider</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-amber-500" />
+                  </Link>
+                </div>
+
+                <Link to="/case-studies" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-200/70 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
+                  <span>Case Studies</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+                </Link>
+                <Link to="/resources" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-200/70 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
+                  <span>Resources</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+                </Link>
+                <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-200/70 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
+                  <span>About Us</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+                </Link>
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-amber-700 dark:text-amber-400 py-2.5 px-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                  <span>Log In (Agent Portal)</span>
+                  <User className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 </Link>
               </div>
 
-              <Link to="/case-studies" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
-                <span>Case Studies</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
-              </Link>
-              <Link to="/resources" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
-                <span>Resources</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
-              </Link>
-              <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-slate-800 dark:text-white py-2.5 px-3 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-800/80 border-b border-slate-200/60 dark:border-zinc-800/40">
-                <span>About Us</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
-              </Link>
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-amber-600 dark:text-amber-400 py-2.5 px-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                <span>Log In (Agent Portal)</span>
-                <User className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-              </Link>
-              <div className="pt-2">
-                <Link to="/tools/document-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold shadow-xl">
+              <div className="pt-2 relative z-10">
+                <Link to="/tools/document-generator" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-black font-extrabold shadow-xl">
                   <Zap className="w-4 h-4 fill-black" /> Free Document Generator
                 </Link>
+              </div>
+
+              {/* Mobile Menu Bottom Brand Logo & Info Banner */}
+              <div className="pt-4 mt-2 border-t border-slate-200 dark:border-zinc-800 relative z-10">
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-900 via-zinc-900 to-black text-white border border-amber-500/30 shadow-xl relative overflow-hidden group">
+                  {/* Subtle inner gold sheen */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/15 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="relative z-10 flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-lg bg-gradient-to-tr from-amber-400 to-amber-500 text-black flex items-center justify-center font-black text-xs shadow-md">
+                          V
+                        </span>
+                        <span className="font-black text-base tracking-tight font-display text-white">
+                          VELAMETRIC
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-zinc-400 font-mono tracking-normal normal-case">
+                        Cinema • Creative • Enterprise
+                      </p>
+                    </div>
+
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[9px] font-mono font-bold tracking-widest uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> 2026
+                    </span>
+                  </div>
+
+                  {/* Bottom Quick Links / Contact in Drawer */}
+                  <div className="relative z-10 mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-zinc-300 font-mono normal-case">
+                    <a href="tel:+919876543210" className="hover:text-amber-400 transition-colors flex items-center gap-1">
+                      <Phone className="w-3 h-3 text-amber-400" /> +91 98765 43210
+                    </a>
+                    <span className="text-zinc-600">•</span>
+                    <a href="mailto:contact@velametricglobal.company" className="hover:text-amber-400 transition-colors flex items-center gap-1">
+                      <Mail className="w-3 h-3 text-amber-400" /> Email Support
+                    </a>
+                  </div>
+                </div>
+
+                {/* Copyright Tagline */}
+                <div className="text-center pt-3 pb-1 text-[9px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
+                  © {new Date().getFullYear()} Velametric Global Inc.
+                </div>
               </div>
             </div>
           </>
