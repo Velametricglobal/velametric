@@ -85,14 +85,6 @@ export const DocumentWizard: React.FC = () => {
   const [generationStatus, setGenerationStatus] = useState<'idle' | 'generating' | 'success' | 'error'>('idle');
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // Recalculate totals whenever items or advance payment change
-  useEffect(() => {
-    const updated = DocumentService.calculateDocumentTotals(payload);
-    if (updated.grand_total !== payload.grand_total || updated.balance_due !== payload.balance_due) {
-      setPayload(updated);
-    }
-  }, [payload.items, payload.advance_paid]);
-
   const handleNext = () => {
     if (currentStep < steps.length - 1) setCurrentStep(c => c + 1);
   };
@@ -129,21 +121,25 @@ export const DocumentWizard: React.FC = () => {
   };
 
   const updateItem = (index: number, field: keyof DocumentItem, value: any) => {
-    const newItems = [...payload.items];
-    newItems[index] = { ...newItems[index], [field]: value };
-    setPayload(p => ({ ...p, items: newItems }));
+    setPayload(p => {
+      const newItems = [...p.items];
+      newItems[index] = { ...newItems[index], [field]: value };
+      return DocumentService.calculateDocumentTotals({ ...p, items: newItems });
+    });
   };
 
   const addItem = () => {
-    setPayload(p => ({
-      ...p,
-      items: [...p.items, { id: Math.random().toString(), description: '', quantity: 1, unit_price: 0, total: 0 }]
-    }));
+    setPayload(p => {
+      const newItems = [...p.items, { id: Math.random().toString(), description: '', quantity: 1, unit_price: 0, total: 0 }];
+      return DocumentService.calculateDocumentTotals({ ...p, items: newItems });
+    });
   };
 
   const removeItem = (index: number) => {
-    const newItems = payload.items.filter((_, i) => i !== index);
-    setPayload(p => ({ ...p, items: newItems }));
+    setPayload(p => {
+      const newItems = p.items.filter((_, i) => i !== index);
+      return DocumentService.calculateDocumentTotals({ ...p, items: newItems });
+    });
   };
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
