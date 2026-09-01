@@ -17,26 +17,36 @@ interface AudioContextType {
 
 const MusicAudioContext = createContext<AudioContextType | undefined>(undefined);
 
+// High quality, reliable royalty-free ambient audio tracks with fallback URLs
+const AMBIENT_AUDIO_SOURCES = [
+  'https://assets.mixkit.co/music/preview/mixkit-relaxing-in-nature-522.mp3',
+  'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3',
+  'https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3'
+];
+
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isAutoplayBlocked, setIsAutoplayBlocked] = useState<boolean>(false);
   const [settings, setSettings] = useState<BackgroundMusicSettings | null>(null);
-  const [volume, setVolumeState] = useState<number>(0.2); // Default 20%
+  const [volume, setVolumeState] = useState<number>(0.35); // Default 35% audible comfortable volume
   
+  const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const audioCtxRef = useRef<any | null>(null);
-  const gainNodeRef = useRef<GainNode | null>(null);
-  const oscillatorsRef = useRef<OscillatorNode[]>([]);
+  const oscillatorsRef = useRef<any[]>([]);
+  const synthGainRef = useRef<GainNode | null>(null);
   const userManuallyPausedRef = useRef<boolean>(false);
+  const isUsingSynthRef = useRef<boolean>(false);
 
   useEffect(() => {
     // Load Admin Music Settings
     settingsService.getMusicSettings().then(cfg => {
       setSettings(cfg);
       if (cfg) {
-        setVolumeState((cfg.default_volume || 20) / 100);
+        const initialVol = (cfg.default_volume || 35) / 100;
+        setVolumeState(initialVol);
       }
     }).catch(err => {
-      console.error('Error loading music settings:', err);
+      console.warn('Error loading music settings:', err);
     });
 
     const storedPref = localStorage.getItem('website_music_enabled');
@@ -45,7 +55,60 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
-  const startSoundSynth = () => {
+  // Initialize or update HTML5 Audio Element
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (!audioElementRef.current) {
+      const audio = new Audio();
+      audio.loop = true;
+      audio.preload = 'auto';
+      audio.crossOrigin = 'anonymous';
+      audio.volume = volume;
+
+      const primaryUrl = settings?.audio_url || AMBIENT_AUDIO_SOURCES[0];
+      audio.src = primaryUrl;
+
+      audio.addEventListener('play', () => {
+        setIsPlaying(true);
+        setIsAutoplayBlocked(false);
+      });
+
+      audio.addEventListener('pause', () => {
+        setIsPlaying(false);
+      });
+
+      audio.addEventListener('error', () => {
+        console.warn('HTML5 Audio error on primary stream. Activating backup audio or synth engine...');
+        // Fallback to secondary source or synth
+        if (audio.src !== AMBIENT_AUDIO_SOURCES[1]) {
+          audio.src = AMBIENT_AUDIO_SOURCES[1];
+          if (!userManuallyPausedRef.current) {
+            audio.play().catch(() => startSynthFallback());
+          }
+        } else {
+          startSynthFallback();
+        }
+      });
+
+      audioElementRef.current = audio;
+    } else {
+      audioElementRef.current.volume = volume;
+      if (settings?.audio_url && audioElementRef.current.src !== settings.audio_url) {
+        audioElementRef.current.src = settings.audio_url;
+      }
+    }
+
+    return () => {
+      if (audioElementRef.current) {
+        audioElementRef.current.pause();
+      }
+      stopSynthFallback();
+    };
+  }, [settings]);
+
+  // Fallback Harmonic Ambient Web Audio Synthesizer (Zero Network Required)
+  const startSynthFallback = () => {
     try {
       if (!audioCtxRef.current) {
         const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
@@ -61,88 +124,89 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         ctx.resume();
       }
 
-      // Clear existing active oscillators
-      oscillatorsRef.current.forEach(osc => {
-        try { osc.stop(); osc.disconnect(); } catch (e) {}
-      });
-      oscillatorsRef.current = [];
+      stopSynthFallback();
 
-      // Create master gain
       const masterGain = ctx.createGain();
-      masterGain.gain.setValueAtTime(volume * 0.15, ctx.currentTime);
+      masterGain.gain.setValueAtTime(Math.max(0.1, volume * 0.3), ctx.currentTime);
       masterGain.connect(ctx.destination);
-      gainNodeRef.current = masterGain;
+      synthGainRef.current = masterGain;
 
-      // Pentatonic warm atmospheric chord frequencies (E minor ambient pad)
-      const freqs = [164.81, 196.00, 246.94, 293.66, 329.63];
+      // Warm cinematic ambient chord (C major 9th pad: C3, G3, B3, D4, E4)
+      const freqs = [130.81, 196.00, 246.94, 293.66, 329.63];
 
       freqs.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
-        const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
         const noteGain = ctx.createGain();
 
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
-        // Slow gentle frequency modulation (vibrato / warmth)
+        // Gentle organic shimmer
         const lfo = ctx.createOscillator();
         const lfoGain = ctx.createGain();
-        lfo.frequency.value = 0.1 + idx * 0.05;
-        lfoGain.gain.value = 1.5;
+        lfo.frequency.value = 0.15 + idx * 0.05;
+        lfoGain.gain.value = 2.0;
         lfo.connect(osc.frequency);
         lfo.start();
 
         noteGain.gain.setValueAtTime(0.01, ctx.currentTime);
-        noteGain.gain.exponentialRampToValueAtTime(0.2 / freqs.length, ctx.currentTime + 3);
+        noteGain.gain.exponentialRampToValueAtTime(0.3 / freqs.length, ctx.currentTime + 1.5);
 
-        if (panner) {
-          panner.pan.value = (idx - 2) * 0.35;
-          osc.connect(noteGain);
-          noteGain.connect(panner);
-          panner.connect(masterGain);
-        } else {
-          osc.connect(noteGain);
-          noteGain.connect(masterGain);
-        }
+        osc.connect(noteGain);
+        noteGain.connect(masterGain);
 
         osc.start();
-        oscillatorsRef.current.push(osc);
+        oscillatorsRef.current.push({ osc, lfo });
       });
 
+      isUsingSynthRef.current = true;
       setIsPlaying(true);
       setIsAutoplayBlocked(false);
     } catch (err) {
-      console.warn('Audio Autoplay policy / Synth initialization blocked:', err);
-      setIsAutoplayBlocked(true);
-      setIsPlaying(false);
+      console.warn('Synth fallback error:', err);
     }
   };
 
-  const stopSoundSynth = () => {
-    try {
-      oscillatorsRef.current.forEach(osc => {
-        try {
-          osc.stop();
-          osc.disconnect();
-        } catch (e) {}
-      });
-      oscillatorsRef.current = [];
-      setIsPlaying(false);
-    } catch (e) {
-      console.error('Error stopping synth:', e);
-    }
+  const stopSynthFallback = () => {
+    oscillatorsRef.current.forEach(({ osc, lfo }) => {
+      try {
+        osc.stop();
+        osc.disconnect();
+        lfo.stop();
+        lfo.disconnect();
+      } catch (e) {}
+    });
+    oscillatorsRef.current = [];
+    isUsingSynthRef.current = false;
   };
 
   const play = () => {
     userManuallyPausedRef.current = false;
     localStorage.setItem('website_music_enabled', 'true');
-    startSoundSynth();
+
+    if (audioElementRef.current) {
+      audioElementRef.current.volume = volume;
+      audioElementRef.current.play().then(() => {
+        setIsPlaying(true);
+        setIsAutoplayBlocked(false);
+      }).catch((err) => {
+        console.warn('Audio play request blocked or failed:', err);
+        startSynthFallback();
+      });
+    } else {
+      startSynthFallback();
+    }
   };
 
   const pause = () => {
     userManuallyPausedRef.current = true;
     localStorage.setItem('website_music_enabled', 'false');
-    stopSoundSynth();
+
+    if (audioElementRef.current) {
+      audioElementRef.current.pause();
+    }
+    stopSynthFallback();
+    setIsPlaying(false);
   };
 
   const togglePlayPause = () => {
@@ -154,33 +218,48 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const setVolume = (vol: number) => {
-    setVolumeState(vol);
-    if (gainNodeRef.current && audioCtxRef.current) {
+    const clamped = Math.max(0, Math.min(1, vol));
+    setVolumeState(clamped);
+
+    if (audioElementRef.current) {
+      audioElementRef.current.volume = clamped;
+    }
+    if (synthGainRef.current && audioCtxRef.current) {
       try {
-        gainNodeRef.current.gain.setValueAtTime(vol * 0.15, audioCtxRef.current.currentTime);
+        synthGainRef.current.gain.setValueAtTime(Math.max(0.05, clamped * 0.3), audioCtxRef.current.currentTime);
       } catch (e) {}
     }
   };
 
-  // Listen to unlock audio on first user gesture
+  // Smart Autoplay unlock on first user gesture (click, scroll, keypress)
   useEffect(() => {
     const handleFirstInteraction = () => {
-      if (!userManuallyPausedRef.current && settings?.enabled && settings?.autoplay && !isPlaying) {
-        startSoundSynth();
+      if (!userManuallyPausedRef.current && (!settings || settings.enabled !== false)) {
+        if (!isPlaying) {
+          play();
+        }
       }
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
+      cleanupListeners();
     };
 
-    window.addEventListener('click', handleFirstInteraction);
-    window.addEventListener('keydown', handleFirstInteraction);
+    const cleanupListeners = () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+    };
+
+    window.addEventListener('click', handleFirstInteraction, { once: true });
+    window.addEventListener('pointerdown', handleFirstInteraction, { once: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true });
+    window.addEventListener('keydown', handleFirstInteraction, { once: true });
+    window.addEventListener('scroll', handleFirstInteraction, { once: true });
 
     return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-      stopSoundSynth();
+      cleanupListeners();
     };
-  }, [settings]);
+  }, [settings, isPlaying]);
 
   return (
     <MusicAudioContext.Provider
@@ -188,7 +267,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         isPlaying,
         isAutoplayBlocked,
         volume,
-        trackTitle: settings?.track_title || 'Corporate Ambient',
+        trackTitle: settings?.track_title || 'Corporate Ambient Space',
         artistName: settings?.artist_name || 'Velametric Sound Studio',
         settings,
         togglePlayPause,
