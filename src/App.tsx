@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AuthProvider } from './context/AuthContext';
 import { AudioProvider } from './context/AudioContext';
 import { CurrencyProvider } from './context/CurrencyContext';
@@ -153,6 +154,7 @@ export const App: React.FC = () => {
           <AuthProvider>
             <CurrencyProvider>
               <AudioProvider>
+                <SpeedInsights />
                 <ScrollToTop />
                 <Routes>
                 {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
