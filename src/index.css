@@ -656,3 +656,63 @@ html.light .coverflow-arrow-btn:hover {
   border-color: #f59e0b !important;
 }
 
+/* ==========================================================================
+   MOBILE NAVIGATION DRAWER - PERFECT LIGHT & DARK THEME ADAPTATION
+   ========================================================================== */
+html.light .mobile-nav-drawer {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
+}
+
+html.light .mobile-nav-drawer a.drawer-link {
+  color: #0f172a !important;
+  border-color: #f1f5f9 !important;
+}
+
+html.light .mobile-nav-drawer a.drawer-link:hover {
+  background-color: #f8fafc !important;
+  color: #d97706 !important;
+}
+
+html.light .mobile-nav-drawer .drawer-work-box {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Bottom Logo Brand Card inside Mobile Menu */
+.mobile-bottom-brand-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25) !important;
+}
+
+.mobile-bottom-brand-card *,
+html.light .mobile-bottom-brand-card * {
+  color-scheme: dark !important;
+}
+
+.mobile-bottom-brand-card .brand-title,
+html.light .mobile-bottom-brand-card .brand-title {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+.mobile-bottom-brand-card .brand-sub,
+html.light .mobile-bottom-brand-card .brand-sub {
+  color: #94a3b8 !important;
+}
+
+.mobile-bottom-brand-card .brand-link,
+html.light .mobile-bottom-brand-card .brand-link {
+  color: #cbd5e1 !important;
+}
+
+.mobile-bottom-brand-card .brand-link:hover,
+html.light .mobile-bottom-brand-card .brand-link:hover {
+  color: #fbbf24 !important;
+}
+
+
