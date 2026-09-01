@@ -238,7 +238,7 @@ export const Production3DShowcase: React.FC = () => {
           const transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
           const zIndex = 50 - absOffset * 10;
           const opacity = Math.max(0, 1 - absOffset * 0.25);
-          const filterStyle = absOffset > 0 ? `blur(${absOffset * 1.5}px) brightness(${1 - absOffset * 0.2})` : 'none';
+          const filterStyle = absOffset > 0 ? `blur(${absOffset * 1.2}px)` : 'none';
 
           return (
             <div
@@ -257,13 +257,13 @@ export const Production3DShowcase: React.FC = () => {
               className={`coverflow-card absolute w-[270px] sm:w-[320px] lg:w-[370px] h-[370px] sm:h-[440px] lg:h-[480px] rounded-3xl p-1 bg-gradient-to-b ${
                 isCenter
                   ? item.type === 'video'
-                    ? 'from-purple-500 via-pink-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(168,85,247,0.45)] ring-2 ring-purple-400'
-                    : 'from-amber-400 via-amber-500/50 to-zinc-900 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.45),0_15px_30px_-10px_rgba(0,0,0,0.15)] ring-2 ring-amber-400'
-                  : 'from-zinc-700/60 to-zinc-900/90 shadow-xl border border-zinc-700/80 dark:border-zinc-800'
+                    ? 'from-purple-500 via-pink-500/50 to-amber-500 shadow-[0_25px_60px_-15px_rgba(168,85,247,0.45)] ring-4 ring-purple-400/30'
+                    : 'from-amber-400 via-amber-500/50 to-amber-600 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.45),0_15px_30px_-10px_rgba(0,0,0,0.12)] ring-4 ring-amber-400/30'
+                  : 'from-slate-200/80 to-slate-300/60 dark:from-zinc-700/60 dark:to-zinc-900/90 shadow-xl border border-slate-200 dark:border-zinc-800'
               } group cursor-pointer`}
             >
-              <div className="w-full h-full bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-between p-5 select-none text-white">
-                {/* Media Image */}
+              <div className="w-full h-full bg-slate-900 dark:bg-zinc-950 rounded-[22px] overflow-hidden relative flex flex-col justify-end p-5 select-none text-white">
+                {/* 100% Clear Crisp Photo with Zero Dark Mask */}
                 <img
                   src={item.coverImage}
                   alt={item.title}
@@ -273,7 +273,6 @@ export const Production3DShowcase: React.FC = () => {
                     isCenter ? 'scale-105 group-hover:scale-110' : 'scale-100'
                   }`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/25 pointer-events-none" />
 
                 {/* Video Play Overlay */}
                 {item.type === 'video' && (
@@ -290,98 +289,49 @@ export const Production3DShowcase: React.FC = () => {
                   </div>
                 )}
 
-                {/* Top Badges */}
-                <div className="relative z-10 flex items-center justify-between">
-                  <span
-                    style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.85)', borderColor: 'rgba(255,255,255,0.25)' }}
-                    className="card-client-badge px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider backdrop-blur border shadow-md"
-                  >
-                    {item.client}
-                  </span>
+                {/* Clean Floating Action Buttons Only */}
+                {isCenter && (
+                  <div className="relative z-10 w-full flex items-center gap-2 pt-2">
+                    {item.type === 'video' ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveVideoModal(item);
+                        }}
+                        className="flex-1 py-3 px-5 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_12px_28px_rgba(168,85,247,0.55)] hover:scale-105 active:scale-95 transition-all"
+                      >
+                        <Play className="w-4 h-4 fill-current" /> Watch Video Reel
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActivePhotoModal({
+                            images: item.gallery || [item.coverImage],
+                            index: 0,
+                            title: item.title,
+                            client: item.client,
+                            category: item.category
+                          });
+                        }}
+                        className="card-action-btn flex-1 py-3 px-5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_12px_28px_rgba(245,158,11,0.6)] hover:scale-105 active:scale-95 transition-all"
+                      >
+                        <Eye className="w-4 h-4" /> Open Lookbook
+                      </button>
+                    )}
 
-                  {item.type === 'video' ? (
-                    <span
-                      style={{ color: '#ffffff' }}
-                      className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border border-purple-300/30"
-                    >
-                      <Film className="w-3 h-3" /> {item.viewsCount} REEL
-                    </span>
-                  ) : (
-                    <span
-                      style={{ color: '#000000', backgroundColor: '#fbbf24', borderColor: 'rgba(255,255,255,0.4)' }}
-                      className="card-frames-badge px-3 py-1 rounded-full text-[10px] font-black font-mono uppercase tracking-wider flex items-center gap-1 shadow-lg border"
-                    >
-                      <Star className="w-3 h-3 fill-black" /> {item.gallery?.length || 8} FRAMES
-                    </span>
-                  )}
-                </div>
-
-                {/* Bottom Details */}
-                <div className="relative z-10 space-y-3">
-                  <div className="space-y-1">
-                    <div
-                      style={{ color: '#fbbf24', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}
-                      className="card-category text-[11px] font-extrabold font-mono uppercase tracking-widest flex items-center gap-1.5"
-                    >
-                      <Flame className="w-3.5 h-3.5 text-amber-400" /> {item.category}
-                    </div>
-                    <h3
-                      style={{ color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.9)' }}
-                      className="card-title text-lg sm:text-xl font-black uppercase tracking-tight font-display"
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      style={{ color: '#e2e8f0', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}
-                      className="card-desc text-[11px] line-clamp-2 leading-relaxed"
-                    >
-                      {item.description}
-                    </p>
+                    {item.slug && (
+                      <Link
+                        to={`/portfolio/${item.slug}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-12 h-12 rounded-2xl bg-black/85 hover:bg-amber-400 hover:text-black text-white border border-white/30 backdrop-blur-md flex items-center justify-center transition-all shadow-xl shrink-0"
+                        title="View Project Page"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </Link>
+                    )}
                   </div>
-
-                  {isCenter && (
-                    <div className="pt-2 flex items-center gap-2">
-                      {item.type === 'video' ? (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActiveVideoModal(item);
-                          }}
-                          className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
-                        >
-                          <Play className="w-3.5 h-3.5 fill-current" /> Watch Video Reel
-                        </button>
-                      ) : (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActivePhotoModal({
-                              images: item.gallery || [item.coverImage],
-                              index: 0,
-                              title: item.title,
-                              client: item.client,
-                              category: item.category
-                            });
-                          }}
-                          className="card-action-btn flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
-                        >
-                          <Eye className="w-3.5 h-3.5" /> Open Lookbook
-                        </button>
-                      )}
-
-                      {item.slug && (
-                        <Link
-                          to={`/portfolio/${item.slug}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-10 h-10 rounded-xl bg-black/80 hover:bg-amber-400 hover:text-black text-white border border-white/20 backdrop-blur flex items-center justify-center transition-all shadow-md shrink-0"
-                          title="View Project Page"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </Link>
-                      )}
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           );
