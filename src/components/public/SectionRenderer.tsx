@@ -134,6 +134,9 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             <img
               src={content.poster_url || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80'}
               alt="Hero Poster"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
               className="w-full h-full object-cover opacity-50"
             />
           )}
@@ -234,6 +237,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <img
                 src={content.image_url || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80'}
                 alt="About Visual"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-64 sm:h-[440px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
@@ -422,7 +427,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
               <div key={idx} className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden group hover:border-zinc-600 transition-all flex flex-col justify-between shadow-2xl">
                 <div>
                   <div className="h-52 sm:h-60 relative overflow-hidden bg-zinc-950">
-                    <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
+                    <img src={p.image} alt={p.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
                     <span className="absolute top-3 left-3 sm:top-4 sm:left-4 text-[9px] sm:text-[10px] font-extrabold px-2.5 py-1 bg-zinc-950/90 text-white rounded-full border border-zinc-700">
                       {p.client}
                     </span>
@@ -524,7 +529,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             </div>
 
             <div className="lg:col-span-6 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl relative h-64 sm:h-[400px]">
-              <img src={featEvent.image} alt={featEvent.title} className="w-full h-full object-cover" />
+              <img src={featEvent.image} alt={featEvent.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
             </div>
           </div>
@@ -587,7 +592,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
             {vTestimonials.map((vt: any) => (
               <div key={vt.id} className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-2xl hover:border-zinc-700 transition-all group">
                 <div className="h-48 sm:h-56 relative overflow-hidden bg-zinc-950 cursor-pointer" onClick={() => setActiveVideoModal(vt)}>
-                  <img src={vt.thumbnail} alt={vt.client_name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
+                  <img src={vt.thumbnail} alt={vt.client_name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                       <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white ml-1" />

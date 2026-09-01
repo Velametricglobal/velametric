@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AuthProvider } from './context/AuthContext';
@@ -9,51 +9,68 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute';
 
 import { PublicLayout } from './components/public/PublicLayout';
 import { HomePage } from './pages/public/HomePage';
-import { AboutPage } from './pages/public/AboutPage';
-import { ServicesPage } from './pages/public/ServicesPage';
-import { ServiceDetailPage } from './pages/public/ServiceDetailPage';
-import { PortfolioPage } from './pages/public/PortfolioPage';
-import { PortfolioDetailPage } from './pages/public/PortfolioDetailPage';
-import { PhotoProfilesPage } from './pages/public/PhotoProfilesPage';
-import { CaseStudiesPage } from './pages/public/CaseStudiesPage';
-import { CaseStudyDetailPage } from './pages/public/CaseStudyDetailPage';
-import { ResourcesPage, ResourceDetailPage } from './pages/public/ResourcesPage';
-import { ContactPage, QuoteRequestPage } from './pages/public/ContactPage';
-import { EventRegistrationPage } from './pages/public/EventRegistrationPage';
-import { SponsorRegistrationPage } from './pages/public/SponsorRegistrationPage';
-import { LegalPages } from './pages/public/LegalPages';
-import { NotFoundPage } from './pages/public/NotFoundPage';
 
-import { AdminLayout } from './components/admin/AdminLayout';
-import { LoginPage } from './pages/admin/LoginPage';
-import { Dashboard } from './pages/admin/Dashboard';
-import { HomepageBuilder } from './pages/admin/HomepageBuilder';
-import { LeadsCRM } from './pages/admin/LeadsCRM';
-import { PipelineKanban } from './pages/admin/PipelineKanban';
-import { FollowUps } from './pages/admin/FollowUps';
-import { ServicesCMS } from './pages/admin/ServicesCMS';
-import { TestimonialsCMS } from './pages/admin/TestimonialsCMS';
-import { PortfolioCMS, CaseStudiesCMS } from './pages/admin/PortfolioCMS';
-import { ProposalsInvoices } from './pages/admin/ProposalsInvoices';
-import { MediaLibrary } from './pages/admin/MediaLibrary';
-import { SiteSettingsAdmin, NavigationAdmin } from './pages/admin/SiteSettingsAdmin';
-import { EventsAdmin } from './pages/admin/EventsAdmin';
-import { CommunicationCenterAdmin } from './pages/admin/CommunicationCenterAdmin';
-import { ReelMarketingAdmin } from './pages/admin/ReelMarketingAdmin';
-import { UserManagementAdmin } from './pages/admin/UserManagementAdmin';
-import { RolesPermissionsAdmin } from './pages/admin/RolesPermissionsAdmin';
-import { DepartmentsAdmin } from './pages/admin/DepartmentsAdmin';
-import { SecurityAuditAdmin } from './pages/admin/SecurityAuditAdmin';
-import { InitialSetupAdmin } from './pages/admin/InitialSetupAdmin';
+// Lazy Loaded Public Pages
+const AboutPage = lazy(() => import('./pages/public/AboutPage').then(m => ({ default: m.AboutPage })));
+const ServicesPage = lazy(() => import('./pages/public/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const ServiceDetailPage = lazy(() => import('./pages/public/ServiceDetailPage').then(m => ({ default: m.ServiceDetailPage })));
+const PortfolioPage = lazy(() => import('./pages/public/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
+const PortfolioDetailPage = lazy(() => import('./pages/public/PortfolioDetailPage').then(m => ({ default: m.PortfolioDetailPage })));
+const PhotoProfilesPage = lazy(() => import('./pages/public/PhotoProfilesPage').then(m => ({ default: m.PhotoProfilesPage })));
+const CaseStudiesPage = lazy(() => import('./pages/public/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
+const CaseStudyDetailPage = lazy(() => import('./pages/public/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
+const ResourcesPage = lazy(() => import('./pages/public/ResourcesPage').then(m => ({ default: m.ResourcesPage })));
+const ResourceDetailPage = lazy(() => import('./pages/public/ResourcesPage').then(m => ({ default: m.ResourceDetailPage })));
+const ContactPage = lazy(() => import('./pages/public/ContactPage').then(m => ({ default: m.ContactPage })));
+const QuoteRequestPage = lazy(() => import('./pages/public/ContactPage').then(m => ({ default: m.QuoteRequestPage })));
+const EventRegistrationPage = lazy(() => import('./pages/public/EventRegistrationPage').then(m => ({ default: m.EventRegistrationPage })));
+const SponsorRegistrationPage = lazy(() => import('./pages/public/SponsorRegistrationPage').then(m => ({ default: m.SponsorRegistrationPage })));
+const LegalPages = lazy(() => import('./pages/public/LegalPages').then(m => ({ default: m.LegalPages })));
+const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
-// Document Generator Pages
-import DocumentGeneratorLanding from './pages/public/DocumentGeneratorLanding';
-import DocumentWizard from './pages/public/DocumentWizard';
-import MyDocuments from './pages/user/MyDocuments';
-import SubscriptionManagement from './pages/user/SubscriptionManagement';
-import CompanyProfile from './pages/user/CompanyProfile';
-import DocumentAnalytics from './pages/admin/DocumentAnalytics';
-import DocumentGeneratorSettings from './pages/admin/DocumentGeneratorSettings';
+// Lazy Loaded Admin & CMS Pages
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(m => ({ default: m.AdminLayout })));
+const LoginPage = lazy(() => import('./pages/admin/LoginPage').then(m => ({ default: m.LoginPage })));
+const Dashboard = lazy(() => import('./pages/admin/Dashboard').then(m => ({ default: m.Dashboard })));
+const HomepageBuilder = lazy(() => import('./pages/admin/HomepageBuilder').then(m => ({ default: m.HomepageBuilder })));
+const LeadsCRM = lazy(() => import('./pages/admin/LeadsCRM').then(m => ({ default: m.LeadsCRM })));
+const PipelineKanban = lazy(() => import('./pages/admin/PipelineKanban').then(m => ({ default: m.PipelineKanban })));
+const FollowUps = lazy(() => import('./pages/admin/FollowUps').then(m => ({ default: m.FollowUps })));
+const ServicesCMS = lazy(() => import('./pages/admin/ServicesCMS').then(m => ({ default: m.ServicesCMS })));
+const TestimonialsCMS = lazy(() => import('./pages/admin/TestimonialsCMS').then(m => ({ default: m.TestimonialsCMS })));
+const PortfolioCMS = lazy(() => import('./pages/admin/PortfolioCMS').then(m => ({ default: m.PortfolioCMS })));
+const CaseStudiesCMS = lazy(() => import('./pages/admin/PortfolioCMS').then(m => ({ default: m.CaseStudiesCMS })));
+const ProposalsInvoices = lazy(() => import('./pages/admin/ProposalsInvoices').then(m => ({ default: m.ProposalsInvoices })));
+const MediaLibrary = lazy(() => import('./pages/admin/MediaLibrary').then(m => ({ default: m.MediaLibrary })));
+const SiteSettingsAdmin = lazy(() => import('./pages/admin/SiteSettingsAdmin').then(m => ({ default: m.SiteSettingsAdmin })));
+const NavigationAdmin = lazy(() => import('./pages/admin/SiteSettingsAdmin').then(m => ({ default: m.NavigationAdmin })));
+const EventsAdmin = lazy(() => import('./pages/admin/EventsAdmin').then(m => ({ default: m.EventsAdmin })));
+const CommunicationCenterAdmin = lazy(() => import('./pages/admin/CommunicationCenterAdmin').then(m => ({ default: m.CommunicationCenterAdmin })));
+const ReelMarketingAdmin = lazy(() => import('./pages/admin/ReelMarketingAdmin').then(m => ({ default: m.ReelMarketingAdmin })));
+const UserManagementAdmin = lazy(() => import('./pages/admin/UserManagementAdmin').then(m => ({ default: m.UserManagementAdmin })));
+const RolesPermissionsAdmin = lazy(() => import('./pages/admin/RolesPermissionsAdmin').then(m => ({ default: m.RolesPermissionsAdmin })));
+const DepartmentsAdmin = lazy(() => import('./pages/admin/DepartmentsAdmin').then(m => ({ default: m.DepartmentsAdmin })));
+const SecurityAuditAdmin = lazy(() => import('./pages/admin/SecurityAuditAdmin').then(m => ({ default: m.SecurityAuditAdmin })));
+const InitialSetupAdmin = lazy(() => import('./pages/admin/InitialSetupAdmin').then(m => ({ default: m.InitialSetupAdmin })));
+
+// Lazy Loaded Document Generator Pages
+const DocumentGeneratorLanding = lazy(() => import('./pages/public/DocumentGeneratorLanding'));
+const DocumentWizard = lazy(() => import('./pages/public/DocumentWizard'));
+const MyDocuments = lazy(() => import('./pages/user/MyDocuments'));
+const SubscriptionManagement = lazy(() => import('./pages/user/SubscriptionManagement'));
+const CompanyProfile = lazy(() => import('./pages/user/CompanyProfile'));
+const DocumentAnalytics = lazy(() => import('./pages/admin/DocumentAnalytics'));
+const DocumentGeneratorSettings = lazy(() => import('./pages/admin/DocumentGeneratorSettings'));
+
+// Lightweight, sleek loading fallback
+const PageLoader: React.FC = () => (
+  <div className="min-h-[60vh] flex items-center justify-center bg-transparent py-20">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 rounded-full border-2 border-amber-400/20 border-t-amber-400 animate-spin" />
+      <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Loading...</span>
+    </div>
+  </div>
+);
 // ScrollToTop Component: Always scroll to top of page upon route or anchor button click
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -156,9 +173,10 @@ export const App: React.FC = () => {
               <AudioProvider>
                 <SpeedInsights />
                 <ScrollToTop />
-                <Routes>
-                {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
-                <Route path="/" element={<PublicLayout />}>
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                  {/* PUBLIC WEBSITE ROUTES (NO LOGIN REQUIRED) */}
+                  <Route path="/" element={<PublicLayout />}>
                   <Route index element={<HomePage />} />
                   <Route path="about" element={<AboutPage />} />
                   <Route path="services" element={<ServicesPage />} />
@@ -265,6 +283,7 @@ export const App: React.FC = () => {
                 {/* FALLBACK CATCH-ALL 404 ROUTE */}
                 <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
               </Routes>
+                </Suspense>
             </AudioProvider>
           </CurrencyProvider>
         </AuthProvider>

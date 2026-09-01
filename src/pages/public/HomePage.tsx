@@ -6,11 +6,18 @@ import { portfolioService } from '../../services/portfolioService';
 import { SectionRenderer } from '../../components/public/SectionRenderer';
 
 export const HomePage: React.FC = () => {
-  const [page, setPage] = useState<Page | null>(null);
+  const [page, setPage] = useState<Page | null>(() => ({
+    id: 'home',
+    title: 'Home',
+    slug: 'home',
+    is_published: true,
+    created_at: '',
+    updated_at: '',
+    sections: defaultHomeSections
+  } as Page));
   const [services, setServices] = useState<Service[]>([]);
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const fetchPublishedPage = () => {
     Promise.all([
@@ -19,14 +26,12 @@ export const HomePage: React.FC = () => {
       portfolioService.getProjects(),
       portfolioService.getCaseStudies()
     ]).then(([p, srv, proj, cs]) => {
-      setPage(p);
-      setServices(srv);
-      setProjects(proj);
-      setCaseStudies(cs);
-      setLoading(false);
+      if (p) setPage(p);
+      if (srv) setServices(srv);
+      if (proj) setProjects(proj);
+      if (cs) setCaseStudies(cs);
     }).catch((err) => {
       console.error('Error fetching homepage data:', err);
-      setLoading(false);
     });
   };
 
@@ -43,14 +48,6 @@ export const HomePage: React.FC = () => {
       window.removeEventListener('storage', handlePublishEvent);
     };
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center bg-zinc-950">
-        <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
 
   const rawSections = page?.sections && page.sections.length > 0 ? page.sections : defaultHomeSections;
   const enabledSections = rawSections.filter(s => s.is_enabled !== false);
