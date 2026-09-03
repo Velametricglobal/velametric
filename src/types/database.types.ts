@@ -510,6 +510,7 @@ export interface PortfolioProject {
   client_name?: string;
   client?: string;
   live_url?: string;
+  project_url?: string;
   cover_image?: string;
   featured_image?: string;
   description?: string;
