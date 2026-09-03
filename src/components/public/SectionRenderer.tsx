@@ -64,7 +64,13 @@ export const SmartLink: React.FC<SmartLinkProps> = ({ to, href, openInNewTab, cl
   );
 };
 
-export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => {
+export const SectionRenderer: React.FC<SectionRendererProps> = ({ 
+  section, 
+  services = [], 
+  projects = [], 
+  caseStudies = [], 
+  onFormSubmit 
+}) => {
   const content = section.content || {};
 
   // Form State for Enquiry Section
