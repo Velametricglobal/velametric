@@ -458,6 +458,8 @@ let localCaseStudies: CaseStudy[] = [
   }
 ];
 
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
+
 const STORAGE_KEY_PROJECTS = 'velametric_portfolio_projects_v2';
 const STORAGE_KEY_STUDIES = 'velametric_case_studies_v2';
 
@@ -475,23 +477,85 @@ function loadProjectsFromStorage(): PortfolioProject[] {
   return [...localProjects];
 }
 
-function saveProjectsToStorage(projects: PortfolioProject[]) {
+function notifyPortfolioUpdated(projects: PortfolioProject[]) {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(STORAGE_KEY_PROJECTS, JSON.stringify(projects));
+    window.dispatchEvent(new CustomEvent('velametric_portfolio_updated', { detail: { projects } }));
+    window.dispatchEvent(new Event('storage'));
   } catch (e) {
     console.error('Error saving projects to storage:', e);
   }
 }
 
+function saveProjectsToStorage(projects: PortfolioProject[]) {
+  notifyPortfolioUpdated(projects);
+}
+
 export const portfolioService = {
   async getProjects(): Promise<PortfolioProject[]> {
-    return loadProjectsFromStorage();
+    const local = loadProjectsFromStorage();
+
+    // Optionally try background sync from Supabase if configured
+    if (isSupabaseConfigured() && typeof window !== 'undefined') {
+      supabase.from('portfolio_projects').select('*').then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          const dbMapped: PortfolioProject[] = data.map((row: any) => ({
+            id: row.id,
+            title: row.title || 'Untitled Project',
+            slug: row.slug || `project-${row.id}`,
+            client: row.client_name || row.client || 'Client',
+            client_name: row.client_name || row.client,
+            live_url: row.project_url || row.live_url || '',
+            project_url: row.project_url || row.live_url || '',
+            project_type: row.category || 'web_app',
+            category: row.category,
+            description: row.description || row.short_description || '',
+            featured_image: row.featured_image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+            gallery: Array.isArray(row.gallery_images) ? row.gallery_images : (row.gallery || []),
+            technologies: Array.isArray(row.technologies) ? row.technologies : [],
+            videos: row.video_url ? [row.video_url] : [],
+            is_featured: row.is_featured ?? true,
+            status: row.status || 'PUBLISHED'
+          }));
+
+          // Merge: keep local rich objects and overlay db items
+          if (dbMapped.length > 0 && dbMapped.some(p => p.featured_image && p.featured_image.trim())) {
+            const merged = [...local];
+            dbMapped.forEach(dbP => {
+              const idx = merged.findIndex(m => m.id === dbP.id || m.slug === dbP.slug);
+              if (idx !== -1) {
+                merged[idx] = { ...merged[idx], ...dbP };
+              } else {
+                merged.push(dbP);
+              }
+            });
+            saveProjectsToStorage(merged);
+          }
+        }
+      }).catch(err => {
+        console.warn('Supabase portfolio fetch non-blocking fallback:', err);
+      });
+    }
+
+    return local;
   },
 
   async getProjectBySlug(slug: string): Promise<PortfolioProject | null> {
     const projects = loadProjectsFromStorage();
-    const p = projects.find(item => item.slug === slug);
+    const cleanSlug = slug.toLowerCase().trim();
+    
+    // Direct match
+    let p = projects.find(item => item.slug?.toLowerCase() === cleanSlug || item.id === slug);
+    
+    // Fuzzy match
+    if (!p) {
+      p = projects.find(item => {
+        const itemSlug = (item.slug || '').toLowerCase();
+        return itemSlug.includes(cleanSlug) || cleanSlug.includes(itemSlug);
+      });
+    }
+    
     return p ? JSON.parse(JSON.stringify(p)) : null;
   },
 
@@ -506,35 +570,72 @@ export const portfolioService = {
 
   async saveProject(project: Partial<PortfolioProject>): Promise<PortfolioProject> {
     const projects = loadProjectsFromStorage();
+    let savedProject: PortfolioProject;
+
     if (project.id) {
       const idx = projects.findIndex(p => p.id === project.id);
       if (idx !== -1) {
         projects[idx] = { ...projects[idx], ...project } as PortfolioProject;
-        saveProjectsToStorage(projects);
-        return JSON.parse(JSON.stringify(projects[idx]));
+        savedProject = projects[idx];
+      } else {
+        savedProject = project as PortfolioProject;
+        projects.push(savedProject);
+      }
+    } else {
+      savedProject = {
+        id: `proj-${Date.now()}`,
+        title: project.title || 'New Project',
+        slug: project.slug || `project-${Date.now()}`,
+        client: project.client || 'Client Name',
+        live_url: project.live_url || '',
+        description: project.description || '',
+        challenge: project.challenge || '',
+        solution: project.solution || '',
+        results: project.results || '',
+        featured_image: project.featured_image || '/images/photoshoot/_dsc9548.jpg',
+        gallery: project.gallery || [],
+        videos: project.videos || [],
+        completion_date: project.completion_date || new Date().toISOString().split('T')[0],
+        is_featured: project.is_featured ?? false,
+        status: project.status || 'PUBLISHED',
+        ...project
+      };
+      projects.push(savedProject);
+    }
+
+    saveProjectsToStorage(projects);
+
+    // Sync to Supabase if valid UUID or configured
+    if (isSupabaseConfigured() && typeof window !== 'undefined') {
+      try {
+        const dbPayload: any = {
+          title: savedProject.title,
+          slug: savedProject.slug,
+          client_name: savedProject.client,
+          project_url: savedProject.live_url,
+          description: savedProject.description,
+          featured_image: savedProject.featured_image,
+          gallery_images: savedProject.gallery || [],
+          technologies: savedProject.technologies || [],
+          is_featured: savedProject.is_featured,
+          status: savedProject.status || 'completed',
+          updated_at: new Date().toISOString()
+        };
+
+        // If ID is valid UUID, upsert; otherwise match by slug
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(savedProject.id);
+        if (isUUID) {
+          dbPayload.id = savedProject.id;
+          supabase.from('portfolio_projects').upsert([dbPayload]).then(() => {});
+        } else if (savedProject.slug) {
+          supabase.from('portfolio_projects').update(dbPayload).eq('slug', savedProject.slug).then(() => {});
+        }
+      } catch (err) {
+        console.warn('Supabase portfolio save non-blocking error:', err);
       }
     }
-    const newProj: PortfolioProject = {
-      id: `proj-${Date.now()}`,
-      title: project.title || 'New Project',
-      slug: project.slug || `project-${Date.now()}`,
-      client: project.client || 'Client Name',
-      live_url: project.live_url || '',
-      description: project.description || '',
-      challenge: project.challenge || '',
-      solution: project.solution || '',
-      results: project.results || '',
-      featured_image: project.featured_image || '/images/photoshoot/_dsc9548.jpg',
-      gallery: project.gallery || [],
-      videos: project.videos || [],
-      completion_date: project.completion_date || new Date().toISOString().split('T')[0],
-      is_featured: project.is_featured ?? false,
-      status: project.status || 'PUBLISHED',
-      ...project
-    };
-    projects.push(newProj);
-    saveProjectsToStorage(projects);
-    return JSON.parse(JSON.stringify(newProj));
+
+    return JSON.parse(JSON.stringify(savedProject));
   },
 
   async deleteProject(id: string): Promise<boolean> {
@@ -542,6 +643,14 @@ export const portfolioService = {
     const initialLen = projects.length;
     projects = projects.filter(p => p.id !== id);
     saveProjectsToStorage(projects);
+
+    if (isSupabaseConfigured() && typeof window !== 'undefined') {
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+      if (isUUID) {
+        supabase.from('portfolio_projects').delete().eq('id', id).then(() => {});
+      }
+    }
+
     return projects.length < initialLen;
   },
 
@@ -646,6 +755,8 @@ export const portfolioService = {
   async resetProjectsToDefault(): Promise<PortfolioProject[]> {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(STORAGE_KEY_PROJECTS);
+      window.dispatchEvent(new CustomEvent('velametric_portfolio_updated', { detail: { projects: localProjects } }));
+      window.dispatchEvent(new Event('storage'));
     }
     return [...localProjects];
   },

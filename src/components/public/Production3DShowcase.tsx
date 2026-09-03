@@ -50,7 +50,7 @@ export const Production3DShowcase: React.FC = () => {
   const [activeVideoModal, setActiveVideoModal] = useState<ProductionItem | null>(null);
   const [activePhotoModal, setActivePhotoModal] = useState<{ images: string[]; index: number; title: string; client: string; category: string } | null>(null);
 
-  useEffect(() => {
+  const loadShowcaseItems = () => {
     portfolioService.getProjects().then((projects) => {
       const compiled: ProductionItem[] = [];
 
@@ -60,15 +60,15 @@ export const Production3DShowcase: React.FC = () => {
         .forEach(p => {
           compiled.push({
             id: p.id,
-            title: p.title,
-            client: p.production_partner?.name || p.client,
+            title: p.title || 'Video Production',
+            client: p.production_partner?.name || p.client || 'Client',
             type: 'video',
             category: p.industry || 'Commercial Video & Cinema',
-            coverImage: p.featured_image,
+            coverImage: p.featured_image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
             videoUrl: p.videos?.[0] || p.instagram_url,
             instagramUrl: p.instagram_url,
-            viewsCount: p.video_reels?.[0]?.views_count || '1.2M+',
-            description: p.description,
+            viewsCount: String(p.video_reels?.[0]?.views_count || '1.2M+'),
+            description: p.description || '',
             year: p.completion_date?.split('-')[0] || '2026',
             slug: p.slug
           });
@@ -78,15 +78,17 @@ export const Production3DShowcase: React.FC = () => {
       projects
         .filter(p => p.project_type === 'photoshoot' || (p.gallery && p.gallery.length > 0 && !p.live_url && !p.production_partner))
         .forEach(p => {
+          const cover = p.featured_image || '/images/photoshoot/_dsc9548.jpg';
+          const validGallery = p.gallery && p.gallery.length > 0 ? (p.gallery.filter(Boolean) as string[]) : [cover];
           compiled.push({
             id: p.id,
-            title: p.title,
-            client: p.client,
+            title: p.title || 'Photoshoot Lookbook',
+            client: p.client || 'Client',
             type: 'photo',
             category: p.industry || 'High-Fashion Photoshoot',
-            coverImage: p.featured_image,
-            gallery: p.gallery && p.gallery.length > 0 ? p.gallery : [p.featured_image],
-            description: p.description,
+            coverImage: cover,
+            gallery: validGallery,
+            description: p.description || '',
             year: p.completion_date?.split('-')[0] || '2026',
             slug: p.slug
           });
@@ -96,6 +98,19 @@ export const Production3DShowcase: React.FC = () => {
         setItems(compiled);
       }
     });
+  };
+
+  useEffect(() => {
+    loadShowcaseItems();
+
+    const handleUpdate = () => loadShowcaseItems();
+    window.addEventListener('velametric_portfolio_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+
+    return () => {
+      window.removeEventListener('velametric_portfolio_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   const filteredItems = items.filter(item => {

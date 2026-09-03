@@ -36,10 +36,23 @@ export const PortfolioPage: React.FC = () => {
   const [dragStartX, setDragStartX] = useState(0);
   const [dragDelta, setDragDelta] = useState(0);
 
-  useEffect(() => {
+  const loadPortfolio = () => {
     portfolioService.getProjects().then((projs) => {
       setProjects(projs);
     });
+  };
+
+  useEffect(() => {
+    loadPortfolio();
+
+    const handleUpdate = () => loadPortfolio();
+    window.addEventListener('velametric_portfolio_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+
+    return () => {
+      window.removeEventListener('velametric_portfolio_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   const photoshootProjects = projects.filter(

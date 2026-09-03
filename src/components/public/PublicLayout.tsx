@@ -429,10 +429,10 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
             <div>
               <h4 className="text-black dark:text-white font-bold mb-3 sm:mb-4 text-xs uppercase tracking-widest">Products</h4>
               <ul className="space-y-2 sm:space-y-3 font-medium text-[11px] sm:text-xs">
-                <li><Link to="/services/web-app-development" className="hover:text-black dark:hover:text-white transition-colors">Website Builder</Link></li>
-                <li><Link to="/services/digital-marketing" className="hover:text-black dark:hover:text-white transition-colors">Commerce Tools</Link></li>
+                <li><Link to="/services/website-development" className="hover:text-black dark:hover:text-white transition-colors">Website Builder</Link></li>
+                <li><Link to="/services/digital-marketing" className="hover:text-black dark:hover:text-white transition-colors">Commerce & Marketing</Link></li>
                 <li><Link to="/services/government-subsidy-loans" className="hover:text-black dark:hover:text-white transition-colors">Financial Advisory</Link></li>
-                <li><Link to="/services/video-production-and-events" className="hover:text-black dark:hover:text-white transition-colors">Video & Events</Link></li>
+                <li><Link to="/services/commercial-video-production" className="hover:text-black dark:hover:text-white transition-colors">Video & Cinema</Link></li>
               </ul>
             </div>
 

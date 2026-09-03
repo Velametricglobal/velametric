@@ -38,14 +38,18 @@ export const HomePage: React.FC = () => {
   useEffect(() => {
     fetchPublishedPage();
 
-    // Listen for live page publication events across tabs/windows
-    const handlePublishEvent = () => fetchPublishedPage();
-    window.addEventListener('velametric_page_published', handlePublishEvent);
-    window.addEventListener('storage', handlePublishEvent);
+    // Listen for live page publication & portfolio updates across tabs/windows
+    const handleUpdateEvent = () => fetchPublishedPage();
+    window.addEventListener('velametric_page_published', handleUpdateEvent);
+    window.addEventListener('velametric_portfolio_updated', handleUpdateEvent);
+    window.addEventListener('velametric_services_updated', handleUpdateEvent);
+    window.addEventListener('storage', handleUpdateEvent);
 
     return () => {
-      window.removeEventListener('velametric_page_published', handlePublishEvent);
-      window.removeEventListener('storage', handlePublishEvent);
+      window.removeEventListener('velametric_page_published', handleUpdateEvent);
+      window.removeEventListener('velametric_portfolio_updated', handleUpdateEvent);
+      window.removeEventListener('velametric_services_updated', handleUpdateEvent);
+      window.removeEventListener('storage', handleUpdateEvent);
     };
   }, []);
 

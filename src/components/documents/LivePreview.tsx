@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import { DocumentDataPayload, DocumentTypeCode } from '../../types/document.types';
 import { loadGoogleFont } from '../../utils/fontLoader';
 

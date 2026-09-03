@@ -1288,7 +1288,43 @@ export const serviceService = {
 
   async getServiceBySlug(slug: string): Promise<Service | null> {
     const services = await this.getServices();
-    const s = services.find(item => item.slug === slug);
+    const cleanSlug = slug.toLowerCase().trim();
+
+    // Direct match
+    let s = services.find(item => item.slug?.toLowerCase() === cleanSlug || item.id === slug);
+    if (s) return JSON.parse(JSON.stringify(s));
+
+    // Alias mapping for common variations & footer links
+    const aliasMap: Record<string, string> = {
+      'web-app-development': 'web-application-development',
+      'web-development': 'website-development',
+      'website-builder': 'website-development',
+      'web-apps': 'web-application-development',
+      'video-production-and-events': 'commercial-video-production',
+      'video-production': 'commercial-video-production',
+      'video': 'commercial-video-production',
+      'reels': 'instagram-reels-production',
+      'events': 'event-organization-management',
+      'event-management': 'event-organization-management',
+      'marketing': 'digital-marketing',
+      'branding': 'branding-identity',
+      'loans': 'government-subsidy-loans',
+      'financial-advisory': 'government-subsidy-loans',
+      'pr': 'press-release-digital-pr'
+    };
+
+    if (aliasMap[cleanSlug]) {
+      s = services.find(item => item.slug === aliasMap[cleanSlug]);
+      if (s) return JSON.parse(JSON.stringify(s));
+    }
+
+    // Fuzzy matching
+    s = services.find(item => {
+      const itemSlug = (item.slug || '').toLowerCase();
+      const itemName = (item.name || '').toLowerCase();
+      return itemSlug.includes(cleanSlug) || cleanSlug.includes(itemSlug) || itemName.includes(cleanSlug);
+    });
+
     return s ? JSON.parse(JSON.stringify(s)) : null;
   },
 
@@ -1344,6 +1380,10 @@ export const serviceService = {
     }
 
     localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(services));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('velametric_services_updated', { detail: { services } }));
+      window.dispatchEvent(new Event('storage'));
+    }
     return JSON.parse(JSON.stringify(updatedService));
   },
 
@@ -1351,6 +1391,10 @@ export const serviceService = {
     let services = await this.getServices();
     services = services.filter(s => s.id !== id);
     localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(services));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('velametric_services_updated', { detail: { services } }));
+      window.dispatchEvent(new Event('storage'));
+    }
     return true;
   },
 

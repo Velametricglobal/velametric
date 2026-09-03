@@ -357,25 +357,42 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
     const card1Text = content.card1_button_text || content.buttonText || 'VISIT LIVE SITE';
     const card1Title = content.card1_title || 'Website & Real Estate CRM Platform';
     const card1Client = content.card1_client || 'Velametric Real Estate Group';
+    const card1Image = content.card1_image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
     const card1OpenNewTab = content.card1_open_new_tab !== false;
 
     const card2Url = content.card2_url || 'https://sienna-chimpanzee-129344.hostingersite.com/';
     const card2Text = content.card2_button_text || content.buttonText || 'VISIT LIVE SITE';
     const card2Title = content.card2_title || 'Website & Institute of Distance Education CRM';
     const card2Client = content.card2_client || 'Velametric Distance Education';
+    const card2Image = content.card2_image || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80';
     const card2OpenNewTab = content.card2_open_new_tab !== false;
 
     const card3Url = content.card3_url || 'https://mediumvioletred-viper-351367.hostingersite.com/';
     const card3Text = content.card3_button_text || content.buttonText || 'VISIT LIVE SITE';
     const card3Title = content.card3_title || 'E-Commerce Website with Integrated CRM';
     const card3Client = content.card3_client || 'Velametric Global Retail';
+    const card3Image = content.card3_image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';
     const card3OpenNewTab = content.card3_open_new_tab !== false;
 
-    const portfolioCards = [
+    // Dynamically derive from latest projects if available
+    const webProjects = (projects || []).filter(p => p.project_type === 'web_app' || p.live_url || p.project_url);
+    
+    const dynamicCards = webProjects.length >= 3 
+      ? webProjects.slice(0, 3).map((p, i) => ({
+          title: p.title || `Project ${i + 1}`,
+          client: p.client || p.client_name || 'Client',
+          image: p.featured_image || p.cover_image || (i === 0 ? card1Image : i === 1 ? card2Image : card3Image),
+          live_url: p.live_url || p.project_url || (i === 0 ? card1Url : i === 1 ? card2Url : card3Url),
+          button_text: 'VISIT LIVE SITE',
+          open_new_tab: true
+        }))
+      : [];
+
+    const portfolioCards = dynamicCards.length === 3 ? dynamicCards : [
       {
         title: card1Title,
         client: card1Client,
-        image: content.card1_image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+        image: card1Image,
         live_url: card1Url,
         button_text: card1Text,
         open_new_tab: card1OpenNewTab
@@ -383,7 +400,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
       {
         title: card2Title,
         client: card2Client,
-        image: content.card2_image || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
+        image: card2Image,
         live_url: card2Url,
         button_text: card2Text,
         open_new_tab: card2OpenNewTab
@@ -391,7 +408,7 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section }) => 
       {
         title: card3Title,
         client: card3Client,
-        image: content.card3_image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+        image: card3Image,
         live_url: card3Url,
         button_text: card3Text,
         open_new_tab: card3OpenNewTab

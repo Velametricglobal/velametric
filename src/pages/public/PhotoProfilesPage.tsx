@@ -275,8 +275,7 @@ export const PhotoProfilesPage: React.FC = () => {
 
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load custom saved profiles from portfolio service if available
-  useEffect(() => {
+  const loadProfiles = () => {
     portfolioService.getProjects().then((projs) => {
       const photoshootProjects = projs.filter(p => p.project_type === 'photoshoot' && p.gallery && p.gallery.length > 0);
       if (photoshootProjects.length > 0) {
@@ -304,8 +303,23 @@ export const PhotoProfilesPage: React.FC = () => {
           };
         });
         setProfiles(dynamicProfiles);
+      } else {
+        setProfiles(DEFAULT_PROFILES);
       }
     });
+  };
+
+  useEffect(() => {
+    loadProfiles();
+
+    const handleUpdate = () => loadProfiles();
+    window.addEventListener('velametric_portfolio_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+
+    return () => {
+      window.removeEventListener('velametric_portfolio_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   const total = profiles.length;
