@@ -26,6 +26,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({ payload, typeCode }) => {
         setFontLoaded(true);
       });
     }
+  
   }, [customization?.font_family]);
 
   const getDocumentTitle = () => {
