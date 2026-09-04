@@ -1,1 +1,2 @@
-/*    /index.html   200
+# Cloudflare Static Assets SPA redirects
+# not_found_handling: "single-page-application" is configured in wrangler.jsonc
